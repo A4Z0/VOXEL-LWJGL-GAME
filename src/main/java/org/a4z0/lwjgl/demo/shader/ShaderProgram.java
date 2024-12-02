@@ -8,9 +8,9 @@ import java.nio.FloatBuffer;
 
 import static org.lwjgl.opengl.GL20.*;
 
-public class ShaderProgram {
+public final class ShaderProgram {
 
-    protected final int glShaderProgram;
+    private final int glShaderProgram;
 
     /**
     * Construct a {@link ShaderProgram}.
@@ -42,8 +42,10 @@ public class ShaderProgram {
     * @param shader ...
     */
 
-    public void addShader(Shader shader) {
+    public ShaderProgram addShader(Shader shader) {
         glAttachShader(this.glShaderProgram, shader.getID());
+
+        return this;
     }
 
     /**
@@ -53,8 +55,10 @@ public class ShaderProgram {
     * @param var ...
     */
 
-    public void attribute(int attr, String var) {
+    public ShaderProgram attribute(int attr, String var) {
         glBindAttribLocation(this.glShaderProgram, attr, var);
+
+        return this;
     }
 
     /**
@@ -177,11 +181,13 @@ public class ShaderProgram {
     * Links this {@link ShaderProgram} to the current context.
     */
 
-    public void link() {
+    public ShaderProgram link() {
         glLinkProgram(this.glShaderProgram);
 
         if(glGetProgrami(this.glShaderProgram, GL_LINK_STATUS) == 0)
             throw new RuntimeException("Unable to link this Shader Program. \n" + glGetProgramInfoLog(this.glShaderProgram));
+
+        return this;
     }
 
     /**

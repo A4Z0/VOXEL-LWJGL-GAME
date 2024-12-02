@@ -19,7 +19,7 @@ public class Chunk {
 
     protected boolean Loaded;
 
-    protected Layers Layers = new Layers(this);
+    protected ChunkLayers Layers = new ChunkLayers(this);
 
     /**
     * Construct a {@link Chunk}.
@@ -63,7 +63,7 @@ public class Chunk {
     }
 
     @Deprecated
-    public Layers getLayers() {
+    public ChunkLayers getLayers() {
         return this.Layers;
     }
 
@@ -166,12 +166,17 @@ public class Chunk {
         this.Loaded = true;
 
         if(g) {
-            Random r = new Random();
-
             for(int x = 0; x < 256; x++) {
-                for(int y = 0; y < 256; y++) {
+                for(int y = 0; y < 1; y++) {
                     for(int z = 0; z < 256; z++) {
-                        this.getVoxelAt(x, y, z).setColor(r.nextInt(255), r.nextInt(255), r.nextInt(255));
+                        int blockX = x / 16;
+                        int blockZ = z / 16;
+
+                        if ((blockX + blockZ) % 2 == 0) {
+                            this.getVoxelAt(x, y, z).setColor(255, 255, 255);
+                        } else {
+                            this.getVoxelAt(x, y, z).setColor(0, 0, 0);
+                        }
                     }
                 }
             }
@@ -207,5 +212,13 @@ public class Chunk {
         System.out.println("[Chunk]: Unloaded!");
 
         return true;
+    }
+
+    /**
+    * Ticks this {@link Chunk}.
+    */
+
+    public void tick() {
+
     }
 }

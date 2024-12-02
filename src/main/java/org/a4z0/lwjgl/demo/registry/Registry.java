@@ -1,13 +1,13 @@
-package org.a4z0.lwjgl.demo.resource;
+package org.a4z0.lwjgl.demo.registry;
 
 import java.util.Arrays;
-import java.util.Optional;
+import java.util.Set;
 
 public class Registry<T>  {
 
     public static final int GROWTH_FACTOR = 1;
 
-    protected ResourceKey[] kA;
+    protected Key[] kA;
     protected T[] eA;
 
     protected int i;
@@ -17,7 +17,9 @@ public class Registry<T>  {
     */
 
     public Registry() {
-        this.kA = new ResourceKey[1];
+        this.kA = new Key[1];
+
+        //noinspection unchecked
         this.eA = (T[]) new Object[1];
     }
 
@@ -30,31 +32,39 @@ public class Registry<T>  {
     }
 
     /**
-    * ...
-    *
-    * @param k ...
-    *
     * @return ...
     */
 
-    public Optional<T> get(ResourceKey k) {
-        for(int i = 0; i < this.i; i++)
-            if(this.kA[i].equals(k))
-                return Optional.of(this.eA[i]);
-
-        return Optional.empty();
+    public Set<Key> getKeys() {
+        return Set.of(this.kA);
     }
 
     /**
-    * ...
+    * Retrieves a Value.
     *
-    * @param k ...
-    * @param e ...
+    * @param k {@link Key} attached to a Value.
+    *
+    * @return a Value if it exists, null otherwise.
+    */
+
+    public T get(Key k) {
+        for(int i = 0; i < this.i; i++)
+            if(this.kA[i].equals(k))
+                return this.eA[i];
+
+        return null;
+    }
+
+    /**
+    * Register a Value.
+    *
+    * @param k {@link Key} that will hold the Value.
+    * @param e Value to be registered.
     *
     * @return this {@link Registry}.
     */
 
-    public Registry<T> register(ResourceKey k, T e) {
+    public Registry<T> register(Key k, T e) {
         for(int i = 0; i < this.i; i++) {
             if(this.kA[i].equals(k)) {
                 this.eA[i] = e;
@@ -77,14 +87,14 @@ public class Registry<T>  {
     }
 
     /**
-    * ...
+    * Unregister a Value.
     *
-    * @param k ...
+    * @param k {@link Key} to be removed.
     *
     * @return this {@link Registry}.
     */
 
-    public Registry<T> unregister(ResourceKey k) {
+    public Registry<T> unregister(Key k) {
         for(int i = 0; i < this.i; i++) {
             if(this.kA[i].equals(k)) {
                 System.arraycopy(this.kA, i + 1, this.kA, i, this.i - i - 1);

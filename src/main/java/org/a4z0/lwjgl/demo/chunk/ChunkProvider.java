@@ -1,17 +1,13 @@
 package org.a4z0.lwjgl.demo.chunk;
 
-import org.a4z0.lwjgl.demo.Game;
+import org.a4z0.lwjgl.demo.DevelopmentConstants;
 import org.a4z0.lwjgl.demo.level.Level;
 import org.a4z0.lwjgl.demo.level.Location;
 import org.a4z0.lwjgl.demo.server.Server;
-import org.a4z0.lwjgl.demo.util.Input;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_R;
 
 public class ChunkProvider {
 
@@ -143,22 +139,20 @@ public class ChunkProvider {
     */
 
     public void tick() {
-        /*Location playerLoc = Game.PLAYER.getLocation().clone();
+        if(this.Cached.isEmpty()) {
+            Location playerLoc = DevelopmentConstants.DEVELOPMENT_PLAYER.getLocation().clone();
 
-        for(int x = (int) playerLoc.getX() - 16; x < (int) playerLoc.getX() + 16; x++) {
-            for(int y = (int) playerLoc.getY() - 16; y < (int) playerLoc.getY() + 16; y++) {
-                for(int z = (int) playerLoc.getZ() - 16; z < (int) playerLoc.getZ() + 16; z++) {
-                    Chunk playerChunk = this.provide(x >> 4, y >> 4, z >> 4);
+            for (int x = (int) playerLoc.getX() - 16; x < (int) playerLoc.getX() + 16; x++) {
+                for (int z = (int) playerLoc.getZ() - 16; z < (int) playerLoc.getZ() + 16; z++) {
+                    Chunk playerChunk = this.provide(x << 4, 0, z << 4);
 
-                    if(!playerChunk.isLoaded()) {
-                        CompletableFuture.runAsync(() -> playerChunk.load(true));
-                    }
-
-                    if(playerChunk.isLoaded()) {
-                        playerChunk.getLayer().render();
-                    }
+                    playerChunk.load(true);
                 }
             }
-        }*/
+        }
+
+        for(Chunk value : this.Cached.values()) {
+            value.getLayers().render();
+        }
     }
 }

@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.demo.chunk;
 
 import org.a4z0.lwjgl.demo.mesh.Mesh;
-import org.a4z0.lwjgl.demo.shader.Shaders;
+import org.a4z0.lwjgl.demo.shader.ShaderPrograms;
 import org.a4z0.lwjgl.demo.util.ByteBuf;
 import org.joml.Matrix4f;
 
@@ -14,7 +14,7 @@ import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL30.*;
 
-public class Segment {
+public class ChunkLayer {
 
     private static final int ELEMENTS_SIZE = 3 + 1 + 1;
     private static final int ELEMENTS_STRIDE = ELEMENTS_SIZE * Float.BYTES;
@@ -42,12 +42,12 @@ public class Segment {
     protected final int z1, z2;
 
     /**
-    * Construct a {@link Segment}.
+    * Construct a {@link ChunkLayer}.
     *
     * @param c ...
     */
 
-    public Segment(Chunk c, int x1, int y1, int z1, int x2, int y2, int z2) {
+    public ChunkLayer(Chunk c, int x1, int y1, int z1, int x2, int y2, int z2) {
         this.c = c;
         this.b = new ByteBuf();
         this.w = 0;
@@ -60,7 +60,7 @@ public class Segment {
     }
 
     /**
-    * Computes this {@link Segment}.
+    * Computes this {@link ChunkLayer}.
     */
 
     protected void compute() {
@@ -72,7 +72,7 @@ public class Segment {
     }
 
     /**
-    * Bakes this {@link Segment}.
+    * Bakes this {@link ChunkLayer}.
     */
 
     protected void bake() {
@@ -99,7 +99,7 @@ public class Segment {
     }
 
     /**
-    * Draws this {@link Segment}.
+    * Draws this {@link ChunkLayer}.
     */
 
     protected void draw() {
@@ -108,7 +108,7 @@ public class Segment {
 
         glBindVertexArray(this.a);
 
-        Shaders.VOXEL_SHADER_PROGRAM.setUniform4fv("transformation", MATRIX_4_F.translate(0, 0, 0));
+        ShaderPrograms.WORLD_SHADER_PROGRAM.setUniform4fv("transformation", MATRIX_4_F.translate(0, 0, 0));
 
         glDrawArrays(GL_TRIANGLES, 0, (this.b.size() / ELEMENTS_SIZE));
 
@@ -116,7 +116,7 @@ public class Segment {
     }
 
     /**
-    * Renders this {@link Segment}.
+    * Renders this {@link ChunkLayer}.
     */
 
     public void render() {
@@ -131,7 +131,7 @@ public class Segment {
     }
 
     /**
-    * Deletes this {@link Segment}.
+    * Deletes this {@link ChunkLayer}.
     */
 
     public void delete() {
@@ -139,7 +139,7 @@ public class Segment {
     }
 
     /**
-    * Deletes this {@link Segment}.
+    * Deletes this {@link ChunkLayer}.
     *
     * @param b ...
     */

@@ -1,12 +1,10 @@
 package org.a4z0.lwjgl.demo.entity;
 
-import org.a4z0.lwjgl.demo.Game;
-import org.a4z0.lwjgl.demo.Main;
+import org.a4z0.lwjgl.demo.behavior.ClientCameraBehavior;
 import org.a4z0.lwjgl.demo.util.Input;
 import org.a4z0.lwjgl.demo.level.Level;
 import org.a4z0.lwjgl.demo.level.Location;
 import org.a4z0.lwjgl.demo.nbt.NBTTagCompound;
-import org.a4z0.lwjgl.demo.shader.Shaders;
 import org.a4z0.lwjgl.demo.math.AABBf;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -174,18 +172,12 @@ public class EntityPlayer extends EntityLiving {
 
     @Override
     public void tick() {
-        Shaders.OUTLINE_SHADER_PROGRAM.bind();
-        Shaders.OUTLINE_SHADER_PROGRAM.setUniform4fv("camera_projection", Game.CAMERA.getProjection());
-        Shaders.OUTLINE_SHADER_PROGRAM.setUniform4fv("camera_view", Game.CAMERA.getView());
-
         tickInput();
         tickMovement();
-
-        Shaders.OUTLINE_SHADER_PROGRAM.unbind();
     }
 
     private void tickInput() {
-        Game.tick();
+        ClientCameraBehavior.tick();
 
         float vertical_speed_x = 0;
         float vertical_speed_z = 0;

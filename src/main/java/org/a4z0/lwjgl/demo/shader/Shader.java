@@ -2,9 +2,9 @@ package org.a4z0.lwjgl.demo.shader;
 
 import static org.lwjgl.opengl.GL20.*;
 
-public class Shader {
+public final class Shader {
 
-    protected final int glShader;
+    private final int glShader;
 
     /**
     * Construct a {@link Shader}.
@@ -30,19 +30,23 @@ public class Shader {
     * @param glSource Source code that will be set.
     */
 
-    public void source(String glSource) {
+    public Shader source(String glSource) {
         glShaderSource(this.glShader, glSource);
+
+        return this;
     }
 
     /**
     * Compile this {@link Shader}.
     */
 
-    public void compile() {
+    public Shader compile() {
         glCompileShader(this.glShader);
 
         if(glGetShaderi(this.glShader, GL_COMPILE_STATUS) == 0)
             throw new RuntimeException("Unable to compile Shader." + "\n" + glGetShaderInfoLog(this.glShader));
+
+        return this;
     }
 
     /**

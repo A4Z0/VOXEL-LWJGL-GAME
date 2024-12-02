@@ -1,4 +1,4 @@
-package org.a4z0.lwjgl.demo.resource;
+package org.a4z0.lwjgl.demo.registry;
 
 public class Key {
 
@@ -56,7 +56,7 @@ public class Key {
 
     @Override
     public boolean equals(Object o) {
-        return (o instanceof Key) && ((Key) o).n.equals(this.n) && ((Key) o).p.equals(this.p);
+        return (o instanceof Key) && ((Key) o).getNamespace().equals(this.getNamespace()) && ((Key) o).getPath().equals(this.getPath());
     }
 
     /**
@@ -66,5 +66,30 @@ public class Key {
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + ": { Namespace: \"" + this.getNamespace() + "\", Path: \"" + this.getPath() + "\" }";
+    }
+
+    /**
+    * Construct a {@link Key}.
+    *
+    * @param p Path.
+    *
+    * @return a new {@link Key}.
+    */
+
+    public static Key of(String p) {
+        return new Key(p);
+    }
+
+    /**
+    * Construct a {@link Key}.
+    *
+    * @param n Namespace.
+    * @param p Path.
+    *
+    * @return a new {@link Key}.
+    */
+
+    public static Key of(String n, String p) {
+        return new Key(n, p);
     }
 }

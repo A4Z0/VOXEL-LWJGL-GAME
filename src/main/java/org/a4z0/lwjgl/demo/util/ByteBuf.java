@@ -6,7 +6,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class ByteBuf implements AutoCloseable {
 
+    /* Address */
     protected long a;
+
+    /* Position / Capacity */
     protected int p, c;
 
     /**

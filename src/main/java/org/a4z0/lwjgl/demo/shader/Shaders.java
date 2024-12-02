@@ -1,117 +1,46 @@
 package org.a4z0.lwjgl.demo.shader;
 
-import java.io.IOException;
-import java.io.InputStream;
+import org.a4z0.lwjgl.demo.registry.Key;
+import org.a4z0.lwjgl.demo.util.Idk;
 
+import static org.a4z0.lwjgl.demo.registry.Registries.SHADER_REGISTRY;
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 
-/**
-* Represents a {@link Shaders}.
-*/
+public final class Shaders {
 
-public class Shaders {
+    public static final Key WORLD_VERTEX_SHADER_KEY = Key.of("shader", "world_vertex");
+    public static final Key WORLD_FRAGMENT_SHADER_KEY = Key.of("shader", "world_fragment");
+    public static final Key TEXT_VERTEX_SHADER_KEY = Key.of("shader", "text_vertex");
+    public static final Key TEXT_FRAGMENT_SHADER_KEY = Key.of("shader", "text_fragment");
 
-    public static ShaderProgram VOXEL_SHADER_PROGRAM;
-    public static ShaderProgram OUTLINE_SHADER_PROGRAM;
-    public static ShaderProgram TEXT_SHADER_PROGRAM;
+    public static Shader WORLD_VERTEX_SHADER;
+    public static Shader WORLD_FRAGMENT_SHADER;
+    public static Shader TEXT_VERTEX_SHADER;
+    public static Shader TEXT_FRAGMENT_SHADER;
 
-    static {
-        {
-            VOXEL_SHADER_PROGRAM = new ShaderProgram();
-            VOXEL_SHADER_PROGRAM.attribute(0, "vertex_position");
-            VOXEL_SHADER_PROGRAM.attribute(1, "vertex_color");
-
-            // Vertex
-            Shader VOXEL_VERTEX_SHADER = new Shader(GL_VERTEX_SHADER);
-            VOXEL_VERTEX_SHADER.source(getSource("assets/shader/glsl/world.vert"));
-            VOXEL_VERTEX_SHADER.compile();
-
-            // Fragment
-            Shader VOXEL_FRAGMENT_SHADER = new Shader(GL_FRAGMENT_SHADER);
-            VOXEL_FRAGMENT_SHADER.source(getSource("assets/shader/glsl/world.frag"));
-            VOXEL_FRAGMENT_SHADER.compile();
-
-            VOXEL_SHADER_PROGRAM.addShader(VOXEL_VERTEX_SHADER);
-            VOXEL_SHADER_PROGRAM.addShader(VOXEL_FRAGMENT_SHADER);
-
-            VOXEL_SHADER_PROGRAM.link();
-        }
-        {
-            OUTLINE_SHADER_PROGRAM = new ShaderProgram();
-            OUTLINE_SHADER_PROGRAM.attribute(0, "vertex_position");
-            OUTLINE_SHADER_PROGRAM.attribute(1, "vertex_color");
-
-            // Vertex
-            Shader OUTLINE_VERTEX_SHADER = new Shader(GL_VERTEX_SHADER);
-            OUTLINE_VERTEX_SHADER.source(getSource("assets/shader/glsl/outline.vert"));
-            OUTLINE_VERTEX_SHADER.compile();
-
-            // Fragment
-            Shader OUTLINE_FRAGMENT_SHADER = new Shader(GL_FRAGMENT_SHADER);
-            OUTLINE_FRAGMENT_SHADER.source(getSource("assets/shader/glsl/outline.frag"));
-            OUTLINE_FRAGMENT_SHADER.compile();
-
-            OUTLINE_SHADER_PROGRAM.addShader(OUTLINE_VERTEX_SHADER);
-            OUTLINE_SHADER_PROGRAM.addShader(OUTLINE_FRAGMENT_SHADER);
-
-            OUTLINE_SHADER_PROGRAM.link();
-        }
-        {
-            TEXT_SHADER_PROGRAM = new ShaderProgram();
-            TEXT_SHADER_PROGRAM.attribute(0, "vertex_position");
-            TEXT_SHADER_PROGRAM.attribute(1, "vertex_texture_coordinates");
-
-            // Vertex
-            Shader TEXT_VERTEX_SHADER = new Shader(GL_VERTEX_SHADER);
-            TEXT_VERTEX_SHADER.source(getSource("assets/shader/glsl/text.vert"));
-            TEXT_VERTEX_SHADER.compile();
-
-            // Fragment
-            Shader TEXT_FRAGMENT_SHADER = new Shader(GL_FRAGMENT_SHADER);
-            TEXT_FRAGMENT_SHADER.source(getSource("assets/shader/glsl/text.frag"));
-            TEXT_FRAGMENT_SHADER.compile();
-
-            TEXT_SHADER_PROGRAM.addShader(TEXT_VERTEX_SHADER);
-            TEXT_SHADER_PROGRAM.addShader(TEXT_FRAGMENT_SHADER);
-
-            TEXT_SHADER_PROGRAM.link();
-        }
-    }
-
-    /**
-    * Initializes this {@link Shaders}.
-    */
+    Shaders() {}
 
     public static void init() {
-
-    }
-
-    /**
-    * ...
-    *
-    * @param uri ...
-    *
-    * @return ...
-    */
-
-    private static String getSource(String uri) {
-        return getSource(Shaders.class.getClassLoader().getResourceAsStream(uri));
-    }
-
-    /**
-    * ...
-    *
-    * @param stream ...
-    *
-    * @return a {@link String}.
-    */
-
-    private static String getSource(InputStream stream) {
-        try(InputStream i = stream) {
-            return new String(i.readAllBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println("[ShaderLoader]: -> \"shader/world.vert\".");
+        SHADER_REGISTRY.register(
+            WORLD_VERTEX_SHADER_KEY,
+            WORLD_VERTEX_SHADER = new Shader(GL_VERTEX_SHADER).source(Idk.getResource("assets/shader/world.vert")).compile()
+        );
+        System.out.println("[ShaderLoader]: -> \"shader/world.frag\".");
+        SHADER_REGISTRY.register(
+            WORLD_FRAGMENT_SHADER_KEY,
+            WORLD_FRAGMENT_SHADER = new Shader(GL_FRAGMENT_SHADER).source(Idk.getResource("assets/shader/world.frag")).compile()
+        );
+        System.out.println("[ShaderLoader]: -> \"shader/text.vert\".");
+        SHADER_REGISTRY.register(
+            TEXT_VERTEX_SHADER_KEY,
+            TEXT_VERTEX_SHADER = new Shader(GL_VERTEX_SHADER).source(Idk.getResource("assets/shader/text.vert")).compile()
+        );
+        System.out.println("[ShaderLoader]: -> \"shader/text.frag\".");
+        SHADER_REGISTRY.register(
+            TEXT_FRAGMENT_SHADER_KEY,
+            TEXT_FRAGMENT_SHADER = new Shader(GL_FRAGMENT_SHADER).source(Idk.getResource("assets/shader/text.frag")).compile()
+        );
     }
 }
