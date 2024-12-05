@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.demo.chunk;
 
 import org.a4z0.lwjgl.demo.mesh.Mesh;
-import org.a4z0.lwjgl.demo.shader.ShaderPrograms;
+import org.a4z0.lwjgl.demo.resource.shader.ShaderPrograms;
 import org.a4z0.lwjgl.demo.util.ByteBuf;
 import org.joml.Matrix4f;
 

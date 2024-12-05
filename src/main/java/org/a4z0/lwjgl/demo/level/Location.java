@@ -108,7 +108,7 @@ public class Location implements Vector3fc {
     */
 
     public void setYaw(float yaw) {
-        this.yaw = yaw;
+        this.yaw = yaw % 360;
     }
 
     /**

@@ -1,4 +1,4 @@
-package org.a4z0.lwjgl.demo.shader;
+package org.a4z0.lwjgl.demo.resource.shader;
 
 import org.joml.Matrix4dc;
 import org.joml.Matrix4fc;

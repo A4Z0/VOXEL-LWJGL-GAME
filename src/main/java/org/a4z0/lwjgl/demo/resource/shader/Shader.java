@@ -1,4 +1,4 @@
-package org.a4z0.lwjgl.demo.shader;
+package org.a4z0.lwjgl.demo.resource.shader;
 
 import static org.lwjgl.opengl.GL20.*;
 

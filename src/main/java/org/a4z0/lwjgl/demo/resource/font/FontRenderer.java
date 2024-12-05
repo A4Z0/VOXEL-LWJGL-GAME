@@ -1,10 +1,7 @@
-package org.a4z0.lwjgl.demo.render;
+package org.a4z0.lwjgl.demo.resource.font;
 
 import org.a4z0.lwjgl.demo.Main;
-import org.a4z0.lwjgl.demo.font.Fonts;
-import org.a4z0.lwjgl.demo.font.GLFont;
-import org.a4z0.lwjgl.demo.font.Glyph;
-import org.a4z0.lwjgl.demo.shader.ShaderPrograms;
+import org.a4z0.lwjgl.demo.resource.shader.ShaderPrograms;
 import org.a4z0.lwjgl.demo.util.ByteBuf;
 import org.a4z0.lwjgl.demo.util.Color;
 
@@ -15,7 +12,7 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
-public final class GLFontRenderer {
+public final class FontRenderer {
 
     public static final int ELEMENTS = 2 + 2 + 1;
     public static final int ELEMENTS_STRIDE = ELEMENTS * Float.BYTES;
@@ -26,10 +23,10 @@ public final class GLFontRenderer {
     public final ByteBuf BYTE_BUF = new ByteBuf();
 
     /**
-    * Construct a {@link GLFontRenderer}.
+    * Construct a {@link FontRenderer}.
     */
 
-    public GLFontRenderer() {
+    public FontRenderer() {
         this.VERTEX_BUFFER_OBJECT = glGenBuffers();
         this.VERTEX_ARRAY_OBJECT = glGenVertexArrays();
     }
@@ -42,8 +39,8 @@ public final class GLFontRenderer {
     * @param y ...
     */
 
-    public void drawString(String t, float x, float y) {
-        this.drawString(t, x, y, 1f);
+    public void drawString(Font Font, String t, float x, float y) {
+        this.drawString(Font, t, x, y, 1f);
     }
 
     /**
@@ -55,8 +52,8 @@ public final class GLFontRenderer {
     * @param scale ...
     */
 
-    public void drawString(String t, float x, float y, float scale) {
-        this.drawString(t, x, y, scale, new Color(255, 255, 255).getColor());
+    public void drawString(Font Font, String t, float x, float y, float scale) {
+        this.drawString(Font, t, x, y, scale, new Color(255, 255, 255).getColor());
     }
 
     /**
@@ -69,7 +66,7 @@ public final class GLFontRenderer {
     * @param i ...
     */
 
-    public void drawString(String Text, float x, float y, float scale, int i) {
+    public void drawString(Font Font, String Text, float x, float y, float scale, int i) {
         float Skip = 0;
         float OffsetX = 0;
 
@@ -81,7 +78,6 @@ public final class GLFontRenderer {
                 continue;
             }
 
-            GLFont Font = Fonts.MINECRAFT;
             Glyph Glyph = Font.getGlyph(Text.codePointAt(Index));
 
             float OffsetY = Skip * Glyph.getHeight();
@@ -125,7 +121,7 @@ public final class GLFontRenderer {
         glVertexAttribPointer(2, 1, GL_FLOAT, true, ELEMENTS_STRIDE, (2 + 2) * Float.BYTES);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, Fonts.MINECRAFT.getID());
+        glBindTexture(GL_TEXTURE_2D, Font.getID());
 
         ShaderPrograms.TEXT_SHADER_PROGRAM.bind();
         glDrawArrays(GL_TRIANGLES, 0, this.BYTE_BUF.size() / ELEMENTS);

@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.demo.util;
 
-import org.a4z0.lwjgl.demo.shader.Shaders;
+import org.a4z0.lwjgl.demo.resource.shader.Shaders;
 
 import java.io.IOException;
 import java.io.InputStream;

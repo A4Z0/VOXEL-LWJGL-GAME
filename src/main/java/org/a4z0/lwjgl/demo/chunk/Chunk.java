@@ -4,22 +4,18 @@ import org.a4z0.lwjgl.demo.level.Level;
 import org.a4z0.lwjgl.demo.voxel.Voxel;
 import org.a4z0.lwjgl.demo.voxel.VoxelPosition;
 
-import java.util.Random;
-
-public class Chunk {
+public final class Chunk {
 
     public static final int CHUNK_SIZE_X = 256;
     public static final int CHUNK_SIZE_Y = 256;
     public static final int CHUNK_SIZE_Z = 256;
 
-    protected final Level level;
-    protected final ChunkPosition position;
+    private final Level LEVEL;
+    private final ChunkPosition POSITION;
+    private final int[] PALETTE = new int[CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z];
+    private final ChunkLayers CHUNK_LAYERS = new ChunkLayers(this);
 
-    protected final int[] Palette = new int[CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z];
-
-    protected boolean Loaded;
-
-    protected ChunkLayers Layers = new ChunkLayers(this);
+    private boolean IS_LOADED;
 
     /**
     * Construct a {@link Chunk}.
@@ -42,8 +38,8 @@ public class Chunk {
     */
 
     public Chunk(Level level, ChunkPosition position) {
-        this.level = level;
-        this.position = position;
+        this.LEVEL = level;
+        this.POSITION = position;
     }
 
     /**
@@ -51,7 +47,7 @@ public class Chunk {
     */
 
     public Level getLevel() {
-        return this.level;
+        return this.LEVEL;
     }
 
     /**
@@ -59,12 +55,12 @@ public class Chunk {
     */
 
     public ChunkPosition getPosition() {
-        return this.position;
+        return this.POSITION;
     }
 
     @Deprecated
     public ChunkLayers getLayers() {
-        return this.Layers;
+        return this.CHUNK_LAYERS;
     }
 
     /**
@@ -90,7 +86,7 @@ public class Chunk {
                 if((x < 0 || x >= CHUNK_SIZE_X) || (y < 0 || y >= CHUNK_SIZE_Y) || (z < 0 || z >= CHUNK_SIZE_Z))
                     return 0;
 
-                return Palette[this.getPosition().getIndex()];
+                return PALETTE[this.getPosition().getIndex()];
             }
 
             @Override
@@ -98,7 +94,7 @@ public class Chunk {
                 if((x < 0 || x >= CHUNK_SIZE_X) || (y < 0 || y >= CHUNK_SIZE_Y) || (z < 0 || z >= CHUNK_SIZE_Z))
                     return;
 
-                Palette[this.getPosition().getIndex()] = (r & 0xFF) | ((g & 0xFF) << 8) | ((b & 0xFF) << 16) | ((a & 0xFF) << 24);
+                PALETTE[this.getPosition().getIndex()] = (r & 0xFF) | ((g & 0xFF) << 8) | ((b & 0xFF) << 16) | ((a & 0xFF) << 24);
             }
 
             @Override
@@ -138,7 +134,7 @@ public class Chunk {
     */
 
     public boolean isLoaded() {
-        return this.Loaded;
+        return this.IS_LOADED;
     }
 
     /**
@@ -163,7 +159,7 @@ public class Chunk {
         if(this.isLoaded())
             return false;
 
-        this.Loaded = true;
+        this.IS_LOADED = true;
 
         if(g) {
             for(int x = 0; x < 256; x++) {
@@ -215,7 +211,7 @@ public class Chunk {
     }
 
     /**
-    * Ticks this {@link Chunk}.
+    * Ticks.
     */
 
     public void tick() {

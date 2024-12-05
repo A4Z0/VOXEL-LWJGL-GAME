@@ -1,12 +1,24 @@
-package org.a4z0.lwjgl.demo.font;
+package org.a4z0.lwjgl.demo.resource.font;
 
 public final class Glyph {
 
     private final int unicode;
-    private final int width, height;
+
     private final int x, y;
-    private final int offsetX, offsetY;
-    private final int advance;
+    private final int width, height;
+
+    private final float u1, v1;
+    private final float u2, v2;
+
+    Glyph(
+        int unicode,
+        int x,
+        int y,
+        int width,
+        int height
+    ) {
+        this(unicode, x, y, width, height, 0, 0, 0, 0);
+    }
 
     /**
     * Construct a {@link Glyph}.
@@ -16,29 +28,32 @@ public final class Glyph {
     * @param height Height.
     * @param x X.
     * @param y Y.
-    * @param offsetX Offset X.
-    * @param offsetY Offset Y.
-    * @param advance Advance.
+    * @param u1 ...
+    * @param v1 ...
+    * @param u2 ...
+    * @param v2 ...
     */
 
-    public Glyph(
+    Glyph(
         int unicode,
         int x,
         int y,
         int width,
         int height,
-        int offsetX,
-        int offsetY,
-        int advance
+        float u1,
+        float v1,
+        float u2,
+        float v2
     ) {
         this.unicode = unicode;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
-        this.advance = advance;
+        this.u1 = u1;
+        this.v1 = v1;
+        this.u2 = u2;
+        this.v2 = v2;
     }
 
     /**
@@ -82,26 +97,34 @@ public final class Glyph {
     }
 
     /**
-    * @return the Offset X.
+    * @return ...
     */
 
-    public int getOffsetX() {
-        return this.offsetX;
+    public float getU1() {
+        return this.u1;
     }
 
     /**
-    * @return the Offset Y.
+    * @return ...
     */
 
-    public int getOffsetY() {
-        return this.offsetY;
+    public float getV1() {
+        return this.v1;
     }
 
     /**
-    * @return the Advance.
+    * @return ...
     */
 
-    public int getAdvance() {
-        return this.advance;
+    public float getU2() {
+        return this.u2;
+    }
+
+    /**
+    * @return ...
+    */
+
+    public float getV2() {
+        return this.v2;
     }
 }
