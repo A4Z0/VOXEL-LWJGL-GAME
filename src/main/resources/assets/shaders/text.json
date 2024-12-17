@@ -1,0 +1,13 @@
+{
+  "name": "text",
+  "shaders": [
+    {
+      "name": "text",
+      "type": "vertex"
+    },
+    {
+      "name": "text",
+      "type": "fragment"
+    }
+  ]
+}

@@ -1,8 +1,65 @@
 package org.a4z0.lwjgl.demo.util;
 
-public class Color {
+public final class Color {
 
-    protected int i;
+    // White (255, 255, 255)
+    public static final Color WHITE = new Color(255, 255, 255);
+
+    // Blue (0, 0, 255)
+    public static final Color BLUE = new Color(0, 0, 255);
+
+    // Black (0, 0, 0)
+    public static final Color BLACK = new Color(0, 0, 0);
+
+    // Red (255, 0, 0)
+    public static final Color RED = new Color(255, 0, 0);
+
+    // Green (0, 255, 0)
+    public static final Color GREEN = new Color(0, 255, 0);
+
+    // Yellow (255, 255, 0)
+    public static final Color YELLOW = new Color(255, 255, 0);
+
+    // Cyan (0, 255, 255)
+    public static final Color CYAN = new Color(0, 255, 255);
+
+    // Magenta (255, 0, 255)
+    public static final Color MAGENTA = new Color(255, 0, 255);
+
+    // Gray (128, 128, 128)
+    public static final Color GRAY = new Color(128, 128, 128);
+
+    // Orange (255, 165, 0)
+    public static final Color ORANGE = new Color(255, 165, 0);
+
+    // Pink (255, 192, 203)
+    public static final Color PINK = new Color(255, 192, 203);
+
+    // Purple (128, 0, 128)
+    public static final Color PURPLE = new Color(128, 0, 128);
+
+    // Brown (165, 42, 42)
+    public static final Color BROWN = new Color(165, 42, 42);
+
+    // Light Blue (173, 216, 230)
+    public static final Color LIGHT_BLUE = new Color(173, 216, 230);
+
+    // Dark Green (0, 100, 0)
+    public static final Color DARK_GREEN = new Color(0, 100, 0);
+
+    // Light Green (144, 238, 144)
+    public static final Color LIGHT_GREEN = new Color(144, 238, 144);
+
+    // Indigo (75, 0, 130)
+    public static final Color INDIGO = new Color(75, 0, 130);
+
+    // Teal (0, 128, 128)
+    public static final Color TEAL = new Color(0, 128, 128);
+
+    private final byte r;
+    private final byte g;
+    private final byte b;
+    private final byte a;
 
     /**
     * Construct a {@link Color}.
@@ -13,7 +70,7 @@ public class Color {
     */
 
     public Color(int r, int g, int b) {
-        this.setColor(r, g, b, 255);
+        this(r, g, b, 255);
     }
 
     /**
@@ -26,238 +83,114 @@ public class Color {
     */
 
     public Color(int r, int g, int b, int a) {
-        this.setColor(r, g, b, a);
+        this.r = (byte) (r & 0xFF);
+        this.g = (byte) (g & 0xFF);
+        this.b = (byte) (b & 0xFF);
+        this.a = (byte) (a & 0xFF);
     }
 
     /**
-    * Construct a {@link Color}.
+    * Retrieves the Red between 0-255.
     *
-    * @param r Red.
-    * @param g Green.
-    * @param b Blue.
+    * @return the Red.
     */
 
-    public Color(byte r, byte g, byte b) {
-        this.setColor(r, g, b, (byte) 255);
+    public int getRed() {
+        return this.r & 0xFF;
     }
 
     /**
-    * Construct a {@link Color}.
-    *
-    * @param r Red.
-    * @param g Green.
-    * @param b Blue.
-    * @param a Alpha.
-    */
-
-    public Color(byte r, byte g, byte b, byte a) {
-        this.setColor(r, g, b, a);
-    }
-
-    /**
-    * Construct a {@link Color}.
-    *
-    * @param i Color.
-    */
-
-    public Color(int i) {
-        this.setColor(i);
-    }
-
-    /**
-    * Construct a {@link Color}.
-    */
-
-    public Color() {
-        this(0);
-    }
-
-    /**
-    * Sets the Red.
+    * Retrieves a new {@link Color} with the new Red.
     *
     * @param r Red.
     *
-    * @return this {@link Color}.
+    * @return a new {@link Color}.
     */
 
     public Color setRed(int r) {
-        return this.setRed((byte) r);
+        return new Color(r, this.getGreen(), this.getBlue(), this.getAlpha());
     }
 
     /**
-    * Sets the Red.
+    * Retrieves the Green between 0-255.
     *
-    * @param r Red.
-    *
-    * @return this {@link Color}.
+    * @return the Green.
     */
 
-    public Color setRed(byte r) {
-        this.i = (this.i & 0xFFFFFF00) | (r & 0xFF);
-
-        return this;
+    public int getGreen() {
+        return this.g & 0xFF;
     }
 
     /**
-    * Sets the Green.
+    * Retrieves a new {@link Color} with the new Green.
     *
     * @param g Green.
     *
-    * @return this {@link Color}.
+    * @return a new {@link Color}.
     */
 
     public Color setGreen(int g) {
-        return this.setGreen((byte) g);
+        return new Color(this.getRed(), g, this.getBlue(), this.getAlpha());
     }
 
     /**
-    * Sets the Green.
+    * Retrieves the Blue between 0-255.
     *
-    * @param g Green.
-    *
-    * @return this {@link Color}.
+    * @return the Blue.
     */
 
-    public Color setGreen(byte g) {
-        this.i = (this.i & 0xFFFF00FF) | ((g & 0xFF) << 8);
-
-        return this;
+    public int getBlue() {
+        return this.b & 0xFF;
     }
 
     /**
-    * Sets the Blue.
+    * Retrieves a new {@link Color} with the new Blue.
     *
     * @param b Blue.
     *
-    * @return this {@link Color}.
+    * @return a new {@link Color}.
     */
 
     public Color setBlue(int b) {
-        return this.setBlue((byte) b);
+        return new Color(this.getRed(), this.getGreen(), b, this.getAlpha());
     }
 
     /**
-    * Sets the Blue.
+    * Retrieves the Alpha between 0-255.
     *
-    * @param b Blue.
-    *
-    * @return this {@link Color}.
+    * @return the Alpha.
     */
 
-    public Color setBlue(byte b) {
-        this.i = (this.i & 0xFF00FFFF) | ((b & 0xFF) << 16);
-
-        return this;
+    public int getAlpha() {
+        return this.a & 0xFF;
     }
 
     /**
-    * Sets the Alpha.
+    * Retrieves a new {@link Color} with the new Alpha.
     *
     * @param a Alpha.
     *
-    * @return this {@link Color}.
+    * @return a new {@link Color}.
     */
 
     public Color setAlpha(int a) {
-        return this.setAlpha((byte) a);
+        return new Color(this.getRed(), this.getGreen(), this.getBlue(), a);
     }
 
     /**
-    * Sets the Alpha.
-    *
-    * @param a Alpha.
-    *
-    * @return this {@link Color}.
+    * @return this as an RGB.
     */
 
-    public Color setAlpha(byte a) {
-        this.i = (this.i & 0x00FFFFFF) | ((a & 0xFF) << 24);
-
-        return this;
+    public int asRGB() {
+        return this.getRed() << 16 | this.getGreen() << 8 | this.getBlue();
     }
 
     /**
-    * Retrieves the Color.
-    *
-    * @return the Color as an RGBA.
+    * @return this as an ARGB.
     */
 
-    public int getColor() {
-        return this.i;
-    }
-
-    /**
-    * Sets the Color.
-    *
-    * @param i Color.
-    *
-    * @return this {@link Color}.
-    */
-
-    public Color setColor(int i) {
-        this.i = i;
-
-        return this;
-    }
-
-    /**
-    * Sets the Color.
-    *
-    * @param r Red.
-    * @param g Green.
-    * @param b Blue.
-    *
-    * @return this {@link Color}.
-    */
-
-    public Color setColor(int r, int g, int b) {
-        return this.setColor(r, g, b, 255);
-    }
-
-    /**
-    * Sets the Color.
-    *
-    * @param r Red.
-    * @param g Green.
-    * @param b Blue.
-    *
-    * @return this {@link Color}.
-    */
-
-    public Color setColor(byte r, byte g, byte b) {
-        return this.setColor(r, g, b, (byte) 255);
-    }
-
-    /**
-    * Sets the Color.
-    *
-    * @param r Red.
-    * @param g Green.
-    * @param b Blue.
-    * @param a Alpha.
-    *
-    * @return this {@link Color}.
-    */
-
-    public Color setColor(int r, int g, int b, int a) {
-        return this.setColor((byte) r, (byte) g, (byte) b, (byte) a);
-    }
-
-    /**
-    * Sets the Color.
-    *
-    * @param r Red.
-    * @param g Green.
-    * @param b Blue.
-    * @param a Alpha.
-    *
-    * @return this {@link Color}.
-    */
-
-    public Color setColor(byte r, byte g, byte b, byte a) {
-        this.i = (r & 0xFF) | ((g & 0xFF) << 8) | ((b & 0xFF) << 16) | ((a & 0xFF) << 24);
-
-        return this;
+    public int asARGB() {
+        return this.getAlpha() << 24 | this.asRGB();
     }
 
     /**
@@ -270,6 +203,36 @@ public class Color {
 
     @Override
     public boolean equals(Object o) {
-        return (o instanceof Color) && ((Color) o).i == this.i;
+        return (o instanceof Color)
+            && ((Color) o).getRed() == this.getRed()
+            && ((Color) o).getGreen() == this.getGreen()
+            && ((Color) o).getBlue() == this.getBlue()
+            && ((Color) o).getAlpha() == this.getAlpha();
+    }
+
+    /**
+    * @return the Hash Code.
+    */
+
+    @Override
+    public int hashCode() {
+        return 31 * this.asARGB();
+    }
+
+    /**
+    * @return this as a {@link String}.
+    */
+
+    @Override
+    public String toString() {
+        return "Color{"
+            + "\"Red\": " + this.getRed()
+            + ", "
+            + "\"Green\": " + this.getGreen()
+            + ", "
+            + "\"Blue\": " + this.getBlue()
+            + ", "
+            + "\"Alpha\": " + this.getAlpha()
+        + "}";
     }
 }

@@ -1,19 +1,17 @@
 package org.a4z0.lwjgl.demo.level;
 
-import org.a4z0.lwjgl.demo.chunk.Chunk;
-import org.a4z0.lwjgl.demo.chunk.ChunkProvider;
-import org.a4z0.lwjgl.demo.server.Server;
-import org.a4z0.lwjgl.demo.voxel.Voxel;
+import org.a4z0.lwjgl.demo.level.chunk.Chunk;
+import org.a4z0.lwjgl.demo.level.chunk.ChunkProvider_V2;
+import org.a4z0.lwjgl.demo.level.chunk.voxel.Voxel;
 
 import java.util.UUID;
 
-public class Level {
+public final class Level {
 
-    protected final ChunkProvider provider;
-
-    protected final UUID uuid;
-    protected final String name;
-    protected final long seed;
+    public final ChunkProvider_V2 provider;
+    private final UUID uuid;
+    private final String name;
+    private final long seed;
 
     /**
     * Construct a {@link Level}.
@@ -23,19 +21,11 @@ public class Level {
     * @param seed {@link Level}'s Seed.
     */
 
-    public Level(Server server, UUID uuid, String name, long seed) {
-        this.provider = new ChunkProvider(server, this);
+    public Level(UUID uuid, String name, long seed) {
+        this.provider = new ChunkProvider_V2(this);
         this.uuid = uuid;
         this.name = name;
         this.seed = seed;
-    }
-
-    /**
-    * @return the {@link Server}.
-    */
-
-    public Server getServer() {
-        return this.provider.getServer();
     }
 
     /**
@@ -72,7 +62,7 @@ public class Level {
     */
 
     public Chunk getChunkAt(int x, int y, int z) {
-        return this.provider.provide(x, y, z);
+        return this.provider.getChunk(x, y, z);
     }
 
     /**

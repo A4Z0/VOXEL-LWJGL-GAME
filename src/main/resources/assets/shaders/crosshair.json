@@ -1,0 +1,13 @@
+{
+  "name": "crosshair",
+  "shaders": [
+    {
+      "name": "crosshair",
+      "type": "vertex"
+    },
+    {
+      "name": "crosshair",
+      "type": "fragment"
+    }
+  ]
+}

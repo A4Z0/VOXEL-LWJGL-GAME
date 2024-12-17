@@ -1,50 +1,39 @@
 package org.a4z0.lwjgl.demo.resource.font;
 
-import org.a4z0.lwjgl.demo.registry.Key;
-import org.a4z0.lwjgl.demo.registry.Registries;
-import org.a4z0.lwjgl.demo.resource.Resource;
-import org.a4z0.lwjgl.demo.resource.texture.Texture;
-import org.a4z0.lwjgl.demo.util.ByteBuf;
-
 import static org.lwjgl.opengl.GL11.*;
 
-public final class Font implements Resource {
+public final class Font {
 
-    private int a;
-    private Key k;
-    private int w;
-    private int h;
-    private Glyph[] g;
+    private int texture;
+    private int width, height;
+    private float ascent, descent, lineGap;
+    private Glyph[] glyphs;
 
     /**
-    * Construct a {@link Texture}.
+    * Construct a {@link Font}.
     *
-    * @param k Key.
-    * @param w Width.
-    * @param h Height.
-    * @param g Glyphs.
-    * @param b Buffer Data.
+    * @param width Width.
+    * @param height Height.
+    * @param ascent Ascent.
+    * @param descent Descent.
+    * @param lineGap Line Gap.
+    * @param glyphs Glyphs.
+    * @param buffer Buffer Data.
     */
 
-    Font(Key k, int w, int h, Glyph[] g, ByteBuf b) {
-        this.g = g;
-        glBindTexture(GL_TEXTURE_2D, this.a = glGenTextures());
+    Font(int width, int height, float ascent, float descent, float lineGap, Glyph[] glyphs, int[] buffer) {
+        this.glyphs = glyphs;
+        this.ascent = ascent;
+        this.descent = descent;
+        this.lineGap = lineGap;
+
+        glBindTexture(GL_TEXTURE_2D, this.texture = glGenTextures());
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this.w = w, this.h = h, 0, GL_RGBA, GL_UNSIGNED_BYTE, b.asByteBuffer());
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this.width = width, this.height = height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
         glBindTexture(GL_TEXTURE_2D, 0);
-
-        Registries.FONT_REGISTRY.register(this.k = k, this);
-    }
-
-    /**
-    * @return the Key.
-    */
-
-    public Key getKey() {
-        return this.k;
     }
 
     /**
@@ -52,7 +41,7 @@ public final class Font implements Resource {
     */
 
     public int getID() {
-        return this.a;
+        return this.texture;
     }
 
     /**
@@ -60,7 +49,7 @@ public final class Font implements Resource {
     */
 
     public int getWidth() {
-        return this.w;
+        return this.width;
     }
 
     /**
@@ -68,20 +57,44 @@ public final class Font implements Resource {
     */
 
     public int getHeight() {
-        return this.h;
+        return this.height;
+    }
+
+    /**
+    * @return the Ascent.
+    */
+
+    public float getAscent() {
+        return ascent;
+    }
+
+    /**
+    * @return the Descent.
+    */
+
+    public float getDescent() {
+        return this.descent;
+    }
+
+    /**
+    * @return the Line Gap.
+    */
+
+    public float getLineGap() {
+        return this.lineGap;
     }
 
     /**
     * Retrieves a {@link Glyph}.
     *
-    * @param u Unicode.
+    * @param unicode Unicode.
     *
     * @return a {@link Glyph} or null.
     */
 
-    public Glyph getGlyph(int u) {
-        for(Glyph glyph : this.g)
-            if(glyph != null && glyph.getUnicode() == u)
+    public Glyph getGlyph(int unicode) {
+        for(Glyph glyph : this.glyphs)
+            if(glyph != null && glyph.getUnicode() == unicode)
                 return glyph;
 
         return null;
@@ -92,17 +105,13 @@ public final class Font implements Resource {
     */
 
     public void delete() {
-        // Remove this Font from our registry.
-        Registries.FONT_REGISTRY.unregister(this.k);
-
         // We delete the Texture.
-        glDeleteTextures(this.a);
+        glDeleteTextures(this.texture);
 
         // Then clear the variables.
-        this.a = 0;
-        this.k = null;
-        this.w = 0;
-        this.h = 0;
-        this.g = null;
+        this.texture = 0;
+        this.width = height = 0;
+        this.ascent = descent = lineGap = 0;
+        this.glyphs = null;
     }
 }

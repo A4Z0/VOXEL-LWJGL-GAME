@@ -1,111 +1,130 @@
 package org.a4z0.lwjgl.demo.registry;
 
-import java.util.Arrays;
+import org.a4z0.lwjgl.demo.resource.Key;
+import org.a4z0.lwjgl.demo.resource.ResourceKey;
+
+import java.util.Collection;
 import java.util.Set;
 
-public class Registry<T>  {
-
-    public static final int GROWTH_FACTOR = 1;
-
-    protected Key[] kA;
-    protected T[] eA;
-
-    protected int i;
+public interface Registry<T> {
 
     /**
-    * Construct a {@link Registry}.
+    * @return the Resource Key of this Registry.
     */
 
-    public Registry() {
-        this.kA = new Key[1];
-
-        //noinspection unchecked
-        this.eA = (T[]) new Object[1];
-    }
+    ResourceKey<? extends Registry<T>> getKey();
 
     /**
-    * @return ...
+    * @return the Location Keys.
     */
 
-    public int size() {
-        return this.i;
-    }
+    Set<Key> getKeys();
+
+    /**
+    * @return the Resource Keys.
+    */
+
+    Set<ResourceKey<T>> getResources();
 
     /**
     * @return ...
     */
 
-    public Set<Key> getKeys() {
-        return Set.of(this.kA);
+    Collection<T> getValues();
+
+    /**
+    * Retrieves a Resource attached to the Resource Key.
+    *
+    * @param resourceKey Resource Key.
+    *
+    * @return a Value or null.
+    */
+
+    T get(ResourceKey<T> resourceKey);
+
+    /**
+    * Retrieves a Resource attached to the Location Key.
+    *
+    * @param key Location Key.
+    *
+    * @return a Value or null.
+    */
+
+    T get(Key key);
+
+    /**
+    * Retrieves a Resource attached to the Resource Key or throws an error.
+    *
+    * @param resourceKey Resource Key.
+    *
+    * @return a Value.
+    */
+
+    default T getOrThrow(ResourceKey<T> resourceKey) {
+        T entry = this.get(resourceKey);
+
+        if(entry == null)
+            throw new IllegalStateException("Unable to find a Resource at: " + this.getKey() + " -> " + resourceKey);
+
+        return entry;
     }
 
     /**
-    * Retrieves a Value.
+    * Retrieves a Resource attached to the Location Key or throws an error.
     *
-    * @param k {@link Key} attached to a Value.
+    * @param key Location Key.
     *
-    * @return a Value if it exists, null otherwise.
+    * @return a Value.
     */
 
-    public T get(Key k) {
-        for(int i = 0; i < this.i; i++)
-            if(this.kA[i].equals(k))
-                return this.eA[i];
+    default T getOrThrow(Key key) {
+        T entry = this.get(key);
 
-        return null;
+        if(entry == null)
+            throw new IllegalStateException("Unable to find a Resource at: " + this.getKey() + " -> " + key);
+
+        return entry;
     }
 
     /**
-    * Register a Value.
+    * Register a Resource to a Resource Key.
     *
-    * @param k {@link Key} that will hold the Value.
-    * @param e Value to be registered.
+    * @param resourceKey Resource Key.
+    * @param value Value.
     *
-    * @return this {@link Registry}.
+    * @return a {@link ResourceKey}.
     */
 
-    public Registry<T> register(Key k, T e) {
-        for(int i = 0; i < this.i; i++) {
-            if(this.kA[i].equals(k)) {
-                this.eA[i] = e;
+    ResourceKey<T> register(ResourceKey<T> resourceKey, T value);
 
-                return this;
-            }
-        }
+    /**
+    * Register a Resource to a Location Key.
+    *
+    * @param key Location Key.
+    * @param value Value.
+    *
+    * @return a {@link ResourceKey}.
+    */
 
-        if(this.i + GROWTH_FACTOR > this.kA.length) {
-            this.kA = Arrays.copyOf(this.kA, this.kA.length * 2 + GROWTH_FACTOR);
-            this.eA = Arrays.copyOf(this.eA, this.eA.length * 2 + GROWTH_FACTOR);
-        }
-
-        this.kA[this.i] = k;
-        this.eA[this.i] = e;
-
-        this.i++;
-
-        return this;
+    default ResourceKey<T> register(Key key, T value) {
+        return this.register(ResourceKey.create(this.getKey().getLocation(), key), value);
     }
 
     /**
-    * Unregister a Value.
+    * Unregister a Resource from a Resource Key.
     *
-    * @param k {@link Key} to be removed.
-    *
-    * @return this {@link Registry}.
+    * @param resourceKey Resource Key.
     */
 
-    public Registry<T> unregister(Key k) {
-        for(int i = 0; i < this.i; i++) {
-            if(this.kA[i].equals(k)) {
-                System.arraycopy(this.kA, i + 1, this.kA, i, this.i - i - 1);
-                System.arraycopy(this.eA, i + 1, this.eA, i, this.i - i - 1);
+    void unregister(ResourceKey<T> resourceKey);
 
-                this.i--;
+    /**
+    * Unregister a Resource from a Location Key.
+    *
+    * @param key Location Key.
+    */
 
-                return this;
-            }
-        }
-
-        return this;
+    default void unregister(Key key) {
+        this.unregister(ResourceKey.create(this.getKey().getLocation(), key));
     }
 }

@@ -1,0 +1,13 @@
+{
+  "name": "outline",
+  "shaders": [
+    {
+      "name": "outline",
+      "type": "vertex"
+    },
+    {
+      "name": "outline",
+      "type": "fragment"
+    }
+  ]
+}

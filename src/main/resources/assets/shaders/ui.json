@@ -1,0 +1,13 @@
+{
+  "name": "ui",
+  "shaders": [
+    {
+      "name": "ui",
+      "type": "vertex"
+    },
+    {
+      "name": "ui",
+      "type": "fragment"
+    }
+  ]
+}

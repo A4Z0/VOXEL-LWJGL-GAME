@@ -1,0 +1,13 @@
+{
+  "name": "world",
+  "shaders": [
+    {
+      "name": "world",
+      "type": "vertex"
+    },
+    {
+      "name": "world",
+      "type": "fragment"
+    }
+  ]
+}

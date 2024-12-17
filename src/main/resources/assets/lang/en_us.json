@@ -1,0 +1,6 @@
+{
+  "debug.name": "VOXEL_LWJGL_DEMO-0.0.0\n",
+  "debug.framerate": "%d fps T: %.0f\n",
+  "debug.location": "XYZ: %.3f / %.3f / %.3f\n",
+  "debug.facing": "Facing: (%.3f / %.3f)\n"
+}

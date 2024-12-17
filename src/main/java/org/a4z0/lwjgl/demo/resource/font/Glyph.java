@@ -10,41 +10,21 @@ public final class Glyph {
     private final float u1, v1;
     private final float u2, v2;
 
-    Glyph(
-        int unicode,
-        int x,
-        int y,
-        int width,
-        int height
-    ) {
-        this(unicode, x, y, width, height, 0, 0, 0, 0);
-    }
-
     /**
     * Construct a {@link Glyph}.
     *
     * @param unicode Unicode.
-    * @param width Width.
-    * @param height Height.
     * @param x X.
     * @param y Y.
+    * @param width Width.
+    * @param height Height.
     * @param u1 ...
     * @param v1 ...
     * @param u2 ...
     * @param v2 ...
     */
 
-    Glyph(
-        int unicode,
-        int x,
-        int y,
-        int width,
-        int height,
-        float u1,
-        float v1,
-        float u2,
-        float v2
-    ) {
+    public Glyph(int unicode, int x, int y, int width, int height, float u1, float v1, float u2, float v2) {
         this.unicode = unicode;
         this.x = x;
         this.y = y;

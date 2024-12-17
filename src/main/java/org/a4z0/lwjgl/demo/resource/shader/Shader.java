@@ -4,16 +4,23 @@ import static org.lwjgl.opengl.GL20.*;
 
 public final class Shader {
 
-    private final int glShader;
+    private int glShader;
 
     /**
     * Construct a {@link Shader}.
     *
-    * @param glShaderType Shader Type that will be set.
+    * @param shaderType Type.
+    * @param shaderSource Source.
     */
 
-    public Shader(int glShaderType) {
-        this.glShader = glCreateShader(glShaderType);
+    Shader(ShaderType shaderType, String shaderSource) throws ShaderException {
+        this.glShader = glCreateShader(shaderType.getShader());
+
+        glShaderSource(this.getID(), shaderSource);
+        glCompileShader(this.getID());
+
+        if(glGetShaderi(this.getID(), GL_COMPILE_STATUS) == 0)
+            throw new ShaderException("Unable to compile Shader." + "\n" + glGetShaderInfoLog(this.getID()));
     }
 
     /**
@@ -25,35 +32,12 @@ public final class Shader {
     }
 
     /**
-    * Sets the source code of this {@link Shader}.
-    *
-    * @param glSource Source code that will be set.
-    */
-
-    public Shader source(String glSource) {
-        glShaderSource(this.glShader, glSource);
-
-        return this;
-    }
-
-    /**
-    * Compile this {@link Shader}.
-    */
-
-    public Shader compile() {
-        glCompileShader(this.glShader);
-
-        if(glGetShaderi(this.glShader, GL_COMPILE_STATUS) == 0)
-            throw new RuntimeException("Unable to compile Shader." + "\n" + glGetShaderInfoLog(this.glShader));
-
-        return this;
-    }
-
-    /**
     * Deletes this {@link Shader}.
     */
 
     public void delete() {
         glDeleteShader(this.glShader);
+
+        this.glShader = 0;
     }
 }

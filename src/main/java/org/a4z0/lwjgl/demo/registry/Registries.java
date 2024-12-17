@@ -1,31 +1,35 @@
 package org.a4z0.lwjgl.demo.registry;
 
+import org.a4z0.lwjgl.demo.bootstrap.*;
+import org.a4z0.lwjgl.demo.lang.Language;
+import org.a4z0.lwjgl.demo.resource.Resources;
 import org.a4z0.lwjgl.demo.resource.font.Font;
-import org.a4z0.lwjgl.demo.resource.texture.Texture;
+import org.a4z0.lwjgl.demo.resource.Key;
 import org.a4z0.lwjgl.demo.resource.shader.Shader;
-import org.a4z0.lwjgl.demo.resource.shader.ShaderProgram;
-import org.a4z0.lwjgl.demo.ui.UI;
+import org.a4z0.lwjgl.demo.resource.shader.program.ShaderProgram;
 
 public final class Registries {
 
-    public static Registry<Shader>          SHADER_REGISTRY;
-    public static Registry<ShaderProgram>   SHADER_PROGRAM_REGISTRY;
-    public static Registry<Texture>         TEXTURE_REGISTRY;
-    public static Registry<Font>            FONT_REGISTRY;
-    public static Registry<UI>          WIDGET_REGISTRY;
+    public static final Key ROOT_REGISTRY_NAME = Key.of("root");
+
+    public static final Registry<Bootstrap> BOOTSTRAP = new MappingRegistry<>(Resources.BOOTSTRAP);
+    public static final Registry<Language> LANGUAGE = new MappingRegistry<>(Resources.LANGUAGE);
+    public static final Registry<Shader> SHADER = new MappingRegistry<>(Resources.SHADER);
+    public static final Registry<ShaderProgram> SHADER_PROGRAM = new MappingRegistry<>(Resources.SHADER_PROGRAM);
+    public static final Registry<Font> FONT = new MappingRegistry<>(Resources.FONT);
 
     Registries() {}
 
+    @Deprecated
     public static void init() {
-        System.out.println("[Registries]: Initializing Shader.");
-        SHADER_REGISTRY = new Registry<>();
-        System.out.println("[Registries]: Initializing Shader Program.");
-        SHADER_PROGRAM_REGISTRY = new Registry<>();
-        System.out.println("[Registries]: Initializing Texture.");
-        TEXTURE_REGISTRY = new Registry<>();
-        System.out.println("[Registries]: Initializing Font.");
-        FONT_REGISTRY = new Registry<>();
-        System.out.println("[Registries]: Initializing Widget.");
-        WIDGET_REGISTRY = new Registry<>();
+        BOOTSTRAP.register(Key.of("language"), new LanguageBootstrap());
+        BOOTSTRAP.register(Key.of("shader"), new ShaderBootstrap());
+        BOOTSTRAP.register(Key.of("shader/program"), new ShaderProgramBootstrap());
+        BOOTSTRAP.register(Key.of("font"), new FontBootstrap());
+    }
+
+    public static void bootstrap() {
+        for(Bootstrap Bootstrap : BOOTSTRAP.getValues())
+            Bootstrap.run();
     }
 }

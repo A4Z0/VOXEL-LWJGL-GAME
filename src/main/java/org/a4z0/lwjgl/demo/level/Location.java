@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.demo.level;
 
-import org.a4z0.lwjgl.demo.math.Vector3f;
-import org.a4z0.lwjgl.demo.math.Vector3fc;
+import org.a4z0.lwjgl.demo.math.vector.Vector3f;
+import org.a4z0.lwjgl.demo.math.vector.Vector3fc;
 
 public class Location implements Vector3fc {
 
