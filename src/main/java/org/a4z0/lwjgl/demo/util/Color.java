@@ -235,4 +235,8 @@ public final class Color {
             + "\"Alpha\": " + this.getAlpha()
         + "}";
     }
+
+    public static Color of(int i) {
+        return new Color((i >> 16) & 0xFF, (i >> 8) & 0xFF, i & 0xFF, (i >> 24) & 0xFF);
+    }
 }

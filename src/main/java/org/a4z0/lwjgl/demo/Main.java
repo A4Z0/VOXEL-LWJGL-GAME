@@ -2,12 +2,13 @@ package org.a4z0.lwjgl.demo;
 
 import org.a4z0.lwjgl.demo.chrono.Chrono;
 import org.a4z0.lwjgl.demo.event.EventBus;
-import org.a4z0.lwjgl.demo.event.client.input.mouse.MouseMoveEvent;
-import org.a4z0.lwjgl.demo.event.client.render.WorldRenderEvent;
-import org.a4z0.lwjgl.demo.event.client.setup.CommonSetupEvent;
-import org.a4z0.lwjgl.demo.event.client.window.WindowReziseEvent;
+import org.a4z0.lwjgl.demo.event.input.mouse.MouseMoveEvent;
+import org.a4z0.lwjgl.demo.event.setup.CommonSetupEvent;
+import org.a4z0.lwjgl.demo.event.window.WindowReziseEvent;
+import org.a4z0.lwjgl.demo.input.InputAction;
+import org.a4z0.lwjgl.demo.extra.ChunkBondaries;
 import org.a4z0.lwjgl.demo.registry.Registries;
-import org.a4z0.lwjgl.demo.screen.Debugger;
+import org.a4z0.lwjgl.demo.extra.Debugger;
 import org.a4z0.lwjgl.demo.input.InputHandler;
 import org.lwjgl.opengl.GL;
 
@@ -17,9 +18,14 @@ import static org.lwjgl.opengl.GL11.*;
 public final class Main {
 
     public static Chrono CHRONO;
+
     public static final EventBus EVENT_BUS = new EventBus();
 
     public static long WINDOW;
+
+    public static boolean FREEZE_SIGNAL;
+    public static boolean CURSOR_ENABLED;
+
     public static boolean EXIT_SIGNAL;
 
     public static void main(String[] args) {
@@ -46,6 +52,7 @@ public final class Main {
 
         EVENT_BUS.register(new Game());
         EVENT_BUS.register(new Debugger());
+        EVENT_BUS.register(new ChunkBondaries());
 
         //noinspection resource
         glfwSetFramebufferSizeCallback(WINDOW, (_ignored, w, h) -> EVENT_BUS.submit(new WindowReziseEvent(w, h)));
@@ -58,8 +65,8 @@ public final class Main {
         glEnable(GL_DEPTH_TEST);
         glClearDepth(1f);
         glDepthFunc(GL_LEQUAL);
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
+        //glEnable(GL_CULL_FACE);
+        //glCullFace(GL_BACK);
         glLineWidth(1f);
 
         Registries.init();
@@ -68,18 +75,24 @@ public final class Main {
 
         EVENT_BUS.submit(new CommonSetupEvent());
 
+        // Disable Cursor
+        glfwSetInputMode(WINDOW, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
         while(!glfwWindowShouldClose(WINDOW)) {
             if(!CHRONO.update())
                 continue;
 
             glfwPollEvents();
 
+            if(InputHandler.getKey(GLFW_KEY_ESCAPE) != InputAction.RELEASE && InputHandler.getKey(GLFW_KEY_X) == InputAction.DOWN)
+                EXIT_SIGNAL = true;
+
             glViewport(0, 0, Game.getWidth(), Game.getHeight());
             glClear(GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT);
             glClearColor(0.6f, 0.8f, 1f, 1);
 
-            EVENT_BUS.submit(new WorldRenderEvent.Post());
-            EVENT_BUS.submit(new WorldRenderEvent.After());
+            Game.PLAYER.tick();
+            Game.LEVEL.tick();
 
             glFlush();
             glfwSwapBuffers(WINDOW);

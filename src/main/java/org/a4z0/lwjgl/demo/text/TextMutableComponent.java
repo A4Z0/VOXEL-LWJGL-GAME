@@ -92,6 +92,14 @@ public final class TextMutableComponent implements TextComponent {
         return this;
     }
 
+    /**
+    * ...
+    *
+    * @param components ...
+    *
+    * @return this {@link TextMutableComponent}.
+    */
+
     public TextMutableComponent append(TextComponent... components) {
         for(TextComponent component : components)
             this.append(component);

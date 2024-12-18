@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.demo.text;
 
-import org.a4z0.lwjgl.demo.lang.Language;
+import org.a4z0.lwjgl.demo.language.Language;
 
 public final class TranslatableContent extends Content {
 

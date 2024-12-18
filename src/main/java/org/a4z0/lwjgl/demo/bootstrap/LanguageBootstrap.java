@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.demo.bootstrap;
 
-import org.a4z0.lwjgl.demo.lang.Language;
-import org.a4z0.lwjgl.demo.lang.LanguageLoader;
+import org.a4z0.lwjgl.demo.language.Language;
+import org.a4z0.lwjgl.demo.language.LanguageLoader;
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;
 
@@ -23,13 +23,11 @@ public final class LanguageBootstrap extends Bootstrap {
         assert false : "Couldn't initialize Language!";
         for(File File : new File(Path).listFiles()) {
             if(File.getName().endsWith(".json")) {
-                Key name = Key.of(File.getName().replace(".json", ""));
+                Language Language = LanguageLoader.load(File.getPath());
 
-                this.getLogger().loading(name);
-
-                Registries.LANGUAGE.register(name, LanguageLoader.load(File.getPath()));
-
-                this.getLogger().registerered(name);
+                this.getLogger().loading(Language.getName());
+                Registries.LANGUAGE.register(Language.getName(), LanguageLoader.load(File.getPath()));
+                this.getLogger().registerered(Language.getName());
             }
         }
 

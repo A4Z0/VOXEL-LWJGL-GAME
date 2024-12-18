@@ -1,8 +1,8 @@
 package org.a4z0.lwjgl.demo.input;
 
 import org.a4z0.lwjgl.demo.Main;
-import org.a4z0.lwjgl.demo.event.client.input.mouse.ButtonEvent;
-import org.a4z0.lwjgl.demo.event.client.input.keyboard.KeyEvent;
+import org.a4z0.lwjgl.demo.event.input.mouse.ButtonEvent;
+import org.a4z0.lwjgl.demo.event.input.keyboard.KeyEvent;
 
 import static org.lwjgl.glfw.GLFW.*;
 

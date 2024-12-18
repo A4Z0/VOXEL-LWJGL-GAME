@@ -1,65 +1,17 @@
 package org.a4z0.lwjgl.demo.level.chunk;
 
 import org.a4z0.lwjgl.demo.level.Level;
-import org.a4z0.lwjgl.demo.math.vector.Vector3f;
-import org.a4z0.lwjgl.demo.math.position.ChunkPosition;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
-public class ChunkProvider {
-
-    protected final Level level;
-
-    protected final Map<Long, Chunk> Cached = new HashMap<>();
+public interface ChunkProvider {
 
     /**
-    * Construct a {@link ChunkProvider}.
-    *
-    * @param level ....
+    * @return the Level.
     */
 
-    public ChunkProvider(Level level) {
-        this.level = level;
-    }
+    Level getLevel();
 
     /**
-    * @return the {@link Level}.
-    */
-
-    public Level getLevel() {
-        return this.level;
-    }
-
-    /**
-    * Checks if a Chunk in a position exists.
-    *
-    * @param x X-Axis.
-    * @param y Y-Axis.
-    * @param z Z-Axis.
-    *
-    * @return true if it exists, false otherwise.
-    */
-
-    public boolean exists(int x, int y, int z) {
-        return this.exists(new ChunkPosition(x, y, z));
-    }
-
-    /**
-    * ...
-    *
-    * @param position ...
-    *
-    * @return true if it exists, false otherwise.
-    */
-
-    public boolean exists(ChunkPosition position) {
-        return this.Cached.containsKey(position.getIndex());
-    }
-
-    /**
-    * Provides a {@link Chunk}.
+    * Retrieves a Chunk.
     *
     * @param x X-Axis.
     * @param y Y-Axis.
@@ -68,79 +20,49 @@ public class ChunkProvider {
     * @return a {@link Chunk}.
     */
 
-    public Chunk provide(int x, int y, int z) {
-        return this.provide(new ChunkPosition(x, y, z));
-    }
+    Chunk getChunkAt(int x, int y, int z);
 
     /**
-    * Provides a {@link Chunk}.
-    *
-    * @param position ...
-    *
-    * @return a {@link Chunk}.
-    */
-
-    public Chunk provide(ChunkPosition position) {
-        return this.Cached.computeIfAbsent(position.getIndex(), (_ignored) -> new Chunk(this.level, position));
-    }
-
-    /**
-    * Removes a {@link Chunk}.
-    *
-    * @param chunk ...
-    *
-    * @return an {@link Optional} of a {@link Chunk}.
-    */
-
-    public Optional<Chunk> remove(Chunk chunk) {
-        return this.remove(chunk.getPosition());
-    }
-
-    /**
-    * Removes a {@link Chunk}.
+    * Loads a Chunk.
     *
     * @param x X-Axis.
     * @param y Y-Axis.
     * @param z Z-Axis.
-    *
-    * @return an {@link Optional} of a {@link Chunk}.
     */
 
-    public Optional<Chunk> remove(int x, int y, int z) {
-        return this.remove(new ChunkPosition(x, y, z));
+    void load(int x, int y, int z);
+
+    /**
+    * Loads a Chunk.
+    *
+    * @param Chunk Chunk.
+    */
+
+    void load(Chunk Chunk);
+
+    /**
+    * Unloads a Chunk.
+    *
+    * @param x X-Axis.
+    * @param y Y-AXIS.
+    * @param z Z-Axis.
+    */
+
+    default void unload(int x, int y, int z) {
+        this.unload(this.getChunkAt(x, y, z));
     }
 
     /**
-    * Removes a {@link Chunk}.
+    * Unloads a Chunk.
     *
-    * @param position ...
-    *
-    * @return an {@link Optional} of a {@link Chunk}.
+    * @param Chunk Chunk.
     */
 
-    public Optional<Chunk> remove(ChunkPosition position) {
-        return Optional.of(this.Cached.remove(position.getIndex()));
-    }
+    void unload(Chunk Chunk);
 
     /**
-    * Ticks this {@link ChunkProvider}.
+    * Ticks this Provider.
     */
 
-    public void tick() {
-        /*if(this.Cached.isEmpty()) {
-            Vector3f playerLoc = PLAYER_ENTITY.getPosition().clone();
-
-            for (int x = (int) playerLoc.getX() - 16; x < (int) playerLoc.getX() + 16; x++) {
-                for (int z = (int) playerLoc.getZ() - 16; z < (int) playerLoc.getZ() + 16; z++) {
-                    Chunk playerChunk = this.provide(x << 4, 0, z << 4);
-
-                    playerChunk.load(true);
-                }
-            }
-        }
-
-        for(Chunk value : this.Cached.values()) {
-            value.getLayers().render();
-        }*/
-    }
+    void tick();
 }

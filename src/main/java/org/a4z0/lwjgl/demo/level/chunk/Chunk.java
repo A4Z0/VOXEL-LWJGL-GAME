@@ -1,68 +1,67 @@
 package org.a4z0.lwjgl.demo.level.chunk;
 
-import org.a4z0.lwjgl.demo.level.chunk.generation.planet.DevPlanetChunkGenerator;
+import org.a4z0.lwjgl.demo.Main;
+import org.a4z0.lwjgl.demo.event.level.chunk.ChunkLoadEvent;
+import org.a4z0.lwjgl.demo.event.level.chunk.ChunkUnloadEvent;
 import org.a4z0.lwjgl.demo.level.Level;
-import org.a4z0.lwjgl.demo.math.position.ChunkPosition;
-import org.a4z0.lwjgl.demo.level.chunk.voxel.Voxel;
-import org.a4z0.lwjgl.demo.math.position.VoxelPosition;
+import org.a4z0.lwjgl.demo.level.chunk.generation.planet.DevPlanetChunkGenerator;
+import org.a4z0.lwjgl.demo.level.chunk.layer.ChunkLayers;
+import org.a4z0.lwjgl.demo.level.chunk.layer.voxel.Voxel;
 
-public final class Chunk {
+public class Chunk {
 
     public static final int CHUNK_SIZE_X = 256;
     public static final int CHUNK_SIZE_Y = 256;
     public static final int CHUNK_SIZE_Z = 256;
 
-    private final Level LEVEL;
-    private final ChunkPosition POSITION;
-    private final int[] PALETTE = new int[CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z];
-    private final ChunkLayers CHUNK_LAYERS = new ChunkLayers(this);
+    private final Level level;
+    private final ChunkPosition position;
 
-    private boolean IS_LOADED;
+    private final int[] palette = new int[CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z];
+    private final ChunkLayers layers;
+
+    private boolean isLoaded;
 
     /**
     * Construct a {@link Chunk}.
     *
-    * @param level {@link Level} this {@link Chunk} is at.
+    * @param level Level.
     * @param x X-Axis.
     * @param y Y-Axis.
     * @param z Z-Axis.
     */
 
     public Chunk(Level level, int x, int y, int z) {
-        this(level, new ChunkPosition(x, y, z));
+        this(level, ChunkPosition.ofVoxel(x, y, z));
     }
 
     /**
     * Construct a {@link Chunk}.
     *
-    * @param level {@link Level} this {@link Chunk} is at.
-    * @param position {@link ChunkPosition Position}.
+    * @param level Level.
+    * @param position Position.
     */
 
     public Chunk(Level level, ChunkPosition position) {
-        this.LEVEL = level;
-        this.POSITION = position;
+        this.level = level;
+        this.position = position;
+        this.layers = new ChunkLayers(this);
     }
 
     /**
-    * @return the {@link Level}.
+    * @return ...
     */
 
     public Level getLevel() {
-        return this.LEVEL;
+        return this.level;
     }
 
     /**
-    * @return the {@link ChunkPosition Position}.
+    * @return ...
     */
 
     public ChunkPosition getPosition() {
-        return this.POSITION;
-    }
-
-    @Deprecated
-    public ChunkLayers getLayers() {
-        return this.CHUNK_LAYERS;
+        return this.position;
     }
 
     /**
@@ -76,59 +75,7 @@ public final class Chunk {
     */
 
     public Voxel getVoxelAt(int x, int y, int z) {
-        return new Voxel() {
-
-            @Override
-            public VoxelPosition getPosition() {
-                return new VoxelPosition(x + ((Chunk.this.getPosition().getX() >> 4) * 256), y + ((Chunk.this.getPosition().getY() >> 4) * 256), z + ((Chunk.this.getPosition().getZ() >> 4) * 256));
-            }
-
-            @Override
-            public int getColor() {
-                if((x < 0 || x >= CHUNK_SIZE_X) || (y < 0 || y >= CHUNK_SIZE_Y) || (z < 0 || z >= CHUNK_SIZE_Z))
-                    return 0;
-
-                return PALETTE[this.getPosition().getIndex()];
-            }
-
-            @Override
-            public void setColor(byte r, byte g, byte b, byte a) {
-                if((x < 0 || x >= CHUNK_SIZE_X) || (y < 0 || y >= CHUNK_SIZE_Y) || (z < 0 || z >= CHUNK_SIZE_Z))
-                    return;
-
-                PALETTE[this.getPosition().getIndex()] = (r & 0xFF) | ((g & 0xFF) << 8) | ((b & 0xFF) << 16) | ((a & 0xFF) << 24);
-            }
-
-            @Override
-            public Voxel getNorth() {
-                return getVoxelAt(x, y, z - 1);
-            }
-
-            @Override
-            public Voxel getSouth() {
-                return getVoxelAt(x, y, z + 1);
-            }
-
-            @Override
-            public Voxel getEast() {
-                return getVoxelAt(x + 1, y, z);
-            }
-
-            @Override
-            public Voxel getWest() {
-                return getVoxelAt(x - 1, y, z);
-            }
-
-            @Override
-            public Voxel getTop() {
-                return getVoxelAt(x, y + 1, z);
-            }
-
-            @Override
-            public Voxel getBottom() {
-                return getVoxelAt(x, y - 1, z);
-            }
-        };
+        return Voxel.of(this, this.palette, x, y, z);
     }
 
     /**
@@ -136,7 +83,7 @@ public final class Chunk {
     */
 
     public boolean isLoaded() {
-        return this.IS_LOADED;
+        return this.isLoaded;
     }
 
     /**
@@ -161,25 +108,6 @@ public final class Chunk {
         if(this.isLoaded())
             return false;
 
-        /*if(g) {
-            for(int x = 0; x < 256; x++) {
-                for(int y = 0; y < 1; y++) {
-                    for(int z = 0; z < 256; z++) {
-                        int blockX = x / 16;
-                        int blockZ = z / 16;
-
-                        if ((blockX + blockZ) % 2 == 0) {
-                            this.getVoxelAt(x, y, z).setColor(255, 255, 255);
-                        } else {
-                            this.getVoxelAt(x, y, z).setColor(0, 0, 0);
-                        }
-                    }
-                }
-            }
-        }
-
-        System.out.println("[Chunk]: Loaded!");*/
-
         int[] map = DevPlanetChunkGenerator.surface(this);
 
         if(g)
@@ -188,7 +116,9 @@ public final class Chunk {
                     for (int z = 0; z < Chunk.CHUNK_SIZE_Z; z++)
                         DevPlanetChunkGenerator.generate(this, x, y, z, map);
 
-        this.IS_LOADED = true;
+        Main.EVENT_BUS.submit(new ChunkLoadEvent(this));
+
+        this.isLoaded = true;
 
         return true;
     }
@@ -215,16 +145,25 @@ public final class Chunk {
         if(!this.isLoaded())
             return false;
 
-        System.out.println("[Chunk]: Unloaded!");
+        Main.EVENT_BUS.submit(new ChunkUnloadEvent(this));
+
+        this.isLoaded = false;
 
         return true;
     }
 
     /**
-    * Ticks.
+    * Ticks this Chunk.
     */
 
     public void tick() {
-
+        if(this.isLoaded())
+            this.layers.render();
     }
+
+    @Override
+    public String toString() {
+        return "Chunk{" + this.getPosition() + "}";
+    }
+
 }

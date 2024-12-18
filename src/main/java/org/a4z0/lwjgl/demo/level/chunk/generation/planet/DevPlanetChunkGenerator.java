@@ -32,7 +32,7 @@ public final class DevPlanetChunkGenerator extends PlanetChunkGenerator {
     }
 
     public static void generate(Chunk chunk, int x, int y, int z, int[] map) {
-        Random random = new Random(chunk.getLevel().getSeed());
+        Random random = new Random();
         int surface = map[getIndex(x, z)];
 
         if(y > surface)
@@ -41,7 +41,7 @@ public final class DevPlanetChunkGenerator extends PlanetChunkGenerator {
         int distance = (surface - y);
 
         if(distance < 256) {
-            int diff = random.nextInt() * 25;
+            int diff = random.nextInt() * 5;
             chunk.getVoxelAt(x, y, z).setColor(random.nextInt(60), 255 - random.nextInt(128) - random.nextInt(128), random.nextInt(75));
         }
     }
