@@ -18,19 +18,19 @@ public interface FormattedText {
     /**
     * Applies the Consumer.
     *
-    * @param consumer Consumer.
+    * @param consumer Text Consumer.
     */
 
-    void applyToText(FormattedText.a consumer);
+    void applyToText(FormattedText.TextConsumer consumer);
 
     /**
     * Applies the Consumer.
     *
-    * @param consumer Consumer.
+    * @param consumer Styled Text Consumer.
     * @param style Style.
     */
 
-    void applyStyledText(FormattedText.b consumer, TextStyle style);
+    void applyStyledText(FormattedText.StyledTextConsumer consumer, TextStyle style);
 
     /**
     * Construct a {@link FormattedText}.
@@ -43,24 +43,24 @@ public interface FormattedText {
     static FormattedText of(final String s) {
         return new FormattedText() {
             @Override
-            public void applyToText(a consumer) {
-                consumer.accept(s);
+            public void applyToText(TextConsumer consumer) {
+                consumer.acceptText(s);
             }
 
             @Override
-            public void applyStyledText(b consumer, TextStyle style) {
-                consumer.accept(s, style);
+            public void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
+                consumer.acceptStyledText(s, style);
             }
         };
     }
 
     @FunctionalInterface
-    interface a {
-        void accept(String s);
+    interface TextConsumer {
+        void acceptText(String s);
     }
 
     @FunctionalInterface
-    interface b {
-        void accept(String s, TextStyle style);
+    interface StyledTextConsumer {
+        void acceptStyledText(String s, TextStyle style);
     }
 }

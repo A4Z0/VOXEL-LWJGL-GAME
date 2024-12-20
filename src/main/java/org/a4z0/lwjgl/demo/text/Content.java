@@ -13,13 +13,13 @@ public abstract class Content implements FormattedText {
     };
 
     @Override
-    public void applyToText(a consumer) {
-        consumer.accept(null);
+    public void applyToText(TextConsumer consumer) {
+        consumer.acceptText(null);
     }
 
     @Override
-    public void applyStyledText(b consumer, TextStyle style) {
-        consumer.accept(null, TextStyle.empty());
+    public void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
+        consumer.acceptStyledText(null, TextStyle.empty());
     }
 
     /**

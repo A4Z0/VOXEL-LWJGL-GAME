@@ -8,7 +8,7 @@ import java.util.List;
 public interface TextComponent extends FormattedText {
 
     @Override
-    default void applyToText(a consumer) {
+    default void applyToText(TextConsumer consumer) {
         this.getContent().applyToText(consumer);
 
         for(TextComponent Component : this.getComponents())
@@ -16,7 +16,7 @@ public interface TextComponent extends FormattedText {
     }
 
     @Override
-    default void applyStyledText(b consumer, TextStyle style) {
+    default void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
         this.getContent().applyStyledText(consumer, this.getStyle());
 
         for(TextComponent Component : this.getComponents())

@@ -5,7 +5,7 @@ import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;
 import org.a4z0.lwjgl.demo.text.TextComponent;
 import org.a4z0.lwjgl.demo.util.ByteBuf;
-import org.a4z0.lwjgl.demo.util.Color;
+import org.a4z0.lwjgl.demo.color.Color;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL15.*;
@@ -69,7 +69,7 @@ public final class FontRenderer {
     }
 
     public static void drawString(String family, String text, float x, float y, float scale, Color color) {
-        drawString(Registries.FONT.get(Key.of(family)), text, x, y, scale, color.asARGB());
+        drawString(Registries.FONT.getOrThrow(Key.of(family)), text, x, y, scale, color.asARGB());
     }
 
     public static void drawString(Font font, String text, float x, float y, float scale, int i) {

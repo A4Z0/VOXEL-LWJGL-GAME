@@ -13,7 +13,8 @@ public enum ShaderType {
     GEOMETRY(GL_GEOMETRY_SHADER, "geom"),
     TESSELLATION_CONTROL(GL_TESS_CONTROL_SHADER, "tesc"),
     TESSELLATION_EVALUATION(GL_TESS_EVALUATION_SHADER, "tese"),
-    COMPUTE(GL_COMPUTE_SHADER, "comp");
+    COMPUTE(GL_COMPUTE_SHADER, "comp"),
+    MODULE(GL_VERTEX_SHADER, "glsl");
 
     private final int shaderCode;
     private final String extension;
@@ -65,8 +66,10 @@ public enum ShaderType {
                 TESSELLATION_EVALUATION;
             case "compute" ->
                 COMPUTE;
+            case "module" ->
+                MODULE;
             default ->
-                throw new RuntimeException("...");
+                throw new IllegalArgumentException("...");
         };
     }
 }

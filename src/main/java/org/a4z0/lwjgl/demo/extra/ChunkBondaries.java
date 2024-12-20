@@ -4,7 +4,7 @@ import org.a4z0.lwjgl.demo.Game;
 import org.a4z0.lwjgl.demo.event.EventHandler;
 import org.a4z0.lwjgl.demo.event.input.keyboard.KeyEvent;
 import org.a4z0.lwjgl.demo.event.level.LevelRenderEvent;
-import org.a4z0.lwjgl.demo.level.chunk.ChunkPosition;
+import org.a4z0.lwjgl.demo.chunk.ChunkPosition;
 import org.a4z0.lwjgl.demo.math.aabb.AABBi;
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;
@@ -31,13 +31,13 @@ public final class ChunkBondaries {
         if(!ENABLED)
             return;
 
-        Registries.SHADER_PROGRAM.get(Key.of("outline")).bind();
-        Registries.SHADER_PROGRAM.get(Key.of("outline")).setUniform4fv("camera_projection_view", Game.CAMERA.getProjectionView());
+        Registries.SHADER_PROGRAM.getOrThrow(Key.of("outline")).bind();
+        Registries.SHADER_PROGRAM.getOrThrow(Key.of("outline")).setUniform4fv("camera_projection_view", Game.CAMERA.getProjectionView());
 
         ChunkPosition chunkPosition = ChunkPosition.ofEntity(Game.PLAYER.getPosition());
         AABBRenderer.draw(Chunk, chunkPosition.getX(), chunkPosition.getY(), chunkPosition.getZ(), 255, 255, 0);
 
         AABBRenderer.flush();
-        Registries.SHADER_PROGRAM.get(Key.of("outline")).unbind();
+        Registries.SHADER_PROGRAM.getOrThrow(Key.of("outline")).unbind();
     }
 }

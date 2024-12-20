@@ -15,13 +15,13 @@ public final class TextContent extends Content {
     }
 
     @Override
-    public void applyToText(a consumer) {
-        consumer.accept(this.text);
+    public void applyToText(TextConsumer consumer) {
+        consumer.acceptText(this.text);
     }
 
     @Override
-    public void applyStyledText(b consumer, TextStyle style) {
-        consumer.accept(this.text, style);
+    public void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
+        consumer.acceptStyledText(this.text, style);
     }
 
     @Override

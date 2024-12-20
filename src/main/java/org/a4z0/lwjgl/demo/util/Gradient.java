@@ -1,5 +1,6 @@
 package org.a4z0.lwjgl.demo.util;
 
+import org.a4z0.lwjgl.demo.color.Color;
 import org.a4z0.lwjgl.demo.text.TextComponent;
 import org.a4z0.lwjgl.demo.text.TextStyle;
 

@@ -5,8 +5,8 @@ import org.a4z0.lwjgl.demo.Main;
 import org.a4z0.lwjgl.demo.event.EventHandler;
 import org.a4z0.lwjgl.demo.event.input.keyboard.KeyEvent;
 import org.a4z0.lwjgl.demo.event.level.LevelRenderEvent;
-import org.a4z0.lwjgl.demo.level.chunk.ChunkPosition;
-import org.a4z0.lwjgl.demo.level.chunk.layer.ChunkLayerPosition;
+import org.a4z0.lwjgl.demo.chunk.ChunkPosition;
+import org.a4z0.lwjgl.demo.layer.ChunkLayerPosition;
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;
 import org.a4z0.lwjgl.demo.resource.font.FontRenderer;
@@ -31,7 +31,7 @@ public final class Debugger {
         if(!ENABLED)
             return;
 
-        Registries.SHADER_PROGRAM.get(Key.of("text")).bind();
+        Registries.SHADER_PROGRAM.getOrThrow(Key.of("text")).bind();
 
         ChunkPosition chunkPosition = ChunkPosition.ofEntity(Game.PLAYER.getPosition());
         ChunkLayerPosition layerPosition = ChunkLayerPosition.ofEntity(Game.PLAYER.getPosition());
@@ -46,6 +46,6 @@ public final class Debugger {
         3f, 3f, 1.5f);
 
         FontRenderer.flush();
-        Registries.SHADER_PROGRAM.get(Key.of("text")).unbind();
+        Registries.SHADER_PROGRAM.getOrThrow(Key.of("text")).unbind();
     }
 }

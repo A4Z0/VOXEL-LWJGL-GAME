@@ -8,18 +8,6 @@ public final class Colision {
     Colision() {}
 
     public static boolean grounded(Vector3f Pos) {
-        /*AABBfc Body = EntityPlayer.DEFAULT_PLAYER_BODY
-            .clone().add(Pos).divide(0.0625f);
-
-        for(int x = getLowerX(Body); x <= getUpperX(Body); x++) {
-            for(int z = getLowerZ(Body); z <= getUpperZ(Body); z++) {
-                Voxel Voxel = DEVELOPMENT_LEVEL.getVoxelAt(x, (int) (Pos.getY() / 0.0625), z);
-
-                if(Voxel.intersects(Body))
-                    return true;
-            }
-        }*/
-
         return false;
     }
 

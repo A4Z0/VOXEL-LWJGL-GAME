@@ -31,6 +31,6 @@ public final class LanguageBootstrap extends Bootstrap {
             }
         }
 
-        Language.setInstance(Registries.LANGUAGE.get(Key.of("en_us")));
+        Language.setInstance(Registries.LANGUAGE.getOrThrow(Key.of("en_us")));
     }
 }

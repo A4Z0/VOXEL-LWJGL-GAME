@@ -12,11 +12,11 @@ public final class Registries {
 
     public static final Key ROOT_REGISTRY_NAME = Key.of("root");
 
-    public static final Registry<Bootstrap> BOOTSTRAP = new MappingRegistry<>(Resources.BOOTSTRAP);
-    public static final Registry<Language> LANGUAGE = new MappingRegistry<>(Resources.LANGUAGE);
-    public static final Registry<Shader> SHADER = new MappingRegistry<>(Resources.SHADER);
-    public static final Registry<ShaderProgram> SHADER_PROGRAM = new MappingRegistry<>(Resources.SHADER_PROGRAM);
-    public static final Registry<Font> FONT = new MappingRegistry<>(Resources.FONT);
+    public static final ResourceRegistry<Bootstrap> BOOTSTRAP = new MappingRegistry<>(Resources.BOOTSTRAP);
+    public static final ResourceRegistry<Language> LANGUAGE = new MappingRegistry<>(Resources.LANGUAGE);
+    public static final ResourceRegistry<Shader> SHADER = new MappingRegistry<>(Resources.SHADER);
+    public static final ResourceRegistry<ShaderProgram> SHADER_PROGRAM = new MappingRegistry<>(Resources.SHADER_PROGRAM);
+    public static final ResourceRegistry<Font> FONT = new MappingRegistry<>(Resources.FONT);
 
     Registries() {}
 

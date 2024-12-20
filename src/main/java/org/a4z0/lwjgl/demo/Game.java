@@ -3,14 +3,11 @@ package org.a4z0.lwjgl.demo;
 import org.a4z0.lwjgl.demo.event.EventHandler;
 import org.a4z0.lwjgl.demo.event.EventPriority;
 import org.a4z0.lwjgl.demo.event.input.mouse.MouseMoveEvent;
-import org.a4z0.lwjgl.demo.event.level.LevelRenderEvent;
 import org.a4z0.lwjgl.demo.event.setup.CommonSetupEvent;
 import org.a4z0.lwjgl.demo.event.window.WindowReziseEvent;
 import org.a4z0.lwjgl.demo.level.Level;
 import org.a4z0.lwjgl.demo.entity.EntityPlayer;
 import org.a4z0.lwjgl.demo.math.camera.Camera3fa;
-import org.a4z0.lwjgl.demo.registry.Registries;
-import org.a4z0.lwjgl.demo.resource.Key;
 import org.a4z0.lwjgl.demo.text.TextComponent;
 
 import java.util.UUID;
@@ -31,7 +28,6 @@ public final class Game {
         CAMERA = new Camera3fa<>();
 
         LEVEL.provider.load(0, 0, 0);
-        //LEVEL.provider.load(257, 0, 0);
     }
 
     @EventHandler

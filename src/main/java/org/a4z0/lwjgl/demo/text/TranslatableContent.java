@@ -34,21 +34,21 @@ public final class TranslatableContent extends Content {
     }
 
     @Override
-    public void applyToText(a consumer) {
+    public void applyToText(TextConsumer consumer) {
         String translated = this.fallback != null
                 ? Language.getInstance().getOrDefault(this.text, this.fallback)
                 : Language.getInstance().getOrFallback(this.text);
 
-        consumer.accept(String.format(translated, this.objects));
+        consumer.acceptText(String.format(translated, this.objects));
     }
 
     @Override
-    public void applyStyledText(b consumer, TextStyle style) {
+    public void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
         String translated = this.fallback != null
                 ? Language.getInstance().getOrDefault(this.text, this.fallback)
                 : Language.getInstance().getOrFallback(this.text);
 
-        consumer.accept(String.format(translated, this.objects), style);
+        consumer.acceptStyledText(String.format(translated, this.objects), style);
     }
 
     @Override

@@ -80,7 +80,7 @@ public final class Language {
     */
 
     public String getOrFallback(String messageLocation) {
-        return this.getOrDefault(messageLocation, Registries.LANGUAGE.get(FALLBACK_LANGUAGE).getOrDefault(messageLocation, messageLocation));
+        return this.getOrDefault(messageLocation, Registries.LANGUAGE.getOrThrow(FALLBACK_LANGUAGE).getOrDefault(messageLocation, messageLocation));
     }
 
     /**

@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.demo.text;
 
 import org.a4z0.lwjgl.demo.resource.Key;
-import org.a4z0.lwjgl.demo.util.Color;
+import org.a4z0.lwjgl.demo.color.Color;
 
 public class TextMutableStyle implements TextStyle {
 

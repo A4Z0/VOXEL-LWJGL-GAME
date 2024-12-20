@@ -1,6 +1,7 @@
 package org.a4z0.lwjgl.demo;
 
 import org.a4z0.lwjgl.demo.chrono.Chrono;
+import org.a4z0.lwjgl.demo.color.Color;
 import org.a4z0.lwjgl.demo.event.EventBus;
 import org.a4z0.lwjgl.demo.event.input.mouse.MouseMoveEvent;
 import org.a4z0.lwjgl.demo.event.setup.CommonSetupEvent;
