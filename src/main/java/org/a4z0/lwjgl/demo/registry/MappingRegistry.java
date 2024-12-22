@@ -26,22 +26,27 @@ public final class MappingRegistry<T> implements ResourceRegistry<T> {
     }
 
     @Override
-    public ResourceKey<? extends Registry<T>> getKey() {
+    public ResourceKey<? extends Registry<T>> getResource() {
         return this.resourceKey;
     }
 
     @Override
-    public Set<Key> getKeys() {
+    public boolean isEmpty() {
+        return this.queryValueWithResource.isEmpty();
+    }
+
+    @Override
+    public Set<Key> keySet() {
         return this.queryResourceWithKey.keySet();
     }
 
     @Override
-    public Set<ResourceKey<T>> getResources() {
+    public Set<ResourceKey<T>> registrySet() {
         return this.queryValueWithResource.keySet();
     }
 
     @Override
-    public Collection<T> getValues() {
+    public Collection<T> values() {
         return this.queryValueWithResource.values();
     }
 
@@ -101,11 +106,21 @@ public final class MappingRegistry<T> implements ResourceRegistry<T> {
     }
 
     @Override
+    public ResourceKey<T> register(Key key, T value) {
+        return this.register(ResourceKey.create(this.getResource().getLocation(), key), value);
+    }
+
+    @Override
     public ResourceKey<T> register(ResourceKey<T> resourceKey, T value) {
         this.queryValueWithResource.put(resourceKey, value);
         this.queryResourceWithKey.put(resourceKey.getLocation(), resourceKey);
 
         return resourceKey;
+    }
+
+    @Override
+    public void unregister(Key key) {
+        this.unregister(ResourceKey.create(this.getResource().getLocation(), key));
     }
 
     @Override

@@ -16,8 +16,12 @@ public final class FontLoader {
     * @return a {@link Font}.
     */
 
-    public static Font getFrom(String path) {
-        return getFrom(path, 16);
+    public static Font load(String path) {
+        return load(path, 16);
+    }
+
+    public static Font load(File file) {
+        return load(file.getPath());
     }
 
     /**
@@ -29,9 +33,9 @@ public final class FontLoader {
     * @return a {@link Font}.
     */
 
-    public static Font getFrom(String path, int fontSize) {
+    public static Font load(String path, int fontSize) {
         try(InputStream Stream = new FileInputStream(path)) {
-            return getFrom(Stream, fontSize);
+            return load(Stream, fontSize);
         } catch (IOException e) {
             throw new RuntimeException("...", e);
         }
@@ -46,7 +50,7 @@ public final class FontLoader {
     * @return a {@link Font}.
     */
 
-    public static Font getFrom(InputStream fontStream, int fontSize) {
+    public static Font load(InputStream fontStream, int fontSize) {
         java.awt.Font awtFont;
 
         try {

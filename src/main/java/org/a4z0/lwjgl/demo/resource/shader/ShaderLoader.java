@@ -21,11 +21,11 @@ public final class ShaderLoader {
     * @return a {@link Shader}.
     */
 
-    public static Shader load(String path, ShaderType shaderType) throws ShaderException {
+    public static Shader load(String path, ShaderType shaderType) {
         try {
             return load(new FileInputStream(path),path + "/../../include", shaderType);
-        } catch (IOException e) {
-            throw new ShaderException("Unable to locate Shader.", e);
+        } catch (IOException | ShaderException e) {
+            throw new RuntimeException("Unable to locate Shader.", e);
         }
     }
 
@@ -45,7 +45,7 @@ public final class ShaderLoader {
         while(matcher.find()) {
             String Path = matcher.group(1);
             String Content = ShaderResourceReader.read(include + "/" + Path);
-            matcher.appendReplacement(Source, Matcher.quoteReplacement(Content));
+            matcher.appendReplacement(Source, Matcher.quoteReplacement(Content.replaceAll("^#version\\s[0-9]+", "")));
         }
 
         matcher.appendTail(Source);

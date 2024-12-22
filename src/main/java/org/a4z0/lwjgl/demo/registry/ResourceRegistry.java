@@ -12,19 +12,19 @@ public interface ResourceRegistry<T> extends Registry<T> {
     * @return the Resource Key of this Registry.
     */
 
-    ResourceKey<? extends Registry<T>> getKey();
+    ResourceKey<? extends Registry<T>> getResource();
 
     /**
     * @return the Location Keys.
     */
 
-    Set<Key> getKeys();
+    Set<Key> keySet();
 
     /**
     * @return the Resource Keys.
     */
 
-    Set<ResourceKey<T>> getResources();
+    Set<ResourceKey<T>> registrySet();
 
     /**
     * Checks if this contains the given Location Key.
@@ -45,16 +45,6 @@ public interface ResourceRegistry<T> extends Registry<T> {
     */
 
     boolean contains(ResourceKey<T> resourceKey);
-
-    /**
-    * Checks if this contains the given Value.
-    *
-    * @param value Value.
-    *
-    * @return true if it contains the Value, false otherwise.
-    */
-
-    boolean contains(T value);
 
     /**
     * Retrieves a Location Key attached to the Value.
@@ -139,6 +129,17 @@ public interface ResourceRegistry<T> extends Registry<T> {
     /**
     * Register a Value.
     *
+    * @param key Location Key.
+    * @param value Value.
+    *
+    * @return a {@link ResourceKey}.
+    */
+
+    ResourceKey<T> register(Key key, T value);
+
+    /**
+    * Register a Value.
+    *
     * @param resourceKey Resource Key.
     * @param value Value.
     *
@@ -148,17 +149,12 @@ public interface ResourceRegistry<T> extends Registry<T> {
     ResourceKey<T> register(ResourceKey<T> resourceKey, T value);
 
     /**
-    * Register a Value.
+    * Unregister a Resource from a Location Key.
     *
     * @param key Location Key.
-    * @param value Value.
-    *
-    * @return a {@link ResourceKey}.
     */
 
-    default ResourceKey<T> register(Key key, T value) {
-        return this.register(ResourceKey.create(this.getKey().getLocation(), key), value);
-    }
+    void unregister(Key key);
 
     /**
     * Unregister a Resource from a Resource Key.
@@ -167,14 +163,4 @@ public interface ResourceRegistry<T> extends Registry<T> {
     */
 
     void unregister(ResourceKey<T> resourceKey);
-
-    /**
-    * Unregister a Resource from a Location Key.
-    *
-    * @param key Location Key.
-    */
-
-    default void unregister(Key key) {
-        this.unregister(ResourceKey.create(this.getKey().getLocation(), key));
-    }
 }

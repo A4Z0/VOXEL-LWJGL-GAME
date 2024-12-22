@@ -1,3 +1,5 @@
+#version 120
+
 vec4 color_from_argb(int argb) {
     return vec4(
         (argb >> 16) & 0xFF, // Red

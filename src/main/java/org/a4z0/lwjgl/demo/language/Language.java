@@ -2,6 +2,7 @@ package org.a4z0.lwjgl.demo.language;
 
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;
+import org.a4z0.lwjgl.demo.resource.ResourceKey;
 
 import java.util.Map;
 
@@ -9,7 +10,7 @@ public final class Language {
 
     private static final Key FALLBACK_LANGUAGE = Key.of("en_us");
 
-    private static Language INSTANCE;
+    private static ResourceKey<Language> INSTANCE;
 
     private final Key name;
     private final Map<String, String> messages;
@@ -21,7 +22,7 @@ public final class Language {
     * @param messages Messages.
     */
 
-    Language(Key name, Map<String, String> messages) {
+    public Language(Key name, Map<String, String> messages) {
         this.name = name;
         this.messages = messages;
     }
@@ -88,7 +89,11 @@ public final class Language {
     */
 
     public static Language getInstance() {
-        return Language.INSTANCE;
+        if(Language.INSTANCE != null) {
+            return Registries.LANGUAGE.getOrThrow(Language.INSTANCE);
+        } else {
+            return Registries.LANGUAGE.getOrThrow(Language.FALLBACK_LANGUAGE);
+        }
     }
 
     /**
@@ -97,7 +102,7 @@ public final class Language {
     * @param instance Language Instance to be set.
     */
 
-    public static void setInstance(Language instance) {
+    public static void setInstance(ResourceKey<Language> instance) {
         Language.INSTANCE = instance;
     }
 }

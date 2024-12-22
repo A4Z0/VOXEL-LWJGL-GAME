@@ -1,0 +1,5 @@
+{
+  "name": "outline",
+  "vertex": "core/outline",
+  "fragment": "core/outline"
+}

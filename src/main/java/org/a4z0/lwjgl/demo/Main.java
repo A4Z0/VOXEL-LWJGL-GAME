@@ -1,16 +1,15 @@
 package org.a4z0.lwjgl.demo;
 
 import org.a4z0.lwjgl.demo.chrono.Chrono;
-import org.a4z0.lwjgl.demo.color.Color;
 import org.a4z0.lwjgl.demo.event.EventBus;
 import org.a4z0.lwjgl.demo.event.input.mouse.MouseMoveEvent;
 import org.a4z0.lwjgl.demo.event.setup.CommonSetupEvent;
 import org.a4z0.lwjgl.demo.event.window.WindowReziseEvent;
-import org.a4z0.lwjgl.demo.input.InputAction;
 import org.a4z0.lwjgl.demo.extra.ChunkBondaries;
-import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.extra.Debugger;
+import org.a4z0.lwjgl.demo.input.InputAction;
 import org.a4z0.lwjgl.demo.input.InputHandler;
+import org.a4z0.lwjgl.demo.registry.Registries;
 import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -66,18 +65,18 @@ public final class Main {
         glEnable(GL_DEPTH_TEST);
         glClearDepth(1f);
         glDepthFunc(GL_LEQUAL);
-        //glEnable(GL_CULL_FACE);
-        //glCullFace(GL_BACK);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
         glLineWidth(1f);
-
-        Registries.init();
-        Registries.bootstrap();
+        
         InputHandler.init();
 
         EVENT_BUS.submit(new CommonSetupEvent());
 
         // Disable Cursor
         glfwSetInputMode(WINDOW, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+        Registries.init();
 
         while(!glfwWindowShouldClose(WINDOW)) {
             if(!CHRONO.update())

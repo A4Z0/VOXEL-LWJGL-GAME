@@ -13,8 +13,7 @@ public enum ShaderType {
     GEOMETRY(GL_GEOMETRY_SHADER, "geom"),
     TESSELLATION_CONTROL(GL_TESS_CONTROL_SHADER, "tesc"),
     TESSELLATION_EVALUATION(GL_TESS_EVALUATION_SHADER, "tese"),
-    COMPUTE(GL_COMPUTE_SHADER, "comp"),
-    MODULE(GL_VERTEX_SHADER, "glsl");
+    COMPUTE(GL_COMPUTE_SHADER, "comp");
 
     private final int shaderCode;
     private final String extension;
@@ -54,20 +53,18 @@ public enum ShaderType {
 
     public static ShaderType of(String name) {
         return switch (name) {
-            case "vertex" ->
+            case "vertex", "vert" ->
                 VERTEX;
-            case "fragment" ->
+            case "fragment", "frag" ->
                 FRAGMENT;
-            case "geometry" ->
+            case "geometry", "geom" ->
                 GEOMETRY;
-            case "tessellation_control" ->
+            case "tessellation_control", "tesc" ->
                 TESSELLATION_CONTROL;
-            case "tessellation_evaluation" ->
+            case "tessellation_evaluation", "tese" ->
                 TESSELLATION_EVALUATION;
-            case "compute" ->
+            case "compute", "comp" ->
                 COMPUTE;
-            case "module" ->
-                MODULE;
             default ->
                 throw new IllegalArgumentException("...");
         };

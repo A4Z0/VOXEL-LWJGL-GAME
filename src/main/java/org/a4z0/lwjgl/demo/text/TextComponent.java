@@ -1,7 +1,6 @@
 package org.a4z0.lwjgl.demo.text;
 
 import com.google.common.collect.Lists;
-import org.a4z0.lwjgl.demo.util.FormattedText;
 
 import java.util.List;
 

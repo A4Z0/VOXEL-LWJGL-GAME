@@ -1,0 +1,5 @@
+{
+  "name": "text",
+  "vertex": "core/text",
+  "fragment": "core/text"
+}

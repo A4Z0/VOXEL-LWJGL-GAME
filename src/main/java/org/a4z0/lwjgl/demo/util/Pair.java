@@ -1,5 +1,7 @@
 package org.a4z0.lwjgl.demo.util;
 
+import java.util.Objects;
+
 public final class Pair<F, S> {
 
     private final F first;
@@ -12,7 +14,7 @@ public final class Pair<F, S> {
     * @param second Second Value.
     */
 
-    Pair(F first, S second) {
+    Pair(final F first, final S second) {
         this.first = first;
         this.second = second;
     }
@@ -43,9 +45,35 @@ public final class Pair<F, S> {
         return Pair.of(this.getSecond(), this.getFirst());
     }
 
+    /**
+    * Checks if this is equals to the given {@link Object}.
+    *
+    * @param o {@link Object} to be compared.
+    *
+    * @return true if equal, false otherwise.
+    */
+
     @Override
     public boolean equals(Object o) {
         return (o instanceof Pair<?,?>) && ((Pair<?, ?>) o).getFirst().equals(this.getFirst()) && ((Pair<?, ?>) o).getSecond().equals(this.getSecond());
+    }
+
+    /**
+    * @return this as a {@link String}.
+    */
+
+    @Override
+    public String toString() {
+        return "Pair[" + this.getFirst() + ", " + this.getSecond() + "]";
+    }
+
+    /**
+    * @return the Hashcode.
+    */
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getFirst(), this.getSecond());
     }
 
     /**
@@ -57,7 +85,7 @@ public final class Pair<F, S> {
     * @return a new {@link Pair}.
     */
 
-    public static <F, S> Pair<F, S> of(F first, S second) {
+    public static <F, S> Pair<F, S> of(final F first, final S second) {
         return new Pair<>(first, second);
     }
 }

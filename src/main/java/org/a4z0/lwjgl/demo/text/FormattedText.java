@@ -1,6 +1,4 @@
-package org.a4z0.lwjgl.demo.util;
-
-import org.a4z0.lwjgl.demo.text.TextStyle;
+package org.a4z0.lwjgl.demo.text;
 
 public interface FormattedText {
 

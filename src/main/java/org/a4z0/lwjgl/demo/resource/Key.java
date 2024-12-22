@@ -61,7 +61,7 @@ public final class Key {
     }
 
     /**
-    * @return the Hash Code.
+    * @return the Hashcode.
     */
 
     @Override

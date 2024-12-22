@@ -1,5 +1,7 @@
 package org.a4z0.lwjgl.demo.resource.shader.program;
 
+import org.a4z0.lwjgl.demo.registry.Registries;
+import org.a4z0.lwjgl.demo.resource.ResourceKey;
 import org.a4z0.lwjgl.demo.resource.shader.Shader;
 import org.joml.Matrix4dc;
 import org.joml.Matrix4fc;
@@ -20,16 +22,20 @@ public final class ShaderProgram {
     * @param shaders Shaders.
     */
 
-    public ShaderProgram(List<Shader> shaders) throws ShaderProgramException {
+    public ShaderProgram(List<ResourceKey<Shader>> shaders) {
         this.glShaderProgram = glCreateProgram();
 
-        for(Shader shader : shaders)
-            glAttachShader(this.getID(), shader.getID());
+        for(ResourceKey<Shader> shader : shaders)
+            glAttachShader(this.getID(), Registries.SHADER.getOrThrow(shader).getID());
 
         glLinkProgram(this.getID());
 
-        if(glGetProgrami(this.getID(), GL_LINK_STATUS) == 0)
-            throw new ShaderProgramException("Unable to link this Shader Program. \n" + glGetProgramInfoLog(this.getID()));
+        try {
+            if (glGetProgrami(this.getID(), GL_LINK_STATUS) == 0)
+                throw new ShaderProgramException("Unable to link this Shader Program. \n" + glGetProgramInfoLog(this.getID()));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

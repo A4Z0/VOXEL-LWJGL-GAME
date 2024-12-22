@@ -1,7 +1,5 @@
 package org.a4z0.lwjgl.demo.text;
 
-import org.a4z0.lwjgl.demo.util.FormattedText;
-
 public abstract class Content implements FormattedText {
 
     public static Content EMPTY = new Content() {

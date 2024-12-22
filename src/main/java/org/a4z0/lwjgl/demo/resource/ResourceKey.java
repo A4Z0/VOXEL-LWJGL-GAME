@@ -3,7 +3,6 @@ package org.a4z0.lwjgl.demo.resource;
 import com.google.common.collect.MapMaker;
 import org.a4z0.lwjgl.demo.util.Pair;
 import org.a4z0.lwjgl.demo.registry.Registry;
-import org.a4z0.lwjgl.demo.registry.Registries;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
@@ -11,6 +10,8 @@ import java.util.concurrent.ConcurrentMap;
 public final class ResourceKey<T> {
 
     private static final ConcurrentMap<Pair<Key, Key>, ResourceKey<?>> RESOURCES = (new MapMaker()).weakValues().makeMap();
+
+    private static final Key ROOT_REGISTRY_NAME = Key.of("root");
 
     private final Key registry;
     private final Key location;
@@ -88,8 +89,8 @@ public final class ResourceKey<T> {
     * @return a new {@link ResourceKey}.
     */
 
-    public static <T> ResourceKey<Registry<T>> create(final Key location) {
-        return create(Registries.ROOT_REGISTRY_NAME, location);
+    public static <T> ResourceKey<T> create(final Key location) {
+        return ResourceKey.create(ResourceKey.ROOT_REGISTRY_NAME, location);
     }
 
     /**
@@ -106,5 +107,17 @@ public final class ResourceKey<T> {
         return (ResourceKey<T>) RESOURCES.computeIfAbsent(Pair.of(registry, location), (resource) -> {
             return new ResourceKey<>(resource.getFirst(), resource.getSecond());
         });
+    }
+
+    /**
+    * Construct a {@link ResourceKey}.
+    *
+    * @param location Location Key.
+    *
+    * @return a new {@link ResourceKey} of a {@link Registry}.
+    */
+
+    public static <T> ResourceKey<Registry<T>> registry(final Key location) {
+        return ResourceKey.create(location);
     }
 }
