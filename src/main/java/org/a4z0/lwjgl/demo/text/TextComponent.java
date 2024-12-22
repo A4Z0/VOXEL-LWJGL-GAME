@@ -10,16 +10,16 @@ public interface TextComponent extends FormattedText {
     default void applyToText(TextConsumer consumer) {
         this.getContent().applyToText(consumer);
 
-        for(TextComponent Component : this.getComponents())
-            Component.applyToText(consumer);
+        for(TextComponent component : this.getComponents())
+            component.applyToText(consumer);
     }
 
     @Override
     default void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
         this.getContent().applyStyledText(consumer, this.getStyle());
 
-        for(TextComponent Component : this.getComponents())
-            Component.applyStyledText(consumer, this.getStyle());
+        for(TextComponent component : this.getComponents())
+            component.applyStyledText(consumer, this.getStyle());
     }
 
     /**
@@ -47,7 +47,7 @@ public interface TextComponent extends FormattedText {
     */
 
     default List<TextComponent> toFlatList() {
-        return this.toFlatList(TextStyle.empty());
+        return this.toFlatList(TextStyle.EMPTY);
     }
 
     /**
@@ -61,9 +61,9 @@ public interface TextComponent extends FormattedText {
     default List<TextComponent> toFlatList(TextStyle style) {
         List<TextComponent> List = Lists.newArrayList();
 
-        this.applyStyledText((A, B) -> {
-            if(A != null && !A.isEmpty())
-                List.add(TextComponent.text(A).setStyle(B));
+        this.applyStyledText((Text, Style) -> {
+            if(Text != null && !Text.isEmpty())
+                List.add(TextComponent.text(Text).setStyle(Style));
         }, style);
 
         return List;
@@ -74,7 +74,7 @@ public interface TextComponent extends FormattedText {
     */
 
     static TextMutableComponent empty() {
-        return new TextMutableComponent(Content.EMPTY, TextStyle.empty(), Lists.newArrayList());
+        return new TextMutableComponent(Content.EMPTY, TextStyle.EMPTY, Lists.newArrayList());
     }
 
     /**
@@ -86,7 +86,7 @@ public interface TextComponent extends FormattedText {
     */
 
     static TextMutableComponent text(String text) {
-        return new TextMutableComponent(new TextContent(text), TextStyle.empty(), Lists.newArrayList());
+        return new TextMutableComponent(new TextContent(text), TextStyle.EMPTY, Lists.newArrayList());
     }
 
     /**
@@ -113,6 +113,6 @@ public interface TextComponent extends FormattedText {
     */
 
     static TextMutableComponent translatable(String text, String fallback, Object... args) {
-        return new TextMutableComponent(new TranslatableContent(text, fallback, args), TextStyle.empty(), Lists.newArrayList());
+        return new TextMutableComponent(new TranslatableContent(text, fallback, args), TextStyle.EMPTY, Lists.newArrayList());
     }
 }

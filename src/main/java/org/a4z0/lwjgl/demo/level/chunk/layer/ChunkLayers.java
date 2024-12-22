@@ -1,8 +1,8 @@
-package org.a4z0.lwjgl.demo.layer;
+package org.a4z0.lwjgl.demo.level.chunk.layer;
 
 import org.a4z0.lwjgl.demo.Main;
 import org.a4z0.lwjgl.demo.event.level.chunk.ChunkRenderEvent;
-import org.a4z0.lwjgl.demo.chunk.Chunk;
+import org.a4z0.lwjgl.demo.level.chunk.Chunk;
 
 public final class ChunkLayers {
 

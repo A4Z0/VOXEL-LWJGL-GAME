@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.demo.generation.planet;
 
-import org.a4z0.lwjgl.demo.chunk.Chunk;
+import org.a4z0.lwjgl.demo.level.chunk.Chunk;
 import org.a4z0.lwjgl.demo.generation.noise.OpenSimplex2;
 
 import java.util.Random;

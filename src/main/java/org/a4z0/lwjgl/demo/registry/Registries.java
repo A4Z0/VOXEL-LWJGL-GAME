@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.demo.registry;
 
-import org.a4z0.lwjgl.demo.language.Language;
+import org.a4z0.lwjgl.demo.resource.language.Language;
 import org.a4z0.lwjgl.demo.resource.Resources;
 import org.a4z0.lwjgl.demo.resource.font.Font;
 import org.a4z0.lwjgl.demo.resource.Key;

@@ -1,10 +1,10 @@
-package org.a4z0.lwjgl.demo.chunk;
+package org.a4z0.lwjgl.demo.level.chunk;
 
 import org.a4z0.lwjgl.demo.Main;
 import org.a4z0.lwjgl.demo.event.level.chunk.ChunkLoadEvent;
 import org.a4z0.lwjgl.demo.event.level.chunk.ChunkUnloadEvent;
 import org.a4z0.lwjgl.demo.level.Level;
-import org.a4z0.lwjgl.demo.layer.ChunkLayers;
+import org.a4z0.lwjgl.demo.level.chunk.layer.ChunkLayers;
 import org.a4z0.lwjgl.demo.voxel.IVoxel;
 
 import java.util.Random;

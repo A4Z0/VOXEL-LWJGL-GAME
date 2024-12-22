@@ -1,4 +1,4 @@
-package org.a4z0.lwjgl.demo.chunk;
+package org.a4z0.lwjgl.demo.level.chunk;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -1,7 +1,5 @@
 #version 400 core
 
-#import <color.glsl>
-
 in vec2 vertex_position;
 
 void main() {

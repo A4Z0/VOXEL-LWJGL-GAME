@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.demo.voxel;
 
 import org.a4z0.lwjgl.demo.color.Color;
-import org.a4z0.lwjgl.demo.chunk.Chunk;
+import org.a4z0.lwjgl.demo.level.chunk.Chunk;
 
 public final class Voxel implements IVoxel {
 

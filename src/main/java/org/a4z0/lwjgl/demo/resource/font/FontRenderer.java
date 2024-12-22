@@ -53,7 +53,7 @@ public final class FontRenderer {
 
     public static void drawString(TextComponent textComponent, float x, float y, float scale) {
         for(TextComponent component : textComponent.toFlatList())
-            drawString(component.getStyle().getFont() != null ? component.getStyle().getFont().getPath() : DEFAULT_FONT.getPath(), component.toRawText(), x, y, scale, component.getStyle().getColor() != null ? component.getStyle().getColor() : Color.WHITE);
+            drawString(component.getStyle().getFont() != null ? component.getStyle().getFont().getPath() : DEFAULT_FONT.getPath(), component.getText(), x, y, scale, component.getStyle().getColor() != null ? component.getStyle().getColor() : Color.WHITE);
     }
 
     public static void drawString(String family, String text, float x, float y) {

@@ -3,52 +3,95 @@ package org.a4z0.lwjgl.demo.text;
 import org.a4z0.lwjgl.demo.resource.Key;
 import org.a4z0.lwjgl.demo.color.Color;
 
-public interface TextStyle {
+public class TextStyle {
+
+    public static final TextStyle EMPTY = new TextStyle(null, null, null, null, null, null);
+
+    private final Key font;
+    private final Color color;
+    private final Boolean bold;
+    private final Boolean italic;
+    private final Boolean underlined;
+    private final Boolean strikethrough;
+
+    /**
+    * Construct a {@link TextStyle}.
+    *
+    * @param font Font.
+    * @param color Color.
+    * @param bold Bold.
+    * @param italic Italic.
+    * @param underlined Underlined.
+    * @param strikethrough Strikethough.
+    */
+
+    public TextStyle(Key font, Color color, Boolean bold, Boolean italic, Boolean underlined, Boolean strikethrough) {
+        this.font = font;
+        this.color = color;
+        this.bold = bold;
+        this.italic = italic;
+        this.underlined = underlined;
+        this.strikethrough = strikethrough;
+    }
 
     /**
     * @return the Font.
     */
 
-    Key getFont();
+    public Key getFont() {
+        return this.font;
+    }
 
     /**
     * @return the Color.
     */
 
-    Color getColor();
+    public Color getColor() {
+        return this.color;
+    }
 
     /**
     * @return true if it is Bold, false otherwise.
     */
 
-    boolean isBold();
+    public boolean isBold() {
+        return this.bold == Boolean.TRUE;
+    }
 
     /**
     * @return true if it is Italic, false otherwise.
     */
 
-    boolean isItalic();
+    public boolean isItalic() {
+        return this.italic == Boolean.TRUE;
+    }
 
     /**
     * @return true if it is Underlined, false otherwise.
     */
 
-    boolean isUnderlined();
+    public boolean isUnderlined() {
+        return this.underlined == Boolean.TRUE;
+    }
 
     /**
     * @return true if it is Strikethrough, false otherwise.
     */
 
-    boolean isStrikethrough();
+    public boolean isStrikethrough() {
+        return this.strikethrough == Boolean.TRUE;
+    }
 
     /**
     * @return true if it is empty, false otherwise.
     */
 
-    boolean isEmpty();
+    public boolean isEmpty() {
+        return this.equals(TextStyle.EMPTY);
+    }
 
     /**
-    * Checks if this {@link TextStyle} is equals to the given {@link Object}.
+    * Checks if this is equals to the given {@link Object}.
     *
     * @param o {@link Object} to be compared.
     *
@@ -56,92 +99,30 @@ public interface TextStyle {
     */
 
     @Override
-    boolean equals(Object o);
-
-    /**
-    * @return this as a {@link String}.
-    */
+    public boolean equals(Object o) {
+        return (o instanceof TextStyle)
+            && ((TextStyle) o).getFont() == this.getFont()
+            && ((TextStyle) o).getColor() == this.getColor()
+            && ((TextStyle) o).isBold() == this.isBold()
+            && ((TextStyle) o).isItalic() == this.isItalic()
+            && ((TextStyle) o).isUnderlined() == this.isUnderlined()
+            && ((TextStyle) o).isStrikethrough() == this.isStrikethrough();
+    }
 
     @Override
-    String toString();
-
-    /**
-    * @return an empty {@link TextMutableStyle}.
-    */
-
-    static TextMutableStyle empty() {
-        return new TextMutableStyle(null, null, null, null, null, null);
-    }
-
-    /**
-    * Construct a {@link TextMutableStyle}.
-    *
-    * @param font ...
-    *
-    * @return a new {@link TextMutableStyle}.
-    */
-
-    static TextMutableStyle font(Key font) {
-        return new TextMutableStyle(font, null, null, null, null, null);
-    }
-
-    /**
-    * Construct a {@link TextMutableStyle}.
-    *
-    * @param color ...
-    *
-    * @return a new {@link TextMutableStyle}.
-    */
-
-    static TextMutableStyle color(Color color) {
-        return new TextMutableStyle(null, color, null, null, null, null);
-    }
-
-    /**
-    * Construct a {@link TextMutableStyle}.
-    *
-    * @param bold ...
-    *
-    * @return a new {@link TextMutableStyle}.
-    */
-
-    static TextMutableStyle bold(boolean bold) {
-        return new TextMutableStyle(null, null, bold, null, null, null);
-    }
-
-    /**
-    * Construct a {@link TextMutableStyle}.
-    *
-    * @param italic ...
-    *
-    * @return a new {@link TextMutableStyle}.
-    */
-
-    static TextMutableStyle italic(boolean italic) {
-        return new TextMutableStyle(null, null, null, italic, null, null);
-    }
-
-    /**
-    * Construct a {@link TextMutableStyle}.
-    *
-    * @param underlined ...
-    *
-    * @return a new {@link TextMutableStyle}.
-    */
-
-    static TextMutableStyle underlined(boolean underlined) {
-        return new TextMutableStyle(null, null, null, null, underlined, null);
-    }
-
-    /**
-    * Construct a {@link TextMutableStyle}.
-    *
-    * @param strikethrough ...
-    *
-    * @return a new {@link TextMutableStyle}.
-    */
-
-    static TextMutableStyle strikethrough(boolean strikethrough) {
-        return new TextMutableStyle(null, null, null, null, null, strikethrough);
+    public String toString() {
+        return "TextStyle{"
+            + "\"Font\": " + this.getFont()
+            + ", "
+            + "\"Color\": " + this.getColor()
+            + ", "
+            + "\"Bold\": " + this.isBold()
+            + ", "
+            + "\"Italic\": " + this.isItalic()
+            + ", "
+            + "\"Underlined\": " + this.isUnderlined()
+            + ", "
+            + "\"Strikethrough\": " + this.isStrikethrough()
+        + " }";
     }
 }

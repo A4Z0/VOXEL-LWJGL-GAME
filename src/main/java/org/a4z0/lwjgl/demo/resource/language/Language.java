@@ -1,4 +1,4 @@
-package org.a4z0.lwjgl.demo.language;
+package org.a4z0.lwjgl.demo.resource.language;
 
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;

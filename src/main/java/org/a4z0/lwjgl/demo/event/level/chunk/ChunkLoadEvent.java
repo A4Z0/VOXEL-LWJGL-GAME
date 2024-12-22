@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.demo.event.level.chunk;
 
-import org.a4z0.lwjgl.demo.chunk.Chunk;
+import org.a4z0.lwjgl.demo.level.chunk.Chunk;
 
 public final class ChunkLoadEvent extends ChunkEvent {
 

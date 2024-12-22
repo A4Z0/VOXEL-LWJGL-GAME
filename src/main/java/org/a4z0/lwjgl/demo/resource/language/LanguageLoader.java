@@ -1,4 +1,4 @@
-package org.a4z0.lwjgl.demo.language;
+package org.a4z0.lwjgl.demo.resource.language;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

@@ -3,9 +3,9 @@ package org.a4z0.lwjgl.demo.level;
 import org.a4z0.lwjgl.demo.Game;
 import org.a4z0.lwjgl.demo.Main;
 import org.a4z0.lwjgl.demo.event.level.LevelRenderEvent;
-import org.a4z0.lwjgl.demo.chunk.Chunk;
-import org.a4z0.lwjgl.demo.chunk.ChunkProvider;
-import org.a4z0.lwjgl.demo.chunk.LocalChunkProvider;
+import org.a4z0.lwjgl.demo.level.chunk.Chunk;
+import org.a4z0.lwjgl.demo.level.chunk.ChunkProvider;
+import org.a4z0.lwjgl.demo.level.chunk.LocalChunkProvider;
 import org.a4z0.lwjgl.demo.voxel.IVoxel;
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;
@@ -103,7 +103,7 @@ public final class Level {
     @Override
     public String toString() {
         return "Level{"
-            + "\"Name\":" + this.name.toRawText()
+            + "\"Name\":" + this.name.getText()
             + ", "
             + "\"UUID\":" + this.uuid.toString()
             + ", "

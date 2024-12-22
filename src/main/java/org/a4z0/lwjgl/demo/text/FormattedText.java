@@ -3,10 +3,10 @@ package org.a4z0.lwjgl.demo.text;
 public interface FormattedText {
 
     /**
-    * @return the Raw Text.
+    * @return the Text.
     */
 
-    default String toRawText() {
+    default String getText() {
         StringBuilder s = new StringBuilder();
         this.applyToText(s::append);
 

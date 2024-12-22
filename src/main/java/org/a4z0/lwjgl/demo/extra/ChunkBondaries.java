@@ -4,7 +4,7 @@ import org.a4z0.lwjgl.demo.Game;
 import org.a4z0.lwjgl.demo.event.EventHandler;
 import org.a4z0.lwjgl.demo.event.input.keyboard.KeyEvent;
 import org.a4z0.lwjgl.demo.event.level.LevelRenderEvent;
-import org.a4z0.lwjgl.demo.chunk.ChunkPosition;
+import org.a4z0.lwjgl.demo.level.chunk.ChunkPosition;
 import org.a4z0.lwjgl.demo.math.aabb.AABBi;
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;

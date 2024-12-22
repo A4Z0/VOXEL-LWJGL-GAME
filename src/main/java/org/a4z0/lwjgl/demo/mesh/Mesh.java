@@ -1,10 +1,10 @@
 package org.a4z0.lwjgl.demo.mesh;
 
-import org.a4z0.lwjgl.demo.chunk.Chunk;
+import org.a4z0.lwjgl.demo.level.chunk.Chunk;
 import org.a4z0.lwjgl.demo.voxel.VoxelPosition;
 import org.a4z0.lwjgl.demo.face.FaceGenerator;
 import org.a4z0.lwjgl.demo.level.Direction;
-import org.a4z0.lwjgl.demo.layer.ChunkLayerPosition;
+import org.a4z0.lwjgl.demo.level.chunk.layer.ChunkLayerPosition;
 import org.a4z0.lwjgl.demo.util.ByteBuf;
 import org.a4z0.lwjgl.demo.voxel.IVoxel;
 

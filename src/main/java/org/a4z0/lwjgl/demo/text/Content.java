@@ -17,7 +17,7 @@ public abstract class Content implements FormattedText {
 
     @Override
     public void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
-        consumer.acceptStyledText(null, TextStyle.empty());
+        consumer.acceptStyledText(null, TextStyle.EMPTY);
     }
 
     /**
