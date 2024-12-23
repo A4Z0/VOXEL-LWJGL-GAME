@@ -1,4 +1,4 @@
-package org.a4z0.lwjgl.demo.util;
+package org.a4z0.lwjgl.demo.buffer;
 
 import java.nio.*;
 

@@ -2,7 +2,7 @@ package org.a4z0.lwjgl.demo.extra.test;
 
 import org.a4z0.lwjgl.demo.math.aabb.AABBfc;
 import org.a4z0.lwjgl.demo.math.aabb.AABBic;
-import org.a4z0.lwjgl.demo.util.ByteBuf;
+import org.a4z0.lwjgl.demo.buffer.ByteBuf;
 import org.a4z0.lwjgl.demo.color.Color;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;

@@ -59,14 +59,14 @@ public interface TextComponent extends FormattedText {
     */
 
     default List<TextComponent> toFlatList(TextStyle style) {
-        List<TextComponent> List = Lists.newArrayList();
+        List<TextComponent> flatList = Lists.newArrayList();
 
-        this.applyStyledText((Text, Style) -> {
-            if(Text != null && !Text.isEmpty())
-                List.add(TextComponent.text(Text).setStyle(Style));
+        this.applyStyledText((text, style1) -> {
+            if(!text.isEmpty())
+                flatList.add(TextComponent.text(text).setStyle(style1));
         }, style);
 
-        return List;
+        return flatList;
     }
 
     /**
@@ -86,7 +86,7 @@ public interface TextComponent extends FormattedText {
     */
 
     static TextMutableComponent text(String text) {
-        return new TextMutableComponent(new TextContent(text), TextStyle.EMPTY, Lists.newArrayList());
+        return new TextMutableComponent(new LiteralContent(text), TextStyle.EMPTY, Lists.newArrayList());
     }
 
     /**
@@ -115,4 +115,29 @@ public interface TextComponent extends FormattedText {
     static TextMutableComponent translatable(String text, String fallback, Object... args) {
         return new TextMutableComponent(new TranslatableContent(text, fallback, args), TextStyle.EMPTY, Lists.newArrayList());
     }
+
+    /**
+    * Checks if this is equals to the given {@link Object}.
+    *
+    * @param o {@link Object} to be compared.
+    *
+    * @return true if equal, false otherwise.
+    */
+
+    @Override
+    boolean equals(Object o);
+
+    /**
+    * @return this as a {@link String}.
+    */
+
+    @Override
+    String toString();
+
+    /**
+    * @return the Hashcode.
+    */
+
+    @Override
+    int hashCode();
 }

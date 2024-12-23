@@ -65,8 +65,8 @@ public final class Main {
         glEnable(GL_DEPTH_TEST);
         glClearDepth(1f);
         glDepthFunc(GL_LEQUAL);
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
+        //glEnable(GL_CULL_FACE);
+        //glCullFace(GL_BACK);
         glLineWidth(1f);
         
         InputHandler.init();

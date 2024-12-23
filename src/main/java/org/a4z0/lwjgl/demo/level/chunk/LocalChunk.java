@@ -5,8 +5,11 @@ import org.a4z0.lwjgl.demo.event.level.chunk.ChunkLoadEvent;
 import org.a4z0.lwjgl.demo.event.level.chunk.ChunkUnloadEvent;
 import org.a4z0.lwjgl.demo.level.Level;
 import org.a4z0.lwjgl.demo.level.chunk.layer.ChunkLayers;
+import org.a4z0.lwjgl.demo.voxel.FaceConsumer;
 import org.a4z0.lwjgl.demo.voxel.IVoxel;
+import org.a4z0.lwjgl.demo.voxel.VoxelPosition;
 
+import java.util.List;
 import java.util.Random;
 
 public class LocalChunk implements Chunk {
@@ -65,6 +68,15 @@ public class LocalChunk implements Chunk {
             return IVoxel.of(this, this.palette, x, y, z);
         } else {
             return this.getLevel().getVoxelAt(x, y, z);
+        }
+    }
+
+    @Override
+    public void consume(FaceConsumer consumer) {
+        for(int i = 0; i < this.palette.length; i++) {
+            VoxelPosition pos = VoxelPosition.of(i);
+
+            IVoxel.of(this, this.palette, pos.getRelativeX(), pos.getRelativeY(), pos.getRelativeZ()).consume(consumer);
         }
     }
 

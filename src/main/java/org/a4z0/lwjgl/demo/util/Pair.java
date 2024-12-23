@@ -2,10 +2,10 @@ package org.a4z0.lwjgl.demo.util;
 
 import java.util.Objects;
 
-public final class Pair<F, S> {
+public class Pair<F, S> {
 
-    private final F first;
-    private final S second;
+    protected final F first;
+    protected final S second;
 
     /**
     * Construct a {@link Pair}.
@@ -14,7 +14,7 @@ public final class Pair<F, S> {
     * @param second Second Value.
     */
 
-    Pair(final F first, final S second) {
+    protected Pair(final F first, final S second) {
         this.first = first;
         this.second = second;
     }

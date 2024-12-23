@@ -1,5 +1,5 @@
 {
   "name": "ui",
-  "vertex": "core/ui",
-  "fragment": "core/ui"
+  "vertex": "ui",
+  "fragment": "ui"
 }

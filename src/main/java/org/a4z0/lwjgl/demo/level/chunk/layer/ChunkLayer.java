@@ -1,10 +1,10 @@
 package org.a4z0.lwjgl.demo.level.chunk.layer;
 
 import org.a4z0.lwjgl.demo.level.chunk.Chunk;
-import org.a4z0.lwjgl.demo.mesh.Mesh;
+import org.a4z0.lwjgl.demo.math.vector.Vector3f;
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;
-import org.a4z0.lwjgl.demo.util.ByteBuf;
+import org.a4z0.lwjgl.demo.buffer.ByteBuf;
 import org.joml.Matrix4f;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,6 +17,62 @@ import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL30.*;
 
 public class ChunkLayer {
+
+    public static final Vector3f[] NORTH = new Vector3f[]{
+            new Vector3f(1f, 1f, 0f),
+            new Vector3f(1f, 0f, 0f),
+            new Vector3f(0f, 0f, 0f),
+            new Vector3f(0f, 0f, 0f),
+            new Vector3f(0f, 1f, 0f),
+            new Vector3f(1f, 1f, 0f)
+    };
+
+    public static final Vector3f[] SOUTH = new Vector3f[]{
+            new Vector3f(0f, 1f, 1f),
+            new Vector3f(0f, 0f, 1f),
+            new Vector3f(1f, 0f, 1f),
+            new Vector3f(1f, 0f, 1f),
+            new Vector3f(1f, 1f, 1f),
+            new Vector3f(0f, 1f, 1f)
+    };
+
+    public static final Vector3f[] EAST = new Vector3f[]{
+            new Vector3f(1f, 1f, 1f),
+            new Vector3f(1f, 0f, 1f),
+            new Vector3f(1f, 0f, 0f),
+            new Vector3f(1f, 0f, 0f),
+            new Vector3f(1f, 1f, 0f),
+            new Vector3f(1f, 1f, 1f)
+    };
+
+    public static final Vector3f[] WEST = new Vector3f[]{
+            new Vector3f(0f, 1f, 0f),
+            new Vector3f(0f, 0f, 0f),
+            new Vector3f(0f, 0f, 1f),
+            new Vector3f(0f, 0f, 1f),
+            new Vector3f(0f, 1f, 1f),
+            new Vector3f(0f, 1f, 0f)
+    };
+
+    public static final Vector3f[] TOP = new Vector3f[]{
+            new Vector3f(0f, 1f, 0f),
+            new Vector3f(0f, 1f, 1f),
+            new Vector3f(1f, 1f, 1f),
+            new Vector3f(1f, 1f, 1f),
+            new Vector3f(1f, 1f, 0f),
+            new Vector3f(0f, 1f, 0f)
+    };
+
+    public static final Vector3f[] BOTTOM = new Vector3f[]{
+            new Vector3f(0f, 0f, 1f),
+            new Vector3f(0f, 0f, 0f),
+            new Vector3f(1f, 0f, 0f),
+            new Vector3f(1f, 0f, 0f),
+            new Vector3f(1f, 0f, 1f),
+            new Vector3f(0f, 0f, 1f)
+    };
+
+    public static final Vector3f[][] FACES = new Vector3f[][]{NORTH, SOUTH, EAST, WEST, TOP, BOTTOM};
 
     private static final int ELEMENTS_SIZE = 3 + 1 + 1;
     private static final int ELEMENTS_STRIDE = ELEMENTS_SIZE * Float.BYTES;
@@ -60,7 +116,19 @@ public class ChunkLayer {
 
     protected void compute() {
         this.f = CompletableFuture
-            .runAsync(() -> Mesh.build(this.b, this.c, this.position))
+            .runAsync(() -> {
+                for(int x = position.getX(); x < (position.getX() + 16); x++) {
+                    for(int y = position.getY(); y < (position.getY() + 16); y++) {
+                        for(int z = position.getZ(); z < (position.getZ() + 16); z++) {
+                            this.c.getVoxelAt(x, y, z).consume((direction, vx, vy, vz, argb) -> {
+                                for(Vector3f vertex : FACES[direction.ordinal()]) {
+                                    this.b.put(vertex.getX() + vx).put(vertex.getY() + vy).put(vertex.getZ() + vz).put(argb).put(0);
+                                }
+                            });
+                        }
+                    }
+                }
+            })
             .thenRun(() -> this.w |= COMPUTED);
 
         this.w |= PRE_COMPUTE;

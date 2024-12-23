@@ -11,7 +11,7 @@ import java.util.Collection;
 public final class ResourcePack extends Meta<ResourcePack> {
 
     public static final String ASSETS_DIRECTORY             = "assets\\";
-    public static final String LANGUAGE_DIRECTORY           = ASSETS_DIRECTORY + "lang\\";
+    public static final String LANGUAGE_DIRECTORY           = ASSETS_DIRECTORY + "languages\\";
     public static final String FONT_DIRECTORY               = ASSETS_DIRECTORY + "fonts\\";
     public static final String SHADER_DIRECTORY             = ASSETS_DIRECTORY + "shaders\\";
     public static final String SHADER_PROGRAM_DIRECTORY     = SHADER_DIRECTORY + "program\\";

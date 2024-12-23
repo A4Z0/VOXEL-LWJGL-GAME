@@ -2,19 +2,17 @@ package org.a4z0.lwjgl.demo.resource;
 
 import com.google.common.collect.MapMaker;
 import org.a4z0.lwjgl.demo.util.Pair;
-import org.a4z0.lwjgl.demo.registry.Registry;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
-public final class ResourceKey<T> {
-
-    private static final ConcurrentMap<Pair<Key, Key>, ResourceKey<?>> RESOURCES = (new MapMaker()).weakValues().makeMap();
+public class ResourceKey<T> {
 
     private static final Key ROOT_REGISTRY_NAME = Key.of("root");
+    private static final ConcurrentMap<Pair<Key, Key>, ResourceKey<?>> RESOURCES = (new MapMaker()).weakValues().makeMap();
 
-    private final Key registry;
-    private final Key location;
+    protected final Key registry;
+    protected final Key location;
 
     /**
     * Construct a {@link ResourceKey}.
@@ -23,7 +21,7 @@ public final class ResourceKey<T> {
     * @param location Location Key.
     */
 
-    ResourceKey(final Key registry, final Key location) {
+    protected ResourceKey(final Key registry, final Key location) {
         this.registry = registry;
         this.location = location;
     }
@@ -45,7 +43,7 @@ public final class ResourceKey<T> {
     }
 
     /**
-    * Checks if this {@link ResourceKey} is equals to the given {@link Object}.
+    * Checks if this is equals to the given {@link Object}.
     *
     * @param o {@link Object} to be compared.
     *
@@ -60,15 +58,6 @@ public final class ResourceKey<T> {
     }
 
     /**
-    * @return the Hash Code.
-    */
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.getRegistry(), this.getLocation());
-    }
-
-    /**
     * @return this as a {@link String}.
     */
 
@@ -79,6 +68,15 @@ public final class ResourceKey<T> {
             + ", "
             + "\"Location\": \"" + this.getLocation() + "\""
             + "]";
+    }
+
+    /**
+    * @return the Hashcode.
+    */
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getRegistry(), this.getLocation());
     }
 
     /**
@@ -107,17 +105,5 @@ public final class ResourceKey<T> {
         return (ResourceKey<T>) RESOURCES.computeIfAbsent(Pair.of(registry, location), (resource) -> {
             return new ResourceKey<>(resource.getFirst(), resource.getSecond());
         });
-    }
-
-    /**
-    * Construct a {@link ResourceKey}.
-    *
-    * @param location Location Key.
-    *
-    * @return a new {@link ResourceKey} of a {@link Registry}.
-    */
-
-    public static <T> ResourceKey<Registry<T>> registry(final Key location) {
-        return ResourceKey.create(location);
     }
 }

@@ -2,22 +2,14 @@ package org.a4z0.lwjgl.demo.text;
 
 import org.a4z0.lwjgl.demo.resource.language.Language;
 
-public final class TranslatableContent extends Content {
+import java.util.Arrays;
+import java.util.Objects;
 
-    private final String text;
-    private final String fallback;
-    private final Object[] objects;
+public class TranslatableContent implements Content {
 
-    /**
-    * Construct a {@link TranslatableContent}.
-    *
-    * @param text Text.
-    * @param args Arguments.
-    */
-
-    public TranslatableContent(String text, Object... args) {
-        this(text, null, args);
-    }
+    protected final String text;
+    protected final String fallback;
+    protected final Object[] args;
 
     /**
     * Construct a {@link TranslatableContent}.
@@ -30,29 +22,42 @@ public final class TranslatableContent extends Content {
     public TranslatableContent(String text, String fallback, Object... args) {
         this.text = text;
         this.fallback = fallback;
-        this.objects = args;
+        this.args = args;
     }
 
     @Override
     public void applyToText(TextConsumer consumer) {
-        String translated = this.fallback != null
-                ? Language.getInstance().getOrDefault(this.text, this.fallback)
-                : Language.getInstance().getOrFallback(this.text);
-
-        consumer.acceptText(String.format(translated, this.objects));
+        consumer.acceptText(String.format(this.getTranslatedString(), this.args));
     }
 
     @Override
     public void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
-        String translated = this.fallback != null
-                ? Language.getInstance().getOrDefault(this.text, this.fallback)
-                : Language.getInstance().getOrFallback(this.text);
+        consumer.acceptStyledText(String.format(this.getTranslatedString(), this.args), style);
+    }
 
-        consumer.acceptStyledText(String.format(translated, this.objects), style);
+    private String getTranslatedString() {
+        return this.fallback != null ? Language.getInstance().getOrDefault(this.text, this.fallback) : Language.getInstance().getOrFallback(this.text);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return (o instanceof TranslatableContent)
+            && ((TranslatableContent) o).text.equals(this.text)
+            && ((TranslatableContent) o).fallback.equals(this.fallback)
+            && Arrays.equals(((TranslatableContent) o).args, this.args);
     }
 
     @Override
     public String toString() {
-        return "Translatable{\"Text\": \"" + this.text + "\", \"Fallback\": \"" + this.fallback + "\"}";
+        return "Translatable{"
+            + "\"Text\": \"" + this.text + "\""
+            + ", "
+            + "\"Fallback\": \"" + this.fallback + "\""
+        + "}";
+    }
+
+    @Override
+    public int hashCode() {
+        return (Objects.hash(this.text) * 31 + Objects.hash(this.fallback)) * 31 + Arrays.hashCode(this.args);
     }
 }

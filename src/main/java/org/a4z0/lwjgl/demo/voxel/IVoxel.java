@@ -11,11 +11,6 @@ public interface IVoxel {
     IVoxel EMPTY = new IVoxel() {
 
         @Override
-        public VoxelPosition getPosition() {
-            return null;
-        }
-
-        @Override
         public int getColor() {
             return 0;
         }
@@ -54,16 +49,15 @@ public interface IVoxel {
         }
 
         @Override
+        public void consume(FaceConsumer consumer) {
+
+        }
+
+        @Override
         public String toString() {
             return "EmptyVoxel{}";
         }
     };
-
-    /**
-    * @return the {@link IVoxel}'s {@link VoxelPosition Position}.
-    */
-
-    VoxelPosition getPosition();
 
     /**
     * @return the {@link IVoxel}'s Color.
@@ -154,6 +148,14 @@ public interface IVoxel {
     */
 
     IVoxel getBottom();
+
+    /**
+     * ..
+     *
+     * @param consumer ...
+     */
+
+    void consume(FaceConsumer consumer);
 
     /**
     * ...

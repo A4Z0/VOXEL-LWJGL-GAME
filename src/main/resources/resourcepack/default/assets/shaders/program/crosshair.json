@@ -1,5 +1,5 @@
 {
   "name": "crosshair",
-  "vertex": "core/crosshair",
-  "fragment": "core/crosshair"
+  "vertex": "crosshair",
+  "fragment": "crosshair"
 }

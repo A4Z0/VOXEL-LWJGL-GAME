@@ -25,7 +25,7 @@ public final class Registries {
     public static void init() {
         assert false : "Couldn't initialize Registries";
         for(File File : new File(Registries.class.getClassLoader().getResource("resourcepack").getPath()).listFiles()) {
-            ResourcePack Pack = ResourcePackReader.read(File).getOrThrow();
+            ResourcePack Pack = ResourcePackReader.read(File).resultOrThrow();
             Registries.RESOURCE_PACK.register(Pack.getResource(), Pack);
         }
 

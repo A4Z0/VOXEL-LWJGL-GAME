@@ -12,7 +12,7 @@ import org.a4z0.lwjgl.demo.resourcepack.shader.ResourcePackShaderMeta;
 import org.a4z0.lwjgl.demo.resourcepack.shader.ResourcePackShaderMetaReader;
 import org.a4z0.lwjgl.demo.resourcepack.shader.program.ResourcePackShaderProgramMeta;
 import org.a4z0.lwjgl.demo.resourcepack.shader.program.ResourcePackShaderProgramMetaReader;
-import org.a4z0.lwjgl.demo.util.Result;
+import org.a4z0.lwjgl.demo.util.DataResult;
 
 import java.io.File;
 import java.io.FileReader;
@@ -24,36 +24,36 @@ public final class ResourcePackReader {
     @Deprecated
     public ResourcePackReader() {}
 
-    public static Result<ResourcePack> read(File file) {
+    public static DataResult<ResourcePack> read(File file) {
         try(Reader Reader = new FileReader(new File(file, "pack.json"))) {
             JsonObject packMeta = JsonParser.parseReader(Reader).getAsJsonObject();
 
             if(!packMeta.has("name") || !packMeta.get("name").isJsonPrimitive() || !packMeta.get("name").getAsJsonPrimitive().isString())
-                return Result.error("Couldn't read \"name\" at: \"" + file.getPath() + "\".");
+                return DataResult.error("Couldn't read \"name\" at: \"" + file.getPath() + "\".");
 
-            Result<Collection<ResourcePackLanguageMeta>> languageMetas = ResourcePackLanguageMetaReader.readAll(file);
+            DataResult<Collection<ResourcePackLanguageMeta>> languageMetas = ResourcePackLanguageMetaReader.readAll(file);
 
-            if(languageMetas.getError().isPresent())
-                return Result.error(languageMetas.getError().get());
+            if(languageMetas.error().isPresent())
+                return DataResult.error(languageMetas.error().get());
 
-            Result<Collection<ResourcePackFontMeta>> fontMetas = ResourcePackFontMetaReader.readAll(file);
+            DataResult<Collection<ResourcePackFontMeta>> fontMetas = ResourcePackFontMetaReader.readAll(file);
 
-            if(fontMetas.getError().isPresent())
-                return Result.error(fontMetas.getError().get());
+            if(fontMetas.error().isPresent())
+                return DataResult.error(fontMetas.error().get());
 
-            Result<Collection<ResourcePackShaderMeta>> shaderMetas = ResourcePackShaderMetaReader.readAll(file);
+            DataResult<Collection<ResourcePackShaderMeta>> shaderMetas = ResourcePackShaderMetaReader.readAll(file);
 
-            if(shaderMetas.getError().isPresent())
-                return Result.error(shaderMetas.getError().get());
+            if(shaderMetas.error().isPresent())
+                return DataResult.error(shaderMetas.error().get());
 
-            Result<Collection<ResourcePackShaderProgramMeta>> shaderProgramsMetas = ResourcePackShaderProgramMetaReader.readAll(file);
+            DataResult<Collection<ResourcePackShaderProgramMeta>> shaderProgramsMetas = ResourcePackShaderProgramMetaReader.readAll(file);
 
-            if(shaderProgramsMetas.getError().isPresent())
-                return Result.error(shaderProgramsMetas.getError().get());
+            if(shaderProgramsMetas.error().isPresent())
+                return DataResult.error(shaderProgramsMetas.error().get());
 
-            return Result.success(new ResourcePack(file.getPath(), ResourceKey.create(Key.of(packMeta.get("name").getAsString())), languageMetas.getOrThrow(), fontMetas.getOrThrow(), shaderMetas.getOrThrow(), shaderProgramsMetas.getOrThrow()));
+            return DataResult.success(new ResourcePack(file.getPath(), ResourceKey.create(Key.of(packMeta.get("name").getAsString())), languageMetas.resultOrThrow(), fontMetas.resultOrThrow(), shaderMetas.resultOrThrow(), shaderProgramsMetas.resultOrThrow()));
         } catch (Exception e) {
-            return Result.error("Couldn't read \"" + file.getPath() + "\".");
+            return DataResult.error("Couldn't read \"" + file.getPath() + "\".");
         }
     }
 }

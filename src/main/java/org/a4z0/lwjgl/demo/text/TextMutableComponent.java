@@ -1,13 +1,14 @@
 package org.a4z0.lwjgl.demo.text;
 
 import java.util.List;
+import java.util.Objects;
 
-public final class TextMutableComponent implements TextComponent {
+public class TextMutableComponent implements TextComponent {
 
-    private Content content;
-    private TextStyle style;
+    protected Content content;
+    protected TextStyle style;
 
-    private final List<TextComponent> components;
+    protected final List<TextComponent> components;
 
     /**
     * Construct a {@link TextMutableComponent}.
@@ -17,7 +18,7 @@ public final class TextMutableComponent implements TextComponent {
     * @param components Components.
     */
 
-    TextMutableComponent(Content content, TextStyle style, List<TextComponent> components) {
+    protected TextMutableComponent(Content content, TextStyle style, List<TextComponent> components) {
         this.content = content;
         this.style = style;
         this.components = components;
@@ -31,13 +32,13 @@ public final class TextMutableComponent implements TextComponent {
     /**
     * Sets the Content.
     *
-    * @param text Content to be set.
+    * @param content Content to be set.
     *
     * @return this {@link TextMutableComponent}.
     */
 
-    public TextMutableComponent setContent(Content text) {
-        this.content = text;
+    public TextMutableComponent setContent(Content content) {
+        this.content = content;
 
         return this;
     }
@@ -67,9 +68,9 @@ public final class TextMutableComponent implements TextComponent {
     }
 
     /**
-    * Appends a String.
+    * Appends a Component with the given Text.
     *
-    * @param s String to be appended.
+    * @param s Text.
     *
     * @return this {@link TextMutableComponent}.
     */
@@ -92,27 +93,12 @@ public final class TextMutableComponent implements TextComponent {
         return this;
     }
 
-    /**
-    * ...
-    *
-    * @param components ...
-    *
-    * @return this {@link TextMutableComponent}.
-    */
-
-    public TextMutableComponent append(TextComponent... components) {
-        for(TextComponent component : components)
-            this.append(component);
-
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         return (o instanceof TextMutableComponent)
-            && ((TextMutableComponent) o).getContent().equals(this.getContent())
-            && ((TextMutableComponent) o).getStyle().equals(this.getStyle())
-            && ((TextMutableComponent) o).getComponents().equals(this.getComponents());
+            && ((TextMutableComponent) o).content.equals(this.content)
+            && ((TextMutableComponent) o).style.equals(this.style)
+            && ((TextMutableComponent) o).components.equals(this.components);
     }
 
     @Override
@@ -127,5 +113,10 @@ public final class TextMutableComponent implements TextComponent {
             + "\"Components\": "
             + this.getComponents()
         + "}";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.content, this.style, this.components);
     }
 }

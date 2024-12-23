@@ -9,11 +9,11 @@ import org.a4z0.lwjgl.demo.resourcepack.ResourcePack;
 
 public final class Resources {
 
-    public static final ResourceKey<Registry<ResourcePack>> RESOURCE_PACK = ResourceKey.registry(Key.of("resourcepack"));
-    public static final ResourceKey<Registry<Language>> LANGUAGE = ResourceKey.registry(Key.of("language"));
-    public static final ResourceKey<Registry<Shader>> SHADER = ResourceKey.registry(Key.of("shader"));
-    public static final ResourceKey<Registry<ShaderProgram>> SHADER_PROGRAM = ResourceKey.registry(Key.of("shader/program"));
-    public static final ResourceKey<Registry<Font>> FONT = ResourceKey.registry(Key.of("font"));
+    public static final ResourceKey<Registry<ResourcePack>> RESOURCE_PACK = ResourceKey.create(Key.of("resourcepack"));
+    public static final ResourceKey<Registry<Language>> LANGUAGE = ResourceKey.create(Key.of("language"));
+    public static final ResourceKey<Registry<Shader>> SHADER = ResourceKey.create(Key.of("shader"));
+    public static final ResourceKey<Registry<ShaderProgram>> SHADER_PROGRAM = ResourceKey.create(Key.of("shader/program"));
+    public static final ResourceKey<Registry<Font>> FONT = ResourceKey.create(Key.of("font"));
 
     Resources() {}
 }

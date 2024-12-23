@@ -102,7 +102,7 @@ public final class MappingRegistry<T> implements ResourceRegistry<T> {
 
     @Override
     public T getOrThrow(ResourceKey<T> resourceKey) {
-        return this.get(resourceKey).orElseThrow(() -> new IllegalStateException("Couldn't find the Value."));
+        return this.get(resourceKey).orElseThrow(() -> new IllegalStateException("Couldn't find the value at: " + resourceKey.toString()));
     }
 
     @Override

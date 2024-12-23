@@ -5,7 +5,6 @@ import org.a4z0.lwjgl.demo.input.InputAction;
 import org.a4z0.lwjgl.demo.input.InputHandler;
 import org.a4z0.lwjgl.demo.math.vector.Vector2f;
 import org.a4z0.lwjgl.demo.math.vector.Vector3f;
-import org.a4z0.lwjgl.demo.physics.Colision;
 import org.a4z0.lwjgl.demo.math.aabb.AABBf;
 import org.a4z0.lwjgl.demo.text.TextComponent;
 
@@ -250,36 +249,6 @@ public class EntityPlayer extends EntityLiving {
     }
 
     private void tickGravity() {
-        if(this.is_flying) {
-            this.is_falling = false;
-            this.fall_speed = 0;
 
-            return;
-        }
-
-        this.is_falling = !Colision.grounded(this.getPosition());
-
-        if(!this.is_falling)
-            return;
-
-        this.fall_speed += GRAVITY_FORCE;
-        this.fall_speed = Math.min(this.fall_speed, 0.03125f);
-
-        float remaining_fall_speed = this.fall_speed;
-
-        while(remaining_fall_speed > 0) {
-            float distance = Math.min(remaining_fall_speed, 0.0625f);
-
-            this.getPosition().subtract(0, remaining_fall_speed, 0);
-
-            if(Colision.grounded(this.getPosition())) {
-                this.is_falling = false;
-                this.fall_speed = 0;
-
-                return;
-            }
-
-            remaining_fall_speed -= distance;
-        }
     }
 }

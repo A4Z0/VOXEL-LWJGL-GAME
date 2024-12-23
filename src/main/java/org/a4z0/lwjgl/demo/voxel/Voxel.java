@@ -1,6 +1,7 @@
 package org.a4z0.lwjgl.demo.voxel;
 
 import org.a4z0.lwjgl.demo.color.Color;
+import org.a4z0.lwjgl.demo.level.Direction;
 import org.a4z0.lwjgl.demo.level.chunk.Chunk;
 
 public final class Voxel implements IVoxel {
@@ -28,18 +29,13 @@ public final class Voxel implements IVoxel {
     }
 
     @Override
-    public VoxelPosition getPosition() {
-        return new VoxelPosition(this.x, this.y, this.z);
-    }
-
-    @Override
     public int getColor() {
-        return this.palette[this.getPosition().getIndex()];
+        return this.palette[VoxelPosition.getIndex(this.x, this.y, this.z)];
     }
 
     @Override
     public void setColor(byte r, byte g, byte b, byte a) {
-        this.palette[this.getPosition().getIndex()] = new Color(r, g, b, a).asARGB();
+        this.palette[VoxelPosition.getIndex(this.x, this.y, this.z)] = new Color(r, g, b, a).asARGB();
     }
 
     @Override
@@ -73,11 +69,18 @@ public final class Voxel implements IVoxel {
     }
 
     @Override
-    public String toString() {
-        return "PaletteVoxel{"
-            + "\"Position\": " + this.getPosition()
-            + ", "
-            + "\"Color\": " + Color.argb(this.getColor())
-        + "}";
+    public void consume(FaceConsumer consumer) {
+        if(this.getNorth().getColor() == 0)
+            consumer.consume(Direction.NORTH, x, y, z, this.getColor());
+        if(this.getSouth().getColor() == 0)
+            consumer.consume(Direction.SOUTH, x, y, z, this.getColor());
+        if(this.getEast().getColor() == 0)
+            consumer.consume(Direction.EAST, x, y, z, this.getColor());
+        if(this.getWest().getColor() == 0)
+            consumer.consume(Direction.WEST, x, y, z, this.getColor());
+        if(this.getTop().getColor() == 0)
+            consumer.consume(Direction.TOP, x, y, z, this.getColor());
+        if(this.getBottom().getColor() == 0)
+            consumer.consume(Direction.BOTTOM, x, y, z, this.getColor());
     }
 }

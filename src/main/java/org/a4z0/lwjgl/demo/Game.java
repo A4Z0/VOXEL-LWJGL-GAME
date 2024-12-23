@@ -28,6 +28,9 @@ public final class Game {
         CAMERA = new Camera3fa<>();
 
         LEVEL.provider.load(0, 0, 0);
+        LEVEL.provider.load(256, 0, 0);
+        LEVEL.provider.load(0, 0, 256);
+        LEVEL.provider.load(256, 0, 256);
     }
 
     @EventHandler

@@ -4,7 +4,7 @@ import org.a4z0.lwjgl.demo.Game;
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;
 import org.a4z0.lwjgl.demo.text.TextComponent;
-import org.a4z0.lwjgl.demo.util.ByteBuf;
+import org.a4z0.lwjgl.demo.buffer.ByteBuf;
 import org.a4z0.lwjgl.demo.color.Color;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;

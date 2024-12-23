@@ -1,12 +1,12 @@
 package org.a4z0.lwjgl.demo.resource;
 
-public final class Key {
+public class Key {
 
     private static final char NAMESPACE_SEPARATOR = ':';
     private static final String DEFAULT_NAMESPACE = "default";
 
-    private final String namespace;
-    private final String path;
+    protected final String namespace;
+    protected final String path;
 
     /**
     * Construct a {@link Key}.
@@ -15,7 +15,7 @@ public final class Key {
     * @param path Path.
     */
 
-    private Key(final String namespace, final String path) {
+    protected Key(final String namespace, final String path) {
         this.namespace = namespace;
         this.path = path;
     }
@@ -37,7 +37,7 @@ public final class Key {
     }
 
     /**
-    * Checks if this {@link Key} is equals to the given {@link Object}.
+    * Checks if this is equals to the given {@link Object}.
     *
     * @param o {@link Object} to be compared.
     *

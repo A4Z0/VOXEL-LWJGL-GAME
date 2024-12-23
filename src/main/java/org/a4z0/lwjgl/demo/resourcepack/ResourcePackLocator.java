@@ -24,46 +24,44 @@ public final class ResourcePackLocator {
     /**
     * Adds a Resource Pack.
     *
-    * @param Resource Resource Pack to be added.
+    * @param resourcePack Resource Pack to be added.
     */
 
-    public static void add(ResourcePack Resource) {
-        if(RESOURCE_PACKS.contains(Resource))
+    public static void add(ResourcePack resourcePack) {
+        if(RESOURCE_PACKS.contains(resourcePack))
             return;
 
-        System.out.println(Resource);
-
-        for(ResourcePackLanguageMeta meta : Resource.getLanguages())
+        for(ResourcePackLanguageMeta meta : resourcePack.getLanguages())
             Registries.LANGUAGE.register(meta.getResource(), LanguageLoader.load(meta.getPath()));
-        for(ResourcePackFontMeta meta : Resource.getFonts())
+        for(ResourcePackFontMeta meta : resourcePack.getFonts())
             Registries.FONT.register(meta.getResource(), FontLoader.load(meta.getPath()));
-        for(ResourcePackShaderMeta meta : Resource.getShaders())
-            Registries.SHADER.register(meta.getResource(), ShaderLoader.load(meta.getPath(), ShaderType.of(meta.getResource().getRegistry().getPath())));
-        for(ResourcePackShaderProgramMeta meta : Resource.getShaderPrograms())
+        for(ResourcePackShaderMeta meta : resourcePack.getShaders())
+            Registries.SHADER.register(meta.getResource(), ShaderLoader.load(meta.getPath(), meta.getShaderType()));
+        for(ResourcePackShaderProgramMeta meta : resourcePack.getShaderPrograms())
             Registries.SHADER_PROGRAM.register(meta.getResource(), new ShaderProgram(List.of(meta.getVertex(), meta.getFragment())));
 
-        RESOURCE_PACKS.add(Resource);
+        RESOURCE_PACKS.add(resourcePack);
     }
 
     /**
     * Removes a Resource Pack.
     *
-    * @param Resource Resource Pack to be removed.
+    * @param resourcePack Resource Pack to be removed.
     */
 
-    public static void remove(ResourcePack Resource) {
-        if(!RESOURCE_PACKS.contains(Resource))
+    public static void remove(ResourcePack resourcePack) {
+        if(!RESOURCE_PACKS.contains(resourcePack))
             return;
 
-        for(ResourcePackLanguageMeta Meta : Resource.getLanguages())
-            Registries.LANGUAGE.unregister(Meta.getResource());
-        for(ResourcePackFontMeta Meta : Resource.getFonts())
-            Registries.FONT.unregister(Meta.getResource());
-        for(ResourcePackShaderMeta Meta : Resource.getShaders())
-            Registries.SHADER.unregister(Meta.getResource());
-        for(ResourcePackShaderProgramMeta Meta : Resource.getShaderPrograms())
-            Registries.SHADER_PROGRAM.unregister(Meta.getResource());
+        for(ResourcePackLanguageMeta meta : resourcePack.getLanguages())
+            Registries.LANGUAGE.unregister(meta.getResource());
+        for(ResourcePackFontMeta meta : resourcePack.getFonts())
+            Registries.FONT.unregister(meta.getResource());
+        for(ResourcePackShaderMeta meta : resourcePack.getShaders())
+            Registries.SHADER.unregister(meta.getResource());
+        for(ResourcePackShaderProgramMeta meta : resourcePack.getShaderPrograms())
+            Registries.SHADER_PROGRAM.unregister(meta.getResource());
 
-        RESOURCE_PACKS.remove(Resource);
+        RESOURCE_PACKS.remove(resourcePack);
     }
 }

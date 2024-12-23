@@ -1,8 +1,12 @@
 package org.a4z0.lwjgl.demo.text;
 
-public abstract class Content implements FormattedText {
+public interface Content extends FormattedText {
 
-    public static Content EMPTY = new Content() {
+    /**
+    * Represents an empty {@link Content}.
+    */
+
+    Content EMPTY = new Content() {
 
         @Override
         public String toString() {
@@ -11,17 +15,13 @@ public abstract class Content implements FormattedText {
     };
 
     @Override
-    public void applyToText(TextConsumer consumer) {
-        consumer.acceptText(null);
-    }
+    default void applyToText(TextConsumer consumer) {}
 
     @Override
-    public void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
-        consumer.acceptStyledText(null, TextStyle.EMPTY);
-    }
+    default void applyStyledText(StyledTextConsumer consumer, TextStyle style) {}
 
     /**
-    * Checks if this {@link Content} is equals to the given {@link Object}.
+    * Checks if this is equals to the given {@link Object}.
     *
     * @param o {@link Object} to be compared.
     *
@@ -29,14 +29,19 @@ public abstract class Content implements FormattedText {
     */
 
     @Override
-    public boolean equals(Object o) {
-        return this.getClass().isAssignableFrom(o.getClass()) && o.toString().equals(this.toString());
-    }
+    boolean equals(Object o);
 
     /**
     * @return this as a {@link String}.
     */
 
     @Override
-    public abstract String toString();
+    String toString();
+
+    /**
+    * @return the Hashcode.
+    */
+
+    @Override
+    int hashCode();
 }

@@ -4,7 +4,7 @@ import org.a4z0.lwjgl.demo.resource.Key;
 import org.a4z0.lwjgl.demo.resource.ResourceKey;
 import org.a4z0.lwjgl.demo.resource.shader.ShaderType;
 import org.a4z0.lwjgl.demo.resourcepack.ResourcePack;
-import org.a4z0.lwjgl.demo.util.Result;
+import org.a4z0.lwjgl.demo.util.DataResult;
 
 import java.io.File;
 import java.io.FileReader;
@@ -23,38 +23,38 @@ public final class ResourcePackShaderMetaReader {
     @Deprecated
     public ResourcePackShaderMetaReader() {}
 
-    public static Result<ResourcePackShaderMeta> read(File File) {
+    public static DataResult<ResourcePackShaderMeta> read(File File) {
         try(Reader Reader = new FileReader(File)) {
             ShaderType shaderType = ShaderType.of(File.getName().split("\\.")[1]);
 
-            return Result.success(new ResourcePackShaderMeta(
+            return DataResult.success(new ResourcePackShaderMeta(
                 File.getPath(),
-                ResourceKey.create(Key.of(shaderType.getExtension()), Key.of(File.getParentFile().getName() + "/" + File.getName().replace("." + shaderType.getExtension(), ""))),
+                ResourceKey.create(Key.of(shaderType.getExtension() + "/" + File.getName().replace("." + shaderType.getExtension(), ""))),
                 shaderType
             ));
         } catch (IOException e) {
-            return Result.error("Couldn't read \"" + File.getPath() + "\".");
+            return DataResult.error("Couldn't read \"" + File.getPath() + "\".");
         }
     }
 
-    public static Result<Collection<ResourcePackShaderMeta>> readAll(File File) {
+    public static DataResult<Collection<ResourcePackShaderMeta>> readAll(File File) {
         List<ResourcePackShaderMeta> Shaders = new ArrayList<>();
 
         try(Stream<Path> Paths = Files.walk(Path.of(File.getPath(), ResourcePack.SHADER_DIRECTORY))) {
             for(Path Path : Paths.toList())
                 for(ShaderType Type : ShaderType.values())
                     if(Path.toString().endsWith("." + Type.getExtension())) {
-                        Result<ResourcePackShaderMeta> Meta = ResourcePackShaderMetaReader.read(Path.toFile());
+                        DataResult<ResourcePackShaderMeta> Meta = ResourcePackShaderMetaReader.read(Path.toFile());
 
-                        if(Meta.getError().isPresent())
-                            return Result.error(Meta.getError().get());
+                        if(Meta.error().isPresent())
+                            return DataResult.error(Meta.error().get());
 
-                        Shaders.add(Meta.getOrThrow());
+                        Shaders.add(Meta.resultOrThrow());
                     }
 
-            return Result.success(Collections.unmodifiableCollection(Shaders));
+            return DataResult.success(Collections.unmodifiableCollection(Shaders));
         } catch (IOException e) {
-            return Result.error("Couldn't read \"" + ResourcePack.SHADER_DIRECTORY + "\"");
+            return DataResult.error("Couldn't read \"" + ResourcePack.SHADER_DIRECTORY + "\"");
         }
     }
 }

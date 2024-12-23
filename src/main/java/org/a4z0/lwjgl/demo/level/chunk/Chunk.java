@@ -1,7 +1,10 @@
 package org.a4z0.lwjgl.demo.level.chunk;
 
 import org.a4z0.lwjgl.demo.level.Level;
+import org.a4z0.lwjgl.demo.voxel.FaceConsumer;
 import org.a4z0.lwjgl.demo.voxel.IVoxel;
+
+import java.util.List;
 
 public interface Chunk {
 
@@ -28,6 +31,11 @@ public interface Chunk {
         @Override
         public IVoxel getVoxelAt(int x, int y, int z) {
             return IVoxel.EMPTY;
+        }
+
+        @Override
+        public void consume(FaceConsumer consumer) {
+
         }
 
         @Override
@@ -89,6 +97,8 @@ public interface Chunk {
     */
 
     IVoxel getVoxelAt(int x, int y, int z);
+
+    void consume(FaceConsumer consumer);
 
     /**
     * @return true if is loaded, false otherwise.

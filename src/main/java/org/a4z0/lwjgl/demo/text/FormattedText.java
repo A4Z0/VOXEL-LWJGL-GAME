@@ -30,35 +30,13 @@ public interface FormattedText {
 
     void applyStyledText(FormattedText.StyledTextConsumer consumer, TextStyle style);
 
-    /**
-    * Construct a {@link FormattedText}.
-    *
-    * @param s String.
-    *
-    * @return a new {@link FormattedText}.
-    */
-
-    static FormattedText of(final String s) {
-        return new FormattedText() {
-            @Override
-            public void applyToText(TextConsumer consumer) {
-                consumer.acceptText(s);
-            }
-
-            @Override
-            public void applyStyledText(StyledTextConsumer consumer, TextStyle style) {
-                consumer.acceptStyledText(s, style);
-            }
-        };
-    }
-
     @FunctionalInterface
     interface TextConsumer {
-        void acceptText(String s);
+        void acceptText(String text);
     }
 
     @FunctionalInterface
     interface StyledTextConsumer {
-        void acceptStyledText(String s, TextStyle style);
+        void acceptStyledText(String text, TextStyle style);
     }
 }
