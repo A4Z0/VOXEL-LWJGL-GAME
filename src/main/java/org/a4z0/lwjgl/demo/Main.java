@@ -1,7 +1,8 @@
 package org.a4z0.lwjgl.demo;
 
+import org.a4z0.api.event.EventBus;
 import org.a4z0.lwjgl.demo.chrono.Chrono;
-import org.a4z0.lwjgl.demo.event.EventBus;
+import org.a4z0.lwjgl.demo.controller.PlayerController;
 import org.a4z0.lwjgl.demo.event.input.mouse.MouseMoveEvent;
 import org.a4z0.lwjgl.demo.event.setup.CommonSetupEvent;
 import org.a4z0.lwjgl.demo.event.window.WindowReziseEvent;
@@ -91,7 +92,7 @@ public final class Main {
             glClear(GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT);
             glClearColor(0.6f, 0.8f, 1f, 1);
 
-            Game.PLAYER.tick();
+            PlayerController.tick();
             Game.LEVEL.tick();
 
             glFlush();

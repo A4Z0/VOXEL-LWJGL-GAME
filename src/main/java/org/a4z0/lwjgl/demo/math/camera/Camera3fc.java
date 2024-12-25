@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.demo.math.camera;
 
-import org.a4z0.lwjgl.demo.math.vector.Vector3fc;
+import org.a4z0.api.math.vector.Vector3fc;
 import org.joml.Matrix4f;
 
 public interface Camera3fc<T extends Camera3fc<T>> {

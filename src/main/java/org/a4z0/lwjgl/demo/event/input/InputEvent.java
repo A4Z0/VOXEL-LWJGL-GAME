@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.demo.event.input;
 
-import org.a4z0.lwjgl.demo.event.Event;
+import org.a4z0.api.event.Event;
 import org.a4z0.lwjgl.demo.input.InputAction;
 import org.a4z0.lwjgl.demo.input.InputHandler;
 

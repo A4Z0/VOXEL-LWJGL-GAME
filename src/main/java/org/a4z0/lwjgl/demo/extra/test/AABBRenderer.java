@@ -1,9 +1,9 @@
 package org.a4z0.lwjgl.demo.extra.test;
 
-import org.a4z0.lwjgl.demo.math.aabb.AABBfc;
-import org.a4z0.lwjgl.demo.math.aabb.AABBic;
+import org.a4z0.api.color.Color;
+import org.a4z0.api.math.aabb.AABBfc;
+import org.a4z0.api.math.aabb.AABBic;
 import org.a4z0.lwjgl.demo.buffer.ByteBuf;
-import org.a4z0.lwjgl.demo.color.Color;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL15.*;

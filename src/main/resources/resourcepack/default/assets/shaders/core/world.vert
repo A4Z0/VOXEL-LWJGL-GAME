@@ -12,7 +12,7 @@ uniform mat4 transform;
 out vec4 out_color;
 
 void main() {
-    gl_Position = camera_projection_view * transform * vec4(normalize_to_voxel(vertex_position), 1.0);
+    gl_Position = camera_projection_view * normalize_voxel_matrix(transform) * vec4(normalize_voxel_position(vertex_position), 1.0);
 
     out_color = color_from_argb(vertex_color);
 }

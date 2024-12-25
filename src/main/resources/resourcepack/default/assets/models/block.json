@@ -1,0 +1,15 @@
+{
+  "parent": "",
+  "elements": [
+    {
+      "faces": {
+        "down":  { "cullface": "down" },
+        "up":    { "cullface": "up" },
+        "north": { "cullface": "north" },
+        "south": { "cullface": "south" },
+        "west":  { "cullface": "west" },
+        "east":  { "cullface": "east" }
+      }
+    }
+  ]
+}

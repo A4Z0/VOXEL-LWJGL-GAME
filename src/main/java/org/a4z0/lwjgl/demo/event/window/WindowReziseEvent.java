@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.demo.event.window;
 
-import org.a4z0.lwjgl.demo.event.Event;
+import org.a4z0.api.event.Event;
 
 /**
 * Called when the Window is resized.

@@ -22,7 +22,7 @@ public abstract class KeyEvent extends InputEvent {
     public static final class Down extends KeyEvent {
 
         /**
-        * Construct a {@link KeyEvent.Down}.
+        * Construct a {@link Down}.
         *
         * @param keyCode Key Code.
         */
@@ -56,7 +56,7 @@ public abstract class KeyEvent extends InputEvent {
     public static final class Release extends KeyEvent {
 
         /**
-        * Construct a {@link KeyEvent.Release}.
+        * Construct a {@link Release}.
         *
         * @param keyCode Key Code.
         */

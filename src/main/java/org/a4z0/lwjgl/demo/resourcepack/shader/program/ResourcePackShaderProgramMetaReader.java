@@ -2,10 +2,10 @@ package org.a4z0.lwjgl.demo.resourcepack.shader.program;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.a4z0.common.DataResult;
 import org.a4z0.lwjgl.demo.resource.Key;
 import org.a4z0.lwjgl.demo.resource.ResourceKey;
 import org.a4z0.lwjgl.demo.resourcepack.ResourcePack;
-import org.a4z0.lwjgl.demo.util.DataResult;
 
 import java.io.File;
 import java.io.FileReader;

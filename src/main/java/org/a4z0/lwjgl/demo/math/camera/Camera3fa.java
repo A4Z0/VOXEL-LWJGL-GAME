@@ -1,9 +1,8 @@
 package org.a4z0.lwjgl.demo.math.camera;
 
+import org.a4z0.api.math.vector.Vector3f;
+import org.a4z0.api.math.vector.Vector3fc;
 import org.a4z0.lwjgl.demo.math.frustum.Frustum3f;
-import org.a4z0.lwjgl.demo.math.vector.Vector3f;
-import org.a4z0.lwjgl.demo.math.vector.Vector3fc;
-import org.joml.Math;
 import org.joml.Matrix4f;
 
 public final class Camera3fa<T extends Camera3fa<T>> implements Camera3fc<T> {
@@ -215,12 +214,12 @@ public final class Camera3fa<T extends Camera3fa<T>> implements Camera3fc<T> {
 
     @Override
     public Vector3fc getDirection() {
-        float _YAW_RADIANS = Math.toRadians(this.getYaw());
-        float _PITCH_RADIANS = Math.toRadians(this.getPitch());
+        float _YAW_RADIANS = (float) Math.toRadians(this.getYaw());
+        float _PITCH_RADIANS = (float) Math.toRadians(this.getPitch());
 
-        float x = -Math.cos(_PITCH_RADIANS) * Math.sin(_YAW_RADIANS);
-        float y = -Math.sin(_PITCH_RADIANS);
-        float z = Math.cos(_PITCH_RADIANS) * Math.cos(_YAW_RADIANS);
+        float x = (float) (-Math.cos(_PITCH_RADIANS) * Math.sin(_YAW_RADIANS));
+        float y = (float) -Math.sin(_PITCH_RADIANS);
+        float z = (float) (Math.cos(_PITCH_RADIANS) * Math.cos(_YAW_RADIANS));
 
         return new Vector3f(x, y, z);
     }
@@ -305,7 +304,7 @@ public final class Camera3fa<T extends Camera3fa<T>> implements Camera3fc<T> {
     */
 
     void tickProjection() {
-        float _RADIANS_FOV = Math.toRadians(this.getFOV());
+        float _RADIANS_FOV = (float) Math.toRadians(this.getFOV());
         float _ASPECT_RATIO = (float) this.getWidth() / this.getHeight();
 
         this.projection.identity().perspective(_RADIANS_FOV, _ASPECT_RATIO, DEFAULT_NEAR_PLANE, DEFAULT_FAR_PLANE);
@@ -318,13 +317,13 @@ public final class Camera3fa<T extends Camera3fa<T>> implements Camera3fc<T> {
     */
 
     void tickView() {
-        float _YAW_RADIANS = Math.toRadians(this.getYaw());
-        float _PITCH_RADIANS = Math.toRadians(this.getPitch());
+        float _YAW_RADIANS = (float) Math.toRadians(this.getYaw());
+        float _PITCH_RADIANS = (float) Math.toRadians(this.getPitch());
 
-        float _YAW_COS = Math.cos(_YAW_RADIANS);
-        float _YAW_SIN = Math.sin(_YAW_RADIANS);
-        float _PITCH_COS = Math.cos(_PITCH_RADIANS);
-        float _PITCH_SIN = Math.sin(_PITCH_RADIANS);
+        float _YAW_COS = (float) Math.cos(_YAW_RADIANS);
+        float _YAW_SIN = (float) Math.sin(_YAW_RADIANS);
+        float _PITCH_COS = (float) Math.cos(_PITCH_RADIANS);
+        float _PITCH_SIN = (float) Math.sin(_PITCH_RADIANS);
 
         float _DIR_X = -_PITCH_COS * _YAW_SIN;
         float _DIR_Y = -_PITCH_SIN;

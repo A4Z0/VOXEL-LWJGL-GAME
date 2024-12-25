@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.demo.resource;
 
 import com.google.common.collect.MapMaker;
-import org.a4z0.lwjgl.demo.util.Pair;
+import org.a4z0.common.Pair;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;

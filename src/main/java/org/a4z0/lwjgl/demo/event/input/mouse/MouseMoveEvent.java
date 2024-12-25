@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.demo.event.input.mouse;
 
-import org.a4z0.lwjgl.demo.event.Event;
+import org.a4z0.api.event.Event;
 
 public final class MouseMoveEvent extends Event {
 

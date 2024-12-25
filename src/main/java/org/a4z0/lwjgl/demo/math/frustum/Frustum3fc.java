@@ -1,8 +1,8 @@
 package org.a4z0.lwjgl.demo.math.frustum;
 
-import org.a4z0.lwjgl.demo.math.plane.Plane3f;
-import org.a4z0.lwjgl.demo.math.plane.Plane3fc;
-import org.a4z0.lwjgl.demo.math.vector.Vector3ic;
+import org.a4z0.api.math.plane.Plane3f;
+import org.a4z0.api.math.plane.Plane3fc;
+import org.a4z0.api.math.vector.Vector3ic;
 import org.joml.Matrix4f;
 
 public interface Frustum3fc {

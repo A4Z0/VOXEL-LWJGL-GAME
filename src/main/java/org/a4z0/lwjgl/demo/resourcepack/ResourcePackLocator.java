@@ -4,7 +4,6 @@ import org.a4z0.lwjgl.demo.resource.language.LanguageLoader;
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.font.FontLoader;
 import org.a4z0.lwjgl.demo.resource.shader.ShaderLoader;
-import org.a4z0.lwjgl.demo.resource.shader.ShaderType;
 import org.a4z0.lwjgl.demo.resource.shader.program.ShaderProgram;
 import org.a4z0.lwjgl.demo.resourcepack.font.ResourcePackFontMeta;
 import org.a4z0.lwjgl.demo.resourcepack.language.ResourcePackLanguageMeta;

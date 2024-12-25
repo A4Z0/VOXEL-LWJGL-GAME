@@ -69,7 +69,7 @@ public interface ResourceRegistry<T> extends Registry<T> {
     /**
     * Retrieves a Resource attached to the Value.
     *
-    * @param value ...
+    * @param value Value.
     *
     * @return an Optional of a {@link ResourceKey}.
     */
@@ -79,7 +79,7 @@ public interface ResourceRegistry<T> extends Registry<T> {
     /**
     * Retrieves a Resource attached to the Value.
     *
-    * @param value ...
+    * @param value Value.
     *
     * @return a {@link ResourceKey} or throws an error.
     */

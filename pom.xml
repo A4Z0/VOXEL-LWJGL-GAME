@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.a4z0</groupId>
-    <artifactId>voxel-lwjgl</artifactId>
-    <version>0.0.1-DEV</version>
+    <artifactId>VOXEL-LWJGL-GAME</artifactId>
+    <version>0.0.1</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -109,6 +109,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>32.1.2-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>org.a4z0</groupId>
+            <artifactId>voxel-lwjgl-api</artifactId>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
 </project>
