@@ -21,7 +21,6 @@ public final class Main {
     public static Chrono CHRONO;
 
     public static final EventBus EVENT_BUS = new EventBus();
-
     public static long WINDOW;
 
     public static boolean FREEZE_SIGNAL;

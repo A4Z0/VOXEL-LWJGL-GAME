@@ -8,7 +8,7 @@ import org.a4z0.lwjgl.demo.event.input.mouse.MouseMoveEvent;
 import org.a4z0.lwjgl.demo.event.setup.CommonSetupEvent;
 import org.a4z0.lwjgl.demo.event.window.WindowReziseEvent;
 import org.a4z0.lwjgl.demo.level.ClientLevel;
-import org.a4z0.lwjgl.demo.level.entity.EntityPlayer;
+import org.a4z0.lwjgl.demo.entity.EntityPlayer;
 import org.a4z0.lwjgl.demo.camera.FreeCamera;
 
 import java.util.UUID;

@@ -4,6 +4,8 @@ import org.a4z0.api.location.Location3fc;
 import org.joml.Matrix4d;
 import org.joml.Matrix4dc;
 
+import java.util.Objects;
+
 public class FreeCamera implements Camera {
 
     protected int width, height;
@@ -226,6 +228,16 @@ public class FreeCamera implements Camera {
     }
 
     @Override
+    public FreeCamera set(float x, float y, float z) {
+        return this.set((double) x, (double) y, (double) z);
+    }
+
+    @Override
+    public FreeCamera set(double x, double y, double z) {
+        return this.set(x, y, z, this.getYaw(), this.getPitch());
+    }
+
+    @Override
     public FreeCamera set(float x, float y, float z, float yaw, float pitch) {
         return this.set((double) x, (double) y, (double) z, (double) yaw, (double) pitch);
     }
@@ -242,6 +254,36 @@ public class FreeCamera implements Camera {
         this.updateView();
 
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return (o instanceof FreeCamera)
+            && ((FreeCamera) o).getX() == this.getX()
+            && ((FreeCamera) o).getY() == this.getY()
+            && ((FreeCamera) o).getZ() == this.getZ()
+            && ((FreeCamera) o).getYaw() == this.getYaw()
+            && ((FreeCamera) o).getPitch() == this.getPitch();
+    }
+
+    @Override
+    public String toString() {
+        return "FreeCamera{"
+            + "\"X\": " + this.getX()
+            + ", "
+            + "\"Y\": " + this.getY()
+            + ", "
+            + "\"Z\": " + this.getZ()
+            + ", "
+            + "\"Yaw\": " + this.getYaw()
+            + ", "
+            + "\"Pitch\": " + this.getPitch()
+        + "}";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.x, this.y, this.z, this.yaw, this.pitch);
     }
 
     /**

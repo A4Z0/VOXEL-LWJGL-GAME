@@ -1,11 +1,11 @@
 package org.a4z0.lwjgl.demo.render;
 
+import org.a4z0.api.Direction;
 import org.a4z0.api.color.Color;
 import org.a4z0.api.level.block.BlockState;
 import org.a4z0.api.level.chunk.section.ChunkSection;
 import org.a4z0.api.math.vector.Vector3f;
 import org.a4z0.lwjgl.demo.buffer.ByteBuf;
-import org.a4z0.lwjgl.demo.math.Direction;
 
 public class Mesh {
     

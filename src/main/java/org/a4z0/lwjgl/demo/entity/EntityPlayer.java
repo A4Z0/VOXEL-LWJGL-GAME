@@ -1,6 +1,6 @@
-package org.a4z0.lwjgl.demo.level.entity;
+package org.a4z0.lwjgl.demo.entity;
 
-import org.a4z0.api.level.entity.Player;
+import org.a4z0.api.entity.Player;
 import org.a4z0.api.location.Location3f;
 import org.a4z0.api.text.TextComponent;
 
