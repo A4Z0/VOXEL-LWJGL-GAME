@@ -2,7 +2,7 @@ package org.a4z0.lwjgl.demo.extra;
 
 import org.a4z0.api.event.EventHandler;
 import org.a4z0.api.math.aabb.AABBi;
-import org.a4z0.api.math.position.ChunkPosition;
+import org.a4z0.api.position.ChunkPosition;
 import org.a4z0.lwjgl.demo.Game;
 import org.a4z0.lwjgl.demo.event.input.keyboard.KeyEvent;
 import org.a4z0.lwjgl.demo.event.level.LevelRenderEvent;

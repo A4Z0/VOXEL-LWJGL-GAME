@@ -86,8 +86,7 @@ public class PlayerController {
     }
 
     private static void updateBody() {
-        Game.CAMERA.setRotation(Game.PLAYER.getLocation().getYaw(), Game.PLAYER.getLocation().getPitch());
-        Game.CAMERA.setPosition(Game.PLAYER.getLocation().getX(), Game.PLAYER.getLocation().getY(), Game.PLAYER.getLocation().getZ());
+        Game.CAMERA.set(Game.PLAYER.getLocation());
         Game.CAMERA.setWidth(Game.getWidth()).setHeight(Game.getHeight());
     }
 }

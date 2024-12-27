@@ -1,8 +1,8 @@
 package org.a4z0.lwjgl.demo.extra;
 
 import org.a4z0.api.event.EventHandler;
-import org.a4z0.api.math.position.ChunkPosition;
-import org.a4z0.api.math.position.ChunkSectionPosition;
+import org.a4z0.api.position.ChunkPosition;
+import org.a4z0.api.position.ChunkSectionPosition;
 import org.a4z0.api.text.TextComponent;
 import org.a4z0.lwjgl.demo.Game;
 import org.a4z0.lwjgl.demo.Main;

@@ -3,8 +3,8 @@ package org.a4z0.lwjgl.demo.level.chunk.section;
 import org.a4z0.api.level.block.BlockState;
 import org.a4z0.api.level.chunk.Chunk;
 import org.a4z0.api.level.chunk.section.ChunkSection;
-import org.a4z0.api.math.position.BlockPosition;
-import org.a4z0.api.math.position.ChunkSectionPosition;
+import org.a4z0.api.position.BlockPosition;
+import org.a4z0.api.position.ChunkSectionPosition;
 import org.a4z0.lwjgl.demo.render.RenderableChunkSection;
 
 public class ClientChunkSection implements ChunkSection {

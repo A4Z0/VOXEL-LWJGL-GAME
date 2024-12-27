@@ -2,8 +2,7 @@ package org.a4z0.lwjgl.demo.level;
 
 import org.a4z0.api.level.Level;
 import org.a4z0.api.level.chunk.Chunk;
-import org.a4z0.api.level.chunk.provider.ChunkProvider;
-import org.a4z0.api.math.position.BlockPosition;
+import org.a4z0.api.position.BlockPosition;
 import org.a4z0.api.text.TextComponent;
 import org.a4z0.lwjgl.demo.Game;
 import org.a4z0.lwjgl.demo.Main;
@@ -16,7 +15,7 @@ import java.util.UUID;
 
 public class ClientLevel implements Level {
 
-    public final ChunkProvider provider;
+    public final ClientChunkProvider provider;
 
     protected final UUID uuid;
     protected final TextComponent name;

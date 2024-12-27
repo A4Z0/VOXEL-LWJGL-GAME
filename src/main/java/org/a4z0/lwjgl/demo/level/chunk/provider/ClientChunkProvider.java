@@ -2,7 +2,7 @@ package org.a4z0.lwjgl.demo.level.chunk.provider;
 
 import org.a4z0.api.level.chunk.Chunk;
 import org.a4z0.api.level.chunk.provider.ChunkProvider;
-import org.a4z0.api.math.position.ChunkPosition;
+import org.a4z0.api.position.ChunkPosition;
 import org.a4z0.lwjgl.demo.level.ClientLevel;
 import org.a4z0.lwjgl.demo.level.chunk.ClientChunk;
 

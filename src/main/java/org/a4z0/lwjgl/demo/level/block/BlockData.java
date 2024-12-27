@@ -3,7 +3,7 @@ package org.a4z0.lwjgl.demo.level.block;
 import org.a4z0.api.color.Color;
 import org.a4z0.api.level.block.BlockState;
 import org.a4z0.api.level.chunk.Chunk;
-import org.a4z0.api.math.position.BlockPosition;
+import org.a4z0.api.position.BlockPosition;
 
 public class BlockData implements BlockState {
 

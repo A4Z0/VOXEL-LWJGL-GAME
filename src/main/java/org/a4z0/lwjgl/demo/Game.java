@@ -9,7 +9,7 @@ import org.a4z0.lwjgl.demo.event.setup.CommonSetupEvent;
 import org.a4z0.lwjgl.demo.event.window.WindowReziseEvent;
 import org.a4z0.lwjgl.demo.level.ClientLevel;
 import org.a4z0.lwjgl.demo.level.entity.EntityPlayer;
-import org.a4z0.lwjgl.demo.math.camera.Camera3fa;
+import org.a4z0.lwjgl.demo.camera.FreeCamera;
 
 import java.util.UUID;
 
@@ -20,13 +20,13 @@ public final class Game {
 
     public static ClientLevel LEVEL;
     public static EntityPlayer PLAYER;
-    public static Camera3fa CAMERA;
+    public static FreeCamera CAMERA;
 
     @EventHandler
     private void onStartup(final CommonSetupEvent e) {
         LEVEL = new ClientLevel(UUID.randomUUID(), TextComponent.empty(), 0);
         PLAYER = new EntityPlayer(TextComponent.empty(), 0, 8, 0, 0, 90f);
-        CAMERA = new Camera3fa<>();
+        CAMERA = new FreeCamera();
 
         LEVEL.provider.load(0, 0, 0);
     }

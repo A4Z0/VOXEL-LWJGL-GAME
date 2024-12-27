@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.demo.level.entity;
 
 import org.a4z0.api.level.entity.Player;
-import org.a4z0.api.math.Location;
+import org.a4z0.api.location.Location3f;
 import org.a4z0.api.text.TextComponent;
 
 public class EntityPlayer implements Player {
@@ -11,7 +11,7 @@ public class EntityPlayer implements Player {
 
     protected TextComponent name;
 
-    protected final Location location;
+    protected final Location3f location;
 
     protected boolean isOnGround;
     protected boolean isFlying = true;
@@ -54,7 +54,7 @@ public class EntityPlayer implements Player {
     */
 
     public EntityPlayer(TextComponent name, float x, float y, float z, float yaw, float pitch) {
-        this(name, new Location(x, y, z, yaw, pitch));
+        this(name, new Location3f(x, y, z, yaw, pitch));
     }
 
     /**
@@ -64,7 +64,7 @@ public class EntityPlayer implements Player {
     * @param location Location.
     */
 
-    public EntityPlayer(TextComponent name, Location location) {
+    public EntityPlayer(TextComponent name, Location3f location) {
         this.name = name;
         this.location = location;
 
@@ -84,7 +84,7 @@ public class EntityPlayer implements Player {
     }
 
     @Override
-    public Location getLocation() {
+    public Location3f getLocation() {
         return this.location;
     }
 
