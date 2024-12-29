@@ -8,6 +8,7 @@ import org.a4z0.lwjgl.demo.event.setup.CommonSetupEvent;
 import org.a4z0.lwjgl.demo.event.window.WindowReziseEvent;
 import org.a4z0.lwjgl.demo.extra.ChunkBondaries;
 import org.a4z0.lwjgl.demo.extra.Debugger;
+import org.a4z0.lwjgl.demo.extra.Hitbox;
 import org.a4z0.lwjgl.demo.input.InputAction;
 import org.a4z0.lwjgl.demo.input.InputHandler;
 import org.a4z0.lwjgl.demo.registry.Registries;
@@ -53,6 +54,7 @@ public final class Main {
         EVENT_BUS.register(new Game());
         EVENT_BUS.register(new Debugger());
         EVENT_BUS.register(new ChunkBondaries());
+        EVENT_BUS.register(new Hitbox());
 
         //noinspection resource
         glfwSetFramebufferSizeCallback(WINDOW, (_ignored, w, h) -> EVENT_BUS.submit(new WindowReziseEvent(w, h)));
@@ -92,6 +94,7 @@ public final class Main {
             glClearColor(0.6f, 0.8f, 1f, 1);
 
             PlayerController.tick();
+            Game.PLAYER.tick();
             Game.LEVEL.tick();
 
             glFlush();

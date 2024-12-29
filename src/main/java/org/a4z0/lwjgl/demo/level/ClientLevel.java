@@ -60,7 +60,7 @@ public class ClientLevel implements Level {
     public void tick() {
         Main.EVENT_BUS.submit(new LevelRenderEvent.Post());
         Registries.SHADER_PROGRAM.getOrThrow(Key.of("world")).bind();
-        Registries.SHADER_PROGRAM.getOrThrow(Key.of("world")).setUniform4fv("camera_projection_view", Game.CAMERA.getProjectionView());
+        Registries.SHADER_PROGRAM.getOrThrow(Key.of("world")).setUniform4fv("camera_projection_view", Game.PLAYER.getCamera().getProjectionView());
         this.provider.tick();
         Registries.SHADER_PROGRAM.getOrThrow(Key.of("world")).unbind();
         Main.EVENT_BUS.submit(new LevelRenderEvent.After());

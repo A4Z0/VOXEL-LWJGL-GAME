@@ -4,7 +4,7 @@ import org.a4z0.api.Direction;
 import org.a4z0.api.color.Color;
 import org.a4z0.api.level.block.BlockState;
 import org.a4z0.api.level.chunk.section.ChunkSection;
-import org.a4z0.api.math.vector.Vector3f;
+import org.a4z0.math.vector.Vector3f;
 import org.a4z0.lwjgl.demo.buffer.ByteBuf;
 
 public class Mesh {

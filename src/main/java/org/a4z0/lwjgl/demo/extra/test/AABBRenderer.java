@@ -1,8 +1,8 @@
 package org.a4z0.lwjgl.demo.extra.test;
 
 import org.a4z0.api.color.Color;
-import org.a4z0.api.math.aabb.AABBfc;
-import org.a4z0.api.math.aabb.AABBic;
+import org.a4z0.math.aabb.AABBfc;
+import org.a4z0.math.aabb.AABBic;
 import org.a4z0.lwjgl.demo.buffer.ByteBuf;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
@@ -80,7 +80,7 @@ public final class AABBRenderer {
 
     public static void flush() {
         glEnable(GL_POLYGON_OFFSET_FILL);
-        glPolygonOffset(-1.0f, -1.0f); // "Empurra" as linhas do outline para frente
+        glPolygonOffset(-1.0f, -1.0f);
 
         glBindBuffer(GL_ARRAY_BUFFER, VERTEX_BUFFER_OBJECT);
         glBufferData(GL_ARRAY_BUFFER, BYTE_BUF.asFloatBuffer(), GL_STATIC_DRAW);

@@ -9,7 +9,6 @@ import org.a4z0.lwjgl.demo.event.setup.CommonSetupEvent;
 import org.a4z0.lwjgl.demo.event.window.WindowReziseEvent;
 import org.a4z0.lwjgl.demo.level.ClientLevel;
 import org.a4z0.lwjgl.demo.entity.EntityPlayer;
-import org.a4z0.lwjgl.demo.camera.FreeCamera;
 
 import java.util.UUID;
 
@@ -20,13 +19,11 @@ public final class Game {
 
     public static ClientLevel LEVEL;
     public static EntityPlayer PLAYER;
-    public static FreeCamera CAMERA;
 
     @EventHandler
     private void onStartup(final CommonSetupEvent e) {
         LEVEL = new ClientLevel(UUID.randomUUID(), TextComponent.empty(), 0);
         PLAYER = new EntityPlayer(TextComponent.empty(), 0, 8, 0, 0, 90f);
-        CAMERA = new FreeCamera();
 
         LEVEL.provider.load(0, 0, 0);
     }
@@ -36,13 +33,15 @@ public final class Game {
         if(Main.FREEZE_SIGNAL)
             return;
 
-        PlayerController.tickHeadMovement(e.getX(), e.getY());
+        PlayerController._LEGACY_HEAD_HANDLER(e.getX(), e.getY());
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     private void onResize(final WindowReziseEvent e) {
         WIDTH = e.getWidth();
         HEIGHT = e.getHeight();
+
+        PLAYER.getCamera().setWidth(e.getWidth()).setHeight(e.getHeight());
     }
 
     /**

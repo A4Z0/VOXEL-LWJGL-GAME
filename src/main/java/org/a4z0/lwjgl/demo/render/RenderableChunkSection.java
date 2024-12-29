@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.demo.render;
 
 import org.a4z0.api.level.chunk.section.ChunkSection;
-import org.a4z0.api.math.vector.Vector3f;
+import org.a4z0.math.vector.Vector3f;
 import org.a4z0.lwjgl.demo.buffer.ByteBuf;
 import org.a4z0.lwjgl.demo.registry.Registries;
 import org.a4z0.lwjgl.demo.resource.Key;
@@ -19,57 +19,57 @@ import static org.lwjgl.opengl.GL30.*;
 public class RenderableChunkSection {
 
     public static final Vector3f[] NORTH = new Vector3f[]{
-            new Vector3f(1f, 1f, 0f),
-            new Vector3f(1f, 0f, 0f),
-            new Vector3f(0f, 0f, 0f),
-            new Vector3f(0f, 0f, 0f),
-            new Vector3f(0f, 1f, 0f),
-            new Vector3f(1f, 1f, 0f)
+            new Vector3f(0.5f, 0.5f, -0.5f),
+            new Vector3f(0.5f, -0.5f, -0.5f),
+            new Vector3f(-0.5f, -0.5f, -0.5f),
+            new Vector3f(-0.5f, -0.5f, -0.5f),
+            new Vector3f(-0.5f, 0.5f, -0.5f),
+            new Vector3f(0.5f, 0.5f, -0.5f)
     };
 
     public static final Vector3f[] SOUTH = new Vector3f[]{
-            new Vector3f(0f, 1f, 1f),
-            new Vector3f(0f, 0f, 1f),
-            new Vector3f(1f, 0f, 1f),
-            new Vector3f(1f, 0f, 1f),
-            new Vector3f(1f, 1f, 1f),
-            new Vector3f(0f, 1f, 1f)
+            new Vector3f(-0.5f, 0.5f, 0.5f),
+            new Vector3f(-0.5f, -0.5f, 0.5f),
+            new Vector3f(0.5f, -0.5f, 0.5f),
+            new Vector3f(0.5f, -0.5f, 0.5f),
+            new Vector3f(0.5f, 0.5f, 0.5f),
+            new Vector3f(-0.5f, 0.5f, 0.5f)
     };
 
     public static final Vector3f[] EAST = new Vector3f[]{
-            new Vector3f(1f, 1f, 1f),
-            new Vector3f(1f, 0f, 1f),
-            new Vector3f(1f, 0f, 0f),
-            new Vector3f(1f, 0f, 0f),
-            new Vector3f(1f, 1f, 0f),
-            new Vector3f(1f, 1f, 1f)
+            new Vector3f(0.5f, 0.5f, 0.5f),
+            new Vector3f(0.5f, -0.5f, 0.5f),
+            new Vector3f(0.5f, -0.5f, -0.5f),
+            new Vector3f(0.5f, -0.5f, -0.5f),
+            new Vector3f(0.5f, 0.5f, -0.5f),
+            new Vector3f(0.5f, 0.5f, 0.5f)
     };
 
     public static final Vector3f[] WEST = new Vector3f[]{
-            new Vector3f(0f, 1f, 0f),
-            new Vector3f(0f, 0f, 0f),
-            new Vector3f(0f, 0f, 1f),
-            new Vector3f(0f, 0f, 1f),
-            new Vector3f(0f, 1f, 1f),
-            new Vector3f(0f, 1f, 0f)
+            new Vector3f(-0.5f, 0.5f, -0.5f),
+            new Vector3f(-0.5f, -0.5f, -0.5f),
+            new Vector3f(-0.5f, -0.5f, 0.5f),
+            new Vector3f(-0.5f, -0.5f, 0.5f),
+            new Vector3f(-0.5f, 0.5f, 0.5f),
+            new Vector3f(-0.5f, 0.5f, -0.5f)
     };
 
     public static final Vector3f[] TOP = new Vector3f[]{
-            new Vector3f(0f, 1f, 0f),
-            new Vector3f(0f, 1f, 1f),
-            new Vector3f(1f, 1f, 1f),
-            new Vector3f(1f, 1f, 1f),
-            new Vector3f(1f, 1f, 0f),
-            new Vector3f(0f, 1f, 0f)
+            new Vector3f(-0.5f, 0.5f, -0.5f),
+            new Vector3f(-0.5f, 0.5f, 0.5f),
+            new Vector3f(0.5f, 0.5f, 0.5f),
+            new Vector3f(0.5f, 0.5f, 0.5f),
+            new Vector3f(0.5f, 0.5f, -0.5f),
+            new Vector3f(-0.5f, 0.5f, -0.5f)
     };
 
     public static final Vector3f[] BOTTOM = new Vector3f[]{
-            new Vector3f(0f, 0f, 1f),
-            new Vector3f(0f, 0f, 0f),
-            new Vector3f(1f, 0f, 0f),
-            new Vector3f(1f, 0f, 0f),
-            new Vector3f(1f, 0f, 1f),
-            new Vector3f(0f, 0f, 1f)
+            new Vector3f(-0.5f, -0.5f, 0.5f),
+            new Vector3f(-0.5f, -0.5f, -0.5f),
+            new Vector3f(0.5f, -0.5f, -0.5f),
+            new Vector3f(0.5f, -0.5f, -0.5f),
+            new Vector3f(0.5f, -0.5f, 0.5f),
+            new Vector3f(-0.5f, -0.5f, 0.5f)
     };
 
     public static final Vector3f[][] FACES = new Vector3f[][]{NORTH, SOUTH, EAST, WEST, TOP, BOTTOM};

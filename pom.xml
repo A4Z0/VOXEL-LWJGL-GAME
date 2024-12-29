@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.a4z0</groupId>
-    <artifactId>VOXEL-LWJGL-GAME</artifactId>
+    <artifactId>voxel-lwjgl-game</artifactId>
     <version>0.0.1</version>
 
     <properties>
@@ -29,8 +29,13 @@
     <dependencies>
         <dependency>
             <groupId>org.a4z0</groupId>
-            <artifactId>VOXEL-LWJGL-API</artifactId>
+            <artifactId>voxel-lwjgl-api</artifactId>
             <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.11.0</version>
         </dependency>
         <dependency>
             <groupId>org.lwjgl</groupId>
@@ -104,11 +109,6 @@
             <groupId>com.personthecat</groupId>
             <artifactId>fastnoise</artifactId>
             <version>0.9</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.11.0</version>
         </dependency>
     </dependencies>
 </project>

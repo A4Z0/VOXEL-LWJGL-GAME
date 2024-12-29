@@ -320,15 +320,7 @@ public class FreeCamera implements Camera {
         double dy = -pitchSin;
         double dz = pitchCos * yawCos;
 
-        this.view.identity().lookAt(
-            this.getX(),
-            this.getY(),
-            this.getZ(),
-            (this.getX() + dx),
-            (this.getY() + dy),
-            (this.getZ() + dz),
-        0, 1, 0
-        );
+        this.view.identity().lookAt(0, 0, 0, dx, dy, dz, 0, 1, 0);
 
         this.updateProjectionView();
     }

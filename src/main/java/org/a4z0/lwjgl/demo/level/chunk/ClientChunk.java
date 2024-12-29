@@ -101,9 +101,9 @@ public class ClientChunk implements Chunk {
 
         if(generate) {
             Random r = new Random();
-            for(int x = this.getPosition().getX(); x < (this.getPosition().getX() + CHUNK_SIZE_X); x++)
-                for(int y = this.getPosition().getY(); y < (this.getPosition().getY() + CHUNK_SIZE_Y); y++)
-                    for(int z = this.getPosition().getZ(); z < (this.getPosition().getZ() + CHUNK_SIZE_Z); z++)
+            for(int x = this.getPosition().getX(); x < (this.getPosition().getX() + 16); x++)
+                for(int y = this.getPosition().getY(); y < (this.getPosition().getY() + 16); y++)
+                    for(int z = this.getPosition().getZ(); z < (this.getPosition().getZ() + 16); z++)
                         this.getBlockAt(x, y, z).setColor(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255)));
         }
 
