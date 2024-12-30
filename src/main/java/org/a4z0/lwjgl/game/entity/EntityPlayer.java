@@ -8,7 +8,11 @@ import org.a4z0.lwjgl.api.text.TextComponent;
 import org.a4z0.lwjgl.game.camera.FreeCamera;
 import org.a4z0.lwjgl.game.colision.Collision;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class EntityPlayer implements Player {
+
+    public static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
     public static final AABBf DEFAULT_PLAYER_BODY = new AABBf(-0.45f, -0.5f, -0.45f, 0.45f, 1.5f, 0.45f);
     public static final AABBf DEFAULT_BLOCK_BODY = new AABBf(-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f);
@@ -24,6 +28,7 @@ public class EntityPlayer implements Player {
     private static final float TERMINAL_VELOCITY = 0.02f; // Velocidade máxima de queda
     private static final float AIR_RESISTANCE = 0.98f; // Resistência ao ar (quanto menor, mais resistente)
 
+    protected final int id;
     protected TextComponent name;
 
     protected final Location3f location;
@@ -89,6 +94,7 @@ public class EntityPlayer implements Player {
     */
 
     public EntityPlayer(TextComponent name, Location3f location) {
+        this.id = ENTITY_COUNTER.incrementAndGet();
         this.name = name;
         this.location = location;
 
@@ -99,7 +105,7 @@ public class EntityPlayer implements Player {
 
     @Override
     public int getID() {
-        return 0;
+        return this.id;
     }
 
     @Override
@@ -148,7 +154,8 @@ public class EntityPlayer implements Player {
 
     @Override
     public boolean isOnGround() {
-        return Collision.Bottom(this.getBody());
+        //return Collision.Bottom(this.getBody());
+        return true;
     }
 
     @Override
@@ -233,8 +240,8 @@ public class EntityPlayer implements Player {
 
     public void tick() {
         tickMovement();
-        tickJump();
-        tickFall();
+        //tickJump();
+        //tickFall();
 
         // Camera.
         this.camera.set(this.getLocation().clone().add(0, 1f, 0));

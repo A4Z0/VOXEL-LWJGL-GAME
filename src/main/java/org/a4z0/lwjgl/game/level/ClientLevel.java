@@ -8,7 +8,6 @@ import org.a4z0.lwjgl.api.text.TextComponent;
 import org.a4z0.lwjgl.game.Game;
 import org.a4z0.lwjgl.game.Main;
 import org.a4z0.lwjgl.game.event.level.LevelRenderEvent;
-import org.a4z0.lwjgl.game.level.chunk.provider.ClientChunkProvider;
 import org.a4z0.lwjgl.game.registry.Registries;
 
 import java.util.UUID;
@@ -56,7 +55,10 @@ public class ClientLevel implements Level {
         return this.provider.getChunkAt(blockPosition.getX(), blockPosition.getY(), blockPosition.getZ());
     }
 
-    @Override
+    /**
+    * Ticks this {@link ClientLevel}.
+    */
+
     public void tick() {
         Main.EVENT_BUS.submit(new LevelRenderEvent.Post());
         Registries.SHADER_PROGRAM.getOrThrow(Key.of("world")).bind();

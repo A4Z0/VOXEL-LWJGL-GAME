@@ -46,7 +46,10 @@ public class ClientChunkSection implements ChunkSection {
 
     }
 
-    @Override
+    /**
+    * Ticks this {@link ClientChunkSection}.
+    */
+
     public void tick() {
         this.playerChunkSection.render();
     }

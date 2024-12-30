@@ -22,7 +22,7 @@ public class ClientChunk implements Chunk {
     protected final ChunkPosition position;
 
     protected final int[] palette = new int[CHUNK_SIZE_X * CHUNK_SIZE_Y * CHUNK_SIZE_Z];
-    protected final ChunkSection[] sections = new ChunkSection[ChunkSection.SECTION_SIZE_X * ChunkSection.SECTION_SIZE_Y * ChunkSection.SECTION_SIZE_Z];
+    protected final ClientChunkSection[] sections = new ClientChunkSection[ChunkSection.SECTION_SIZE_X * ChunkSection.SECTION_SIZE_Y * ChunkSection.SECTION_SIZE_Z];
 
     protected boolean isLoaded;
 
@@ -49,6 +49,9 @@ public class ClientChunk implements Chunk {
     public ClientChunk(ClientLevel level, ChunkPosition position) {
         this.level = level;
         this.position = position;
+
+        if(this.position == null)
+            return;
 
         for(int x = 0; x < ChunkSection.SECTION_SIZE_X; x++) {
             for(int y = 0; y < ChunkSection.SECTION_SIZE_Y; y++) {
@@ -85,7 +88,7 @@ public class ClientChunk implements Chunk {
     }
 
     @Override
-    public ChunkSection getSectionAt(BlockPosition blockPosition) {
+    public ClientChunkSection getSectionAt(BlockPosition blockPosition) {
         return this.sections[ChunkSectionPosition.ofVoxel(blockPosition).getIndex()];
     }
 
@@ -126,14 +129,51 @@ public class ClientChunk implements Chunk {
         return true;
     }
 
-    @Override
+    /**
+    * Ticks this {@link ClientChunk}.
+    */
+
     public void tick() {
-        for(ChunkSection section : this.sections)
-            section.tick();
+        if(this.isLoaded())
+            for(ClientChunkSection section : this.sections)
+                section.tick();
     }
 
     @Override
     public String toString() {
         return "ClientChunk{" + "\"Position\": " + this.getPosition() + "}";
     }
+
+    public static ClientChunk EMPTY = new ClientChunk(null, null) {
+
+        @Override
+        public BlockState getBlockAt(BlockPosition blockPosition) {
+            return BlockState.EMPTY;
+        }
+
+        @Override
+        public ChunkSection getSectionAt(int x, int y, int z) {
+            return null;
+        }
+
+        @Override
+        public boolean isLoaded() {
+            return false;
+        }
+
+        @Override
+        public boolean load(boolean generate) {
+            return false;
+        }
+
+        @Override
+        public boolean unload(boolean save) {
+            return false;
+        }
+
+        @Override
+        public void tick() {
+
+        }
+    };
 }
