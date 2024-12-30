@@ -1,0 +1,55 @@
+package org.a4z0.lwjgl.game.resource.shader;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public final class ShaderLoader {
+
+    private static final Pattern IMPORT_PATTERN = Pattern.compile("#import\\s<([a-z]+.[a-z]+)>");
+
+    ShaderLoader() {}
+
+    /**
+    * Loads a Shader.
+    *
+    * @param path Path.
+    * @param shaderType Shader Type.
+    *
+    * @return a {@link Shader}.
+    */
+
+    public static Shader load(String path, ShaderType shaderType) {
+        try {
+            return load(new FileInputStream(path),path + "/../../include", shaderType);
+        } catch (IOException | ShaderException e) {
+            throw new RuntimeException("Unable to locate Shader.", e);
+        }
+    }
+
+    /**
+    * Loads a Shader.
+    *
+    * @param stream Stream.
+    * @param shaderType Shader Type.
+    *
+    * @return a {@link Shader}.
+    */
+
+    public static Shader load(InputStream stream, String include, ShaderType shaderType) throws ShaderException {
+        Matcher matcher = IMPORT_PATTERN.matcher(ShaderResourceReader.read(stream));
+        StringBuilder Source = new StringBuilder();
+
+        while(matcher.find()) {
+            String Path = matcher.group(1);
+            String Content = ShaderResourceReader.read(include + "/" + Path);
+            matcher.appendReplacement(Source, Matcher.quoteReplacement(Content.replaceAll("^#version\\s[0-9]+", "")));
+        }
+
+        matcher.appendTail(Source);
+
+        return new Shader(shaderType, Source.toString());
+    }
+}

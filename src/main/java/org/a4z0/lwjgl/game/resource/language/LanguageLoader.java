@@ -1,0 +1,60 @@
+package org.a4z0.lwjgl.game.resource.language;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.a4z0.lwjgl.Key;
+
+import java.io.*;
+import java.util.Map;
+
+public final class LanguageLoader {
+
+    private static final Gson GSON = new Gson();
+
+    LanguageLoader() {}
+
+    /**
+    * Loads a Language.
+    *
+    * @param path Path.
+    *
+    * @return a {@link Language}.
+    */
+
+    public static Language load(String path) {
+        return load(new File(path));
+    }
+
+    /**
+    * Loads a Language.
+    *
+    * @param file File.
+    *
+    * @return a {@link Language}.
+    */
+
+    public static Language load(File file) {
+        try(InputStream stream = new FileInputStream(file)) {
+            return load(file.getName().split("\\.")[0], stream);
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to locate Language.", e);
+        }
+    }
+
+    /**
+    * Loads a Language.
+    *
+    * @param name Name.
+    * @param stream Stream.
+    *
+    * @return a {@link Language}.
+    */
+
+    public static Language load(String name, InputStream stream) {
+        try(Reader reader = new InputStreamReader(stream)) {
+            return new Language(Key.of(name), GSON.fromJson(reader, new TypeToken<Map<String, String>>() {}.getType()));
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to load Language.", e);
+        }
+    }
+}
