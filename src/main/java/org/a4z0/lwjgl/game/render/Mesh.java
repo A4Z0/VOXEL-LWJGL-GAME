@@ -2,7 +2,7 @@ package org.a4z0.lwjgl.game.render;
 
 import org.a4z0.lwjgl.api.Direction;
 import org.a4z0.lwjgl.api.color.Color;
-import org.a4z0.lwjgl.api.level.block.BlockState;
+import org.a4z0.lwjgl.api.block.BlockState;
 import org.a4z0.lwjgl.api.level.chunk.section.ChunkSection;
 import org.a4z0.lwjgl.math.vector.Vector3f;
 import org.a4z0.lwjgl.game.buffer.ByteBuf;

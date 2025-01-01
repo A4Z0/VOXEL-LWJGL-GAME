@@ -3,7 +3,7 @@ package org.a4z0.lwjgl.game.level.chunk;
 import org.a4z0.lwjgl.api.color.Color;
 import org.a4z0.lwjgl.api.event.level.chunk.ChunkLoadEvent;
 import org.a4z0.lwjgl.api.event.level.chunk.ChunkUnloadEvent;
-import org.a4z0.lwjgl.api.level.block.BlockState;
+import org.a4z0.lwjgl.api.block.BlockState;
 import org.a4z0.lwjgl.api.level.chunk.Chunk;
 import org.a4z0.lwjgl.api.level.chunk.section.ChunkSection;
 import org.a4z0.lwjgl.api.position.BlockPosition;
@@ -11,7 +11,7 @@ import org.a4z0.lwjgl.api.position.ChunkPosition;
 import org.a4z0.lwjgl.api.position.ChunkSectionPosition;
 import org.a4z0.lwjgl.game.Main;
 import org.a4z0.lwjgl.game.level.ClientLevel;
-import org.a4z0.lwjgl.game.level.block.BlockData;
+import org.a4z0.lwjgl.game.block.BlockData;
 import org.a4z0.lwjgl.game.level.chunk.section.ClientChunkSection;
 
 import java.util.Random;

@@ -2,7 +2,7 @@ package org.a4z0.lwjgl.game.resourcepack.font;
 
 import org.a4z0.lwjgl.Key;
 import org.a4z0.lwjgl.DataResult;
-import org.a4z0.lwjgl.game.resource.ResourceKey;
+import org.a4z0.lwjgl.core.resource.ResourceKey;
 import org.a4z0.lwjgl.game.resourcepack.ResourcePack;
 
 import java.io.File;

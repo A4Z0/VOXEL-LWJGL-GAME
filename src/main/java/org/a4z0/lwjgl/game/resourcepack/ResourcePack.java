@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.game.resourcepack;
 
-import org.a4z0.lwjgl.game.resource.ResourceKey;
+import org.a4z0.lwjgl.core.resource.ResourceKey;
 import org.a4z0.lwjgl.game.resourcepack.font.ResourcePackFontMeta;
 import org.a4z0.lwjgl.game.resourcepack.language.ResourcePackLanguageMeta;
 import org.a4z0.lwjgl.game.resourcepack.shader.ResourcePackShaderMeta;

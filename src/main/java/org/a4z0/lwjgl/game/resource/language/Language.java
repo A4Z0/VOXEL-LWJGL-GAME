@@ -2,7 +2,7 @@ package org.a4z0.lwjgl.game.resource.language;
 
 import org.a4z0.lwjgl.Key;
 import org.a4z0.lwjgl.game.registry.Registries;
-import org.a4z0.lwjgl.game.resource.ResourceKey;
+import org.a4z0.lwjgl.core.resource.ResourceKey;
 
 import java.util.Map;
 

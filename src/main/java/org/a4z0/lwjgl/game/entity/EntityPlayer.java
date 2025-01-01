@@ -17,8 +17,8 @@ public class EntityPlayer implements Player {
     public static final AABBf DEFAULT_PLAYER_BODY = new AABBf(-0.45f, -0.5f, -0.45f, 0.45f, 1.5f, 0.45f);
     public static final AABBf DEFAULT_BLOCK_BODY = new AABBf(-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f);
 
-    public static final float DEFAULT_WALK_SPEED = 0.01f;
-    public static final float DEFAULT_FLIGHT_SPEED = 0.01f;
+    public static final float DEFAULT_WALK_SPEED = 5f;
+    public static final float DEFAULT_FLIGHT_SPEED = 5f;
     public static final float DEFAULT_JUMP_FORCE = 2f;
 
     public static final float MOVEMENT_STEP = 0.1f;
@@ -154,8 +154,7 @@ public class EntityPlayer implements Player {
 
     @Override
     public boolean isOnGround() {
-        //return Collision.Bottom(this.getBody());
-        return true;
+        return Collision.Bottom(this.getBody());
     }
 
     @Override
@@ -240,8 +239,8 @@ public class EntityPlayer implements Player {
 
     public void tick() {
         tickMovement();
-        //tickJump();
-        //tickFall();
+        tickJump();
+        tickFall();
 
         // Camera.
         this.camera.set(this.getLocation().clone().add(0, 1f, 0));

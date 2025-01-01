@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.game.resource.shader;
 
 import org.a4z0.lwjgl.Key;
-import org.a4z0.lwjgl.game.resource.ResourceKey;
+import org.a4z0.lwjgl.core.resource.ResourceKey;
 import org.a4z0.lwjgl.game.resource.shader.program.ShaderProgram;
 
 public final class Shaders {

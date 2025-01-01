@@ -29,7 +29,7 @@
     <dependencies>
         <dependency>
             <groupId>org.a4z0</groupId>
-            <artifactId>voxel-lwjgl-api</artifactId>
+            <artifactId>voxel-lwjgl-core</artifactId>
             <version>0.0.1</version>
         </dependency>
         <dependency>

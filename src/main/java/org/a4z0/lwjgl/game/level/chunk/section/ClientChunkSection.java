@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.game.level.chunk.section;
 
-import org.a4z0.lwjgl.api.level.block.BlockState;
+import org.a4z0.lwjgl.api.block.BlockState;
 import org.a4z0.lwjgl.api.level.chunk.Chunk;
 import org.a4z0.lwjgl.api.level.chunk.section.ChunkSection;
 import org.a4z0.lwjgl.api.position.BlockPosition;

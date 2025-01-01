@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.game.resourcepack.language;
 
-import org.a4z0.lwjgl.game.resource.ResourceKey;
+import org.a4z0.lwjgl.core.resource.ResourceKey;
 import org.a4z0.lwjgl.game.resource.language.Language;
 import org.a4z0.lwjgl.game.resourcepack.Meta;
 

@@ -1,7 +1,7 @@
 package org.a4z0.lwjgl.game.resource.shader.program;
 
 import org.a4z0.lwjgl.game.registry.Registries;
-import org.a4z0.lwjgl.game.resource.ResourceKey;
+import org.a4z0.lwjgl.core.resource.ResourceKey;
 import org.a4z0.lwjgl.game.resource.shader.Shader;
 import org.joml.Matrix4dc;
 import org.joml.Matrix4fc;

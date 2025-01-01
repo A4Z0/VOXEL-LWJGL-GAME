@@ -1,6 +1,8 @@
 package org.a4z0.lwjgl.game.registry;
 
 import org.a4z0.lwjgl.Key;
+import org.a4z0.lwjgl.core.registry.MappingRegistry;
+import org.a4z0.lwjgl.core.registry.RegistryWritable;
 import org.a4z0.lwjgl.game.resource.language.Language;
 import org.a4z0.lwjgl.game.resource.Resources;
 import org.a4z0.lwjgl.game.resource.font.Font;
@@ -14,11 +16,11 @@ import java.io.File;
 
 public final class Registries {
 
-    public static final ResourceRegistry<ResourcePack> RESOURCE_PACK = new MappingRegistry<>(Resources.RESOURCE_PACK);
-    public static final ResourceRegistry<Language> LANGUAGE = new MappingRegistry<>(Resources.LANGUAGE);
-    public static final ResourceRegistry<Shader> SHADER = new MappingRegistry<>(Resources.SHADER);
-    public static final ResourceRegistry<ShaderProgram> SHADER_PROGRAM = new MappingRegistry<>(Resources.SHADER_PROGRAM);
-    public static final ResourceRegistry<Font> FONT = new MappingRegistry<>(Resources.FONT);
+    public static final RegistryWritable<ResourcePack> RESOURCE_PACK = new MappingRegistry<>(Resources.RESOURCE_PACK);
+    public static final RegistryWritable<Language> LANGUAGE = new MappingRegistry<>(Resources.LANGUAGE);
+    public static final RegistryWritable<Shader> SHADER = new MappingRegistry<>(Resources.SHADER);
+    public static final RegistryWritable<ShaderProgram> SHADER_PROGRAM = new MappingRegistry<>(Resources.SHADER_PROGRAM);
+    public static final RegistryWritable<Font> FONT = new MappingRegistry<>(Resources.FONT);
 
     Registries() {}
 

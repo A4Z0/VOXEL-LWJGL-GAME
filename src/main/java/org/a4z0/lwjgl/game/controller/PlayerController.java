@@ -1,6 +1,7 @@
 package org.a4z0.lwjgl.game.controller;
 
 import org.a4z0.lwjgl.game.Game;
+import org.a4z0.lwjgl.game.Main;
 import org.a4z0.lwjgl.game.input.InputAction;
 import org.a4z0.lwjgl.game.input.InputHandler;
 
@@ -44,8 +45,10 @@ public class PlayerController {
         if(InputHandler.getKey(GLFW_KEY_D) != InputAction.RELEASE)
             vertical_speed_z -= 1f;
 
-        Game.PLAYER.getVelocity().add(dx * Game.PLAYER.getWalkSpeed() * vertical_speed_x, 0, dz * Game.PLAYER.getWalkSpeed() * vertical_speed_x);
-        Game.PLAYER.getVelocity().add(dz * Game.PLAYER.getWalkSpeed() * vertical_speed_z, 0, -dx * Game.PLAYER.getWalkSpeed() * vertical_speed_z);
+        float walkSpeed = (float) (Game.PLAYER.getWalkSpeed() * Main.CHRONO.getDeltaTime());
+
+        Game.PLAYER.getVelocity().add(dx * walkSpeed * vertical_speed_x, 0, dz * walkSpeed * vertical_speed_x);
+        Game.PLAYER.getVelocity().add(dz * walkSpeed * vertical_speed_z, 0, -dx * walkSpeed * vertical_speed_z);
     }
 
     public static void _LEGACY_TICK_FLY() {
@@ -62,7 +65,9 @@ public class PlayerController {
         if(InputHandler.getKey(GLFW_KEY_LEFT_SHIFT) != InputAction.RELEASE)
             horizontal_speed -= 1f;
 
-        Game.PLAYER.getVelocity().add(0, Game.PLAYER.getFlightSpeed() * horizontal_speed, 0);
+        float flightSpeed = (float) (Game.PLAYER.getFlightSpeed() * Main.CHRONO.getDeltaTime());
+
+        Game.PLAYER.getVelocity().add(0, flightSpeed * horizontal_speed, 0);
     }
 
     public static void _LEGACY_TICK_JUMP() {

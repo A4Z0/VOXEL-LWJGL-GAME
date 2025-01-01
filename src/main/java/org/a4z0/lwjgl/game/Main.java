@@ -1,7 +1,6 @@
 package org.a4z0.lwjgl.game;
 
 import org.a4z0.lwjgl.api.event.EventBus;
-import org.a4z0.lwjgl.game.chrono.Chrono;
 import org.a4z0.lwjgl.game.controller.PlayerController;
 import org.a4z0.lwjgl.game.event.input.mouse.MouseMoveEvent;
 import org.a4z0.lwjgl.game.event.setup.CommonSetupEvent;
@@ -12,6 +11,7 @@ import org.a4z0.lwjgl.game.extra.Hitbox;
 import org.a4z0.lwjgl.game.input.InputAction;
 import org.a4z0.lwjgl.game.input.InputHandler;
 import org.a4z0.lwjgl.game.registry.Registries;
+import org.a4z0.lwjgl.game.util.Timer;
 import org.lwjgl.opengl.GL;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -19,7 +19,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public final class Main {
 
-    public static Chrono CHRONO;
+    public static Timer CHRONO;
 
     public static final EventBus EVENT_BUS = new EventBus();
     public static long WINDOW;
@@ -48,9 +48,7 @@ public final class Main {
 
         GL.createCapabilities();
 
-        CHRONO = new Chrono();
-        CHRONO.setTargetFPS(10000);
-
+        CHRONO = new Timer();
         EVENT_BUS.register(new Game());
         EVENT_BUS.register(new Debugger());
         EVENT_BUS.register(new ChunkBondaries());
@@ -81,8 +79,7 @@ public final class Main {
         Registries.init();
 
         while(!glfwWindowShouldClose(WINDOW)) {
-            if(!CHRONO.update())
-                continue;
+            CHRONO.update();
 
             glfwPollEvents();
 

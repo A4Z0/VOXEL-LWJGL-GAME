@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.a4z0.lwjgl.Key;
 import org.a4z0.lwjgl.DataResult;
-import org.a4z0.lwjgl.game.resource.ResourceKey;
+import org.a4z0.lwjgl.core.resource.ResourceKey;
 import org.a4z0.lwjgl.game.resourcepack.font.ResourcePackFontMeta;
 import org.a4z0.lwjgl.game.resourcepack.font.ResourcePackFontMetaReader;
 import org.a4z0.lwjgl.game.resourcepack.language.ResourcePackLanguageMeta;

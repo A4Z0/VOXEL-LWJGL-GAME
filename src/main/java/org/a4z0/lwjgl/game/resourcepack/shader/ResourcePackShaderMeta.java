@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.game.resourcepack.shader;
 
-import org.a4z0.lwjgl.game.resource.ResourceKey;
+import org.a4z0.lwjgl.core.resource.ResourceKey;
 import org.a4z0.lwjgl.game.resource.shader.Shader;
 import org.a4z0.lwjgl.game.resource.shader.ShaderType;
 import org.a4z0.lwjgl.game.resourcepack.Meta;

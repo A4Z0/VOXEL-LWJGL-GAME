@@ -1,6 +1,6 @@
 package org.a4z0.lwjgl.game.colision;
 
-import org.a4z0.lwjgl.api.level.block.BlockState;
+import org.a4z0.lwjgl.api.block.BlockState;
 import org.a4z0.lwjgl.api.location.Location3fc;
 import org.a4z0.lwjgl.Key;
 import org.a4z0.lwjgl.math.aabb.AABBf;
